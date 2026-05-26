@@ -1,0 +1,31 @@
+:root {
+  --va-font-serif: 'Noto Serif SC', STZhongsong, STKaiti, KaiTi, Roboto, serif;
+  --va-font-sans: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  --va-font-mono: 'IBM Plex Mono Light', 'IBM Plex Mono', Consolas, "Courier New", monospace;
+  --yun-nav-bg-color: rgb(255 255 255 / 0.6);
+  --yun-nav-blur: 8px;
+  --va-c-bg-light: rgba(255, 255, 255, 0.6);
+}
+
+// 暗色模式下中央版心: 不透明度 0.8 + 模糊 8px
+html.dark {
+  --va-c-bg-light: rgba(32, 33, 39, 0.6);
+}
+
+html.dark .yun-card {
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+
+.yun-card {
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+
+// Markdown 代码框字体
+.markdown-body {
+  code,
+  pre {
+    font-family: var(--va-font-mono);
+  }
+}
