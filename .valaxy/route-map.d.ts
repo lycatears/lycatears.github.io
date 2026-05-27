@@ -108,6 +108,13 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
+    '/posts/comic-magazines': RouteRecordInfo<
+      '/posts/comic-magazines',
+      '/posts/comic-magazines',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
     '/posts/db2': RouteRecordInfo<
       '/posts/db2',
       '/posts/db2',
@@ -233,6 +240,12 @@ declare module 'vue-router/auto-routes' {
     'pages/posts/apply-for-graduate-student.md': {
       routes:
         | '/posts/apply-for-graduate-student'
+      views:
+        | never
+    }
+    'pages/posts/comic-magazines.md': {
+      routes:
+        | '/posts/comic-magazines'
       views:
         | never
     }

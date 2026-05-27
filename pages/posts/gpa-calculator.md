@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 吉林大学绩点计算器
-date: 2026-05-26 22:57:45
+date: 2026-05-25 22:57:45
 categories: 项目
 excerpt: 一个简单的吉林大学绩点计算器，初学Qt时制作。
 medium_zoom: true
