@@ -101,6 +101,13 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
+    '/posts/apply-for-graduate-student': RouteRecordInfo<
+      '/posts/apply-for-graduate-student',
+      '/posts/apply-for-graduate-student',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
     '/posts/db2': RouteRecordInfo<
       '/posts/db2',
       '/posts/db2',
@@ -220,6 +227,12 @@ declare module 'vue-router/auto-routes' {
     'node_modules/.pnpm/valaxy-theme-yun@0.28.8_mag_9bcc89a3045b97fb44840e9820e926f7/node_modules/valaxy-theme-yun/pages/posts/index.vue': {
       routes:
         | '/posts/'
+      views:
+        | never
+    }
+    'pages/posts/apply-for-graduate-student.md': {
+      routes:
+        | '/posts/apply-for-graduate-student'
       views:
         | never
     }
