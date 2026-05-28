@@ -129,6 +129,13 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
+    '/posts/goodbye-forever-c': RouteRecordInfo<
+      '/posts/goodbye-forever-c',
+      '/posts/goodbye-forever-c',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
     '/posts/gpa-calculator': RouteRecordInfo<
       '/posts/gpa-calculator',
       '/posts/gpa-calculator',
@@ -258,6 +265,12 @@ declare module 'vue-router/auto-routes' {
     'pages/posts/diary1.md': {
       routes:
         | '/posts/diary1'
+      views:
+        | never
+    }
+    'pages/posts/goodbye-forever-c.md': {
+      routes:
+        | '/posts/goodbye-forever-c'
       views:
         | never
     }

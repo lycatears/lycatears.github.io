@@ -24,6 +24,11 @@ links:
     desc: 一只史莱姆
     avatar: "/links/slime-avatar.jpg"
     color: "#ffffff"
+  - url: https://blog.nanjihuaji.top
+    blog: 南极滑稽
+    desc: 想当科研高手
+    avatar: "/links/nanjihuaji-avatar.jpg"
+    color: "#ffffff"
 
 random: true
 ---
