@@ -1,7 +1,8 @@
 ---
 layout: post
 title: 软件工程通关指南
-date: 2026-05-27 01:33:35
+date: 2024-11-25 18:59:01
+updated: 2026-05-26 01:33:35
 categories: 学习
 excerpt: 软院马原这一块
 tags:
