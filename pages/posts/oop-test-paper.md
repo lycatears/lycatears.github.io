@@ -564,7 +564,7 @@ int main() {
 ### 问题描述
 七、综合编程题。（12分）
 
-各大通信运营商提供的手机运营业务主要包括通话业务、流量业务、短信业务等等。不同的业务具有不同资费方案，例如不同运营商具有不同通话业务资费标准，根据用户的不同需求还提供有月租套餐、包年套餐等，月租套餐一般包括基本的月基本费用（常规包含一定的本地或异地通话时间和数据流量），超出部分主叫费用/分钟和费用/流量等待。（具体业务资费规则可参考同学自己的资费情况）。随着手机业务需求的不断发展，允许新的运营加入竞争，并可能推出新的业务类型，新的资费方案，特别是5G即将全面上线，对于流量业务资费影响颇大。
+各大通信运营商提供的手机运营业务主要包括通话业务、流量业务、短信业务等等。不同的业务具有不同资费方案，例如不同运营商具有不同通话业务资费标准，根据用户的不同需求还提供有月租套餐、包年套餐等，月租套餐一般包括基本的月基本费用（常规包含一定的本地或异地通话时间和数据流量），超出部分主叫费用/分钟和费用/流量等。（具体业务资费规则可参考同学自己的资费情况）。随着手机业务需求的不断发展，允许新的运营加入竞争，并可能推出新的业务类型，新的资费方案，特别是5G即将全面上线，对于流量业务资费影响颇大。
 
 请你设计并实现手机业务管理系统，请以收费为关注点设计类的体系和主要接口，并给出调用程序（比如main函数）模拟张同学在2019年1月到2019年6月期间手机业务的费用情况。
 
@@ -586,10 +586,12 @@ public:
 class CallingBusiness {
   public:
   CallingBusiness(float singleCharge = 0.19) {
+    // 设置套餐外通话单价
     this->singleCharge = singleCharge;
   }
 
-  float charge(int used) { // 假设按秒计算通话时长，但是按照分钟收费
+  float charge(int used) {
+    // 假设按秒计算通话时长，但是按照分钟收费
     return ceil(used / 60) * singleCharge;
   }
 }
@@ -597,39 +599,78 @@ class CallingBusiness {
 class InternetBusiness {
   public:
   InternetBusiness(float singleCharge = 0.29) {
+    // 设置套餐外费用单价
     this->singleCharge = singleCharge;
   }
 
-  float charge(int used) { // 假设按KB计算流量，但是按照MB收费
+  virtual float charge(int used) {
+    // 假设按KB计算流量，但是按照MB收费
     return ceil(used / 1024) * singleCharge;
   }
 }
 ```
-为什么要刻意采取一些单位变换的手段，让各个派生类的函数喊起来不一样呢？因为oop的一个重要考点就是多态，这道题很大程度上，老师关注的就是多态这个点你有没有掌握。从同一个基类派生出的子类，在被调用同一个接口时会产生不同的行为，这是你实现了多态的重要标志。
-- 所有运营商基于抽象基类`MobileOperator`，那么我们可以有`ChinaMobile` `ChinaUnion` `ChinaTelecom`等运营商类。运营商可以有一个月租属性。
+为什么要刻意采取一些单位变换的手段，让各个派生类的函数看起来不一样呢？因为oop的一个重要考点就是多态，这道题很大程度上，老师关注的就是多态这个点你有没有掌握。从同一个基类派生出的子类，在被调用同一个接口时会产生不同的行为，这是你实现了多态的重要标志。
+- 所有运营商基于抽象基类`MobileOperator`，那么我们可以有`ChinaMobile` `ChinaUnion` `ChinaTelecom`等运营商类。**不同运营商具有不同通话业务资费标准**，也就是说业务类应该放到运营商里面，作为一个没有套餐时的基础定价。显然不能仅有三个业务，因为题目要求业务类型是可扩展的。如果只有三个业务指针，加入一个新的业务（比如彩信）就需要所有运营商类都做修改。但是这样一来又带来了新的问题，如何找到对应的业务进行收费呢？我们选择使用STL容器`map`实现，你也可以用两个数组，一个存放业务名称，一个存放业务对象指针，效果是一样的。下面代码中的`vector`你也可以替换为数组，都是一样的效果。
 ```cpp:line-numbers
 class MobileOperator {
 private:
-  float rent;
+  map<string, Business*> bs;
 public:
-  MobileOperator(float rent) {
-    this->rent = rent;
+  void addBusiness(string name, Business* b) {
+    // 运营商公司添加一种业务
+    bs[name] = b;
   }
-  virtual float charge() {
-    return rent;
+
+  virtual float charge(string name, float used) {
+    // 计算套餐外业务产生的费用
+    return bs[name]->charge(used);
   }
 }
 
-class ChinaMobile {
+class ChinaMobile: MobileOperator{
+  // 中国移动派生类，可对套餐外收费细化定制
+}
+```
+- 套餐`Plan`可以派生`MonthlyPlan` `AnnuallyPlan`。套餐里面需要包含各种业务，计算套餐内的费用；需要知道这是哪个运营商推出的套餐，收取套餐外费用。因此，`Plan`需要有成员存储运营商对象和业务对象。由于后续还可能产生其他的业务，显然我们不能定死一个套餐只有三种业务；套餐还有限额，超出后按照套餐外标准收费。考虑用STL容器`map`实现，存放业务名称和套餐限额的对应关系。当然，你也可以用两个数组实现，一个数组放业务的名称，另一个放各个套餐的限额。
+- 题目没有要求多个运营商联合推出套餐，只要求允许加入新的运营商，我们显然已经满足了这个需求。
+```cpp:line-numbers
+class Plan {
 private:
-  float rent;
+  map<string, int> bus; // 套餐名称与限额
+  MobileOperator* mo; // 运营商，处理套餐外费用
+  float planCharge; // 套餐固定费
 public:
-  MobileOperator(float rent) {
-    this->rent = rent;
+  Plan(MobileOperator* mo) {
+    // 设置运营商
+    this->mo = mo;
   }
-  virtual float charge() {
-    return rent;
+
+  void addBussiness(string name, int maxuse){
+    // 为套餐添加业务和额度
+    bus[name] = maxuse;
+  }
+
+  void setPlanCharge(float planCharge) {
+    // 设置套餐基本费用
+    this->planCharge = planCharge;
+  }
+
+  virtual float singleCharge(vector<string> names, vector<float> used) {
+    // 单个套餐周期的收费
+    float total = planCharge; // 先收套餐费
+    for (int i = 0;i < names.size(); i++) {
+      // 逐个业务收取费用
+      if (bus[names[i]] <= used[i]) {
+        // 如果没用完套餐，则无需收取套餐外费用
+        continue;
+      }
+      else {
+        // 收取套餐外费用，需要减掉套餐内额度
+        total += mo->charge(names[i], used - bus[names[i]]);
+      }
+    }
+
+    return total;
   }
 }
 ```
-- 套餐`Plan`可以派生`MonthlyPlan` `AnnuallyPlan`。
