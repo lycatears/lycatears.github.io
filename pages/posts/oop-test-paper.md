@@ -2,7 +2,7 @@
 layout: post
 title: 面向对象程序设计试卷大题解析
 date: 2023-07-02 19:11:01
-updated: 2026-05-27 11:07:36
+updated: 2026-05-28 23:54:36
 categories: 学习
 excerpt: 手把手带你做oop期末考试大题
 tags:
@@ -666,11 +666,72 @@ public:
       }
       else {
         // 收取套餐外费用，需要减掉套餐内额度
-        total += mo->charge(names[i], used - bus[names[i]]);
+        total += mo->charge(names[i], used[i] - bus[names[i]]);
       }
     }
 
     return total;
   }
+
+  virtual float charge(vector<string> names, vector<vector<float> used>) {
+    // 用二维数组实现多个套餐周期的收费
+    float total;
+    for (int i = 0; i < names.size(); i++) {
+      total += singleCharge(names[i], used[i]);
+    }
+  }
+}
+
+class MonthlyPlan: public Plan {
+  // 包月套餐，与上述规则大致相同
+}
+
+class AnnuallyPlan: public Plan {
+  // 统计全年每项业务的消费，按年计费
+  float charge(vector<string> names, vector<vector<float> used>) {
+    float total = planCharge;
+    // 各项业务先设为0消耗
+    vector<float> annually_used(names.size(), 0);
+    for(int i = 0; i < names.size(); i++) {
+      // 逐业务统计这段时间内使用了多少业务量
+      for(int j = 0;j < used.size(); i++) {
+        // 加单月的单个业务使用量
+        annually_used[i] += used[j][i];
+      }
+    }
+    for (int i = 0;i < names.size(); i++) {
+      if (bus[names[i]] <= annually_used[i]) {
+        // 未超出套餐额度则不额外扣费
+        continue;
+      }
+      else {
+        // 对套餐外部分收费
+        total += mo->charge(names[i], annually_used[i] - bus[names[i]]);
+      }
+    }
+    return total;
+  }
+}
+
+int main(void) {
+  Mobile* cm = new ChinaMobile();
+  cm->addBusiness("通话", new CallingBussiness);
+  cm->addBusiness("流量", new InternetBussiness);
+  cm->addBusiness("短信", new MessageBusiness);
+  Plan* p = new MonthlyPlan(cm);
+  p->addBusiness("通话", 60*50);
+  p->addBusiness("流量", 20*1024);
+  p->addBusiness("短信", 50);
+  p->setPlanCharge(8);
+  vector<string> names = {"通话", "流量", "短信"};
+  vector<vector<float>> used = {{888, 9999, 114}, {1234, 5678, 5}, {1145, 1419, 8}, {1611, 1645, 16}, {888, 999, 77}};// 考试的时候随便编几个数据
+  p->charge(names, used);
 }
 ```
+- 以上代码合起来，就是最终的答案了。
+- 但是我们往往没有时间设计这样的细节，在考试时间不足的情况下，我们需要简单粗暴的解决方法——注释大法。看到代码里面的那些注释了吗？如果你没有时间去考虑这么多细节了，比如用数组还是vector，那就用最简单的方法、你最熟悉的方法。然后，在没时间实现的函数里面，粗暴的填充大量注释。**体现多态性的函数最好不要。** 因为这个题的考点就是多态，你摆出类继承体系和多态的关注点函数就已经拿到大部分的分数了。
+- 你不用考虑数组越界、空指针什么的，即使你用的是最原始的数组，那也不要紧，因为这个大题看的就是你的继承体系和多态的掌握情况。直接循环就行，点到为止，能表达出那个意思即可。所以你没学过STL也不要紧，这只是我刷太多力扣养成的习惯，该咋样咋样就行。
+
+## 后记
+- OOP是一门以背诵为基础的学科，前面的小题才是难点，需要你非常熟悉PPT上面的知识点。
+- 祝你满绩通关OOP！
