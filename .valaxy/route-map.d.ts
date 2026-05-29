@@ -143,6 +143,13 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
+    '/posts/ml-final-2024': RouteRecordInfo<
+      '/posts/ml-final-2024',
+      '/posts/ml-final-2024',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
     '/posts/oop-test-paper': RouteRecordInfo<
       '/posts/oop-test-paper',
       '/posts/oop-test-paper',
@@ -277,6 +284,12 @@ declare module 'vue-router/auto-routes' {
     'pages/posts/gpa-calculator.md': {
       routes:
         | '/posts/gpa-calculator'
+      views:
+        | never
+    }
+    'pages/posts/ml-final-2024.md': {
+      routes:
+        | '/posts/ml-final-2024'
       views:
         | never
     }

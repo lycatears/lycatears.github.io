@@ -1,7 +1,6 @@
 ---
 title: 我的小伙伴们
 keywords: 链接
-description: 云游的小伙伴们
 links:
   - url: https://lycatears.github.io
     name: 洛樱
@@ -13,7 +12,7 @@ links:
     blog: 万人恢复
     desc: 随处可见的笨蛋
     avatar: /links/wanrenhuifu-avatar.jpg
-    color: "#ffffff"
+    color: "#000000"
   - url: https://narafluorine.github.io/
     blog: NaraFluorine
     desc: 高天卫星
@@ -28,6 +27,11 @@ links:
     blog: 南极滑稽
     desc: 想当科研高手
     avatar: "/links/nanjihuaji-avatar.jpg"
+    color: "#ffffff"
+  - url: https://blog.kisechan.space/
+    blog: Kisechan's Blog
+    desc: Kisechan 的博客！
+    avatar: "/links/kisechan-avatar.ico"
     color: "#ffffff"
 
 random: true

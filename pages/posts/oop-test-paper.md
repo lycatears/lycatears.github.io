@@ -470,7 +470,7 @@ void main()
 4. `cout << c2 << endl;` 同样是运算符重载。**注意流对象的操作。** 但由于流对象在左边，我们需要使用非成员函数的重载；但是Car类的属性都是私有，因此还需要添加getter，详见最终答案的代码。
 ```cpp:line-numbers=46
 // ...
-    Car operator<<(ostream& os){ // [!code ++]
+    ostream& operator<<(ostream& os){ // [!code ++]
       os << "车架号："<< this->iId << "，发动机型号：" << this->pName << "，里程数：" << this->iI; // [!code ++]
       return os; // [!code ++]
     } // [!code ++]
@@ -735,3 +735,4 @@ int main(void) {
 ## 后记
 - OOP是一门以背诵为基础的学科，前面的小题才是难点，需要你非常熟悉PPT上面的知识点。
 - 祝你满绩通关OOP！
+- 需要用的函数随便用，不用管什么头文件。至于这个函数是什么功能，由你的注释决定。非常的唯心主义，不是吗？

@@ -5,6 +5,7 @@ date: 2025-06-20 12:06:14
 updated: 2026-05-25 22:57:45
 categories: 项目
 excerpt: 一个简单的吉林大学绩点计算器，初学Qt时制作。
+cover: https://www.helloimg.com/i/2026/05/29/6a1916ad504f5.png
 medium_zoom: true
 tags:
   - 编程
@@ -43,3 +44,4 @@ tags:
 ## 免责声明
 - 该程序制作水平较低，计算的绩点数据仅供参考，不作为您留学、推免、评奖、评优的成绩依据。
 - 该程序未收集您的个人信息，未对吉林大学教务系统进行逆向，仅在程序运行期间收集了前端可见的数据并进行自动化计算，且不会在本人所有的存储设备上（或使用的网络存储服务账号）存储任何数据。所有代码可在[GitHub](https://github.com/lycatears/jlu/tree/main/Qt%E8%B7%A8%E5%B9%B3%E5%8F%B0%E7%BC%96%E7%A8%8B/%E7%BB%A9%E7%82%B9%E8%AE%A1%E7%AE%97%E5%99%A8)浏览。如您不同意该程序使用上述成绩数据进行计算，请勿使用。
+- 封面由GPT Image2 AI生成。

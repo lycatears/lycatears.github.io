@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 吉林大学软件学院·DB2通关指南
+title: DB2通关指南
 date: 2024-12-30 14:55:41
 updated: 2026-05-26 15:09:14
 categories: 学习
