@@ -33,7 +33,11 @@ links:
     desc: Kisechan 的博客！
     avatar: "/links/kisechan-avatar.ico"
     color: "#ffffff"
-
+  - url: https://lawrencesivan.github.io
+    blog: LawrenceSivan
+    desc: 栽种绝处的花
+    avatar: https://gcore.jsdelivr.net/gh/LawrenceSivan/cdn@master/pictures/avatar.jpg
+    color: "#ffffff"
 random: true
 ---
 
