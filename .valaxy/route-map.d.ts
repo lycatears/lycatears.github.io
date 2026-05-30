@@ -150,6 +150,13 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
+    '/posts/oop-addition': RouteRecordInfo<
+      '/posts/oop-addition',
+      '/posts/oop-addition',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
     '/posts/oop-test-paper': RouteRecordInfo<
       '/posts/oop-test-paper',
       '/posts/oop-test-paper',
@@ -290,6 +297,12 @@ declare module 'vue-router/auto-routes' {
     'pages/posts/ml-final-2024.md': {
       routes:
         | '/posts/ml-final-2024'
+      views:
+        | never
+    }
+    'pages/posts/oop-addition.md': {
+      routes:
+        | '/posts/oop-addition'
       views:
         | never
     }
