@@ -136,5 +136,9 @@ export default defineSiteConfig({
     enable: true,
   },
 
-  favicon: '/favicon.ico'
+  comment: {
+    enable: true,
+  },
+
+  favicon: '/favicon.ico',
 })

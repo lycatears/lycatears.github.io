@@ -1,5 +1,6 @@
 import type { UserThemeConfig } from 'valaxy-theme-yun'
 import { defineValaxyConfig } from 'valaxy'
+import { addonWaline } from 'valaxy-addon-waline/index.js'
 
 // add icons what you will need
 const safelist = [
@@ -59,6 +60,13 @@ export default defineValaxyConfig<UserThemeConfig>({
       primary: '#ffcce6'
     },
   },
+
+  addons: [
+    addonWaline({
+      serverURL: 'https://waline-comment-1u2megism-lycatears-projects.vercel.app',
+      dark: 'auto',
+    })
+  ],
 
   unocss: { safelist },
   devtools: false
