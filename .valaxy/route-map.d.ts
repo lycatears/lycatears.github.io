@@ -143,6 +143,13 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
+    '/posts/java-review-notes': RouteRecordInfo<
+      '/posts/java-review-notes',
+      '/posts/java-review-notes',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
     '/posts/ml-final-2024': RouteRecordInfo<
       '/posts/ml-final-2024',
       '/posts/ml-final-2024',
@@ -160,6 +167,13 @@ declare module 'vue-router/auto-routes' {
     '/posts/oop-test-paper': RouteRecordInfo<
       '/posts/oop-test-paper',
       '/posts/oop-test-paper',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/posts/python-review-notes': RouteRecordInfo<
+      '/posts/python-review-notes',
+      '/posts/python-review-notes',
       Record<never, never>,
       Record<never, never>,
       | never
@@ -294,6 +308,12 @@ declare module 'vue-router/auto-routes' {
       views:
         | never
     }
+    'pages/posts/java-review-notes.md': {
+      routes:
+        | '/posts/java-review-notes'
+      views:
+        | never
+    }
     'pages/posts/ml-final-2024.md': {
       routes:
         | '/posts/ml-final-2024'
@@ -309,6 +329,12 @@ declare module 'vue-router/auto-routes' {
     'pages/posts/oop-test-paper.md': {
       routes:
         | '/posts/oop-test-paper'
+      views:
+        | never
+    }
+    'pages/posts/python-review-notes.md': {
+      routes:
+        | '/posts/python-review-notes'
       views:
         | never
     }
