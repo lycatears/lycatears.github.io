@@ -31,3 +31,4 @@ public class HelloWorld {
 - `main`是主函数，是程序入口。
 - `System.out`是核心类库提供的标准输出对象，包含的`println`方法能够打印语句到控制台上，并换行。
 - Java源代码需要由`javac`编译为.class字节码文件，再交由java执行，由JVM将字节码翻译为机器码执行。
+## 输入输出
