@@ -63,7 +63,7 @@ export default defineValaxyConfig<UserThemeConfig>({
 
   addons: [
     addonWaline({
-      serverURL: 'https://waline-comment-1u2megism-lycatears-projects.vercel.app',
+      serverURL: 'https://waline-comment-seven-gilt.vercel.app/',
       dark: 'auto',
     })
   ],
