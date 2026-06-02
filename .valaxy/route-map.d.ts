@@ -115,6 +115,13 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
+    '/posts/csapp-notes': RouteRecordInfo<
+      '/posts/csapp-notes',
+      '/posts/csapp-notes',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
     '/posts/db2': RouteRecordInfo<
       '/posts/db2',
       '/posts/db2',
@@ -281,6 +288,12 @@ declare module 'vue-router/auto-routes' {
     'pages/posts/comic-magazines.md': {
       routes:
         | '/posts/comic-magazines'
+      views:
+        | never
+    }
+    'pages/posts/csapp-notes.md': {
+      routes:
+        | '/posts/csapp-notes'
       views:
         | never
     }
