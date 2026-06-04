@@ -5,6 +5,7 @@ import { addonWaline } from 'valaxy-addon-waline/index.js'
 // add icons what you will need
 const safelist = [
   'i-ri-home-line',
+  'i-ri-tools-line',
 ]
 
 /**
@@ -34,6 +35,12 @@ export default defineValaxyConfig<UserThemeConfig>({
         url: '/links/',
         icon: 'i-ri-links-line',
         color: 'dodgerblue',
+      },
+      {
+        name: '工具',
+        url: '/tools/',
+        icon: 'i-ri-tools-line',
+        color: 'skyblue',
       },
       // {
       //   name: '喜欢的女孩子',

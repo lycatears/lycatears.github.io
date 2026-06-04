@@ -213,6 +213,20 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
+    '/tools/': RouteRecordInfo<
+      '/tools/',
+      '/tools',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/tools/random-gen': RouteRecordInfo<
+      '/tools/random-gen',
+      '/tools/random-gen',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
   }
 
   /**
@@ -379,6 +393,18 @@ declare module 'vue-router/auto-routes' {
     'pages/tags/index.md': {
       routes:
         | '/tags/'
+      views:
+        | never
+    }
+    'pages/tools/index.md': {
+      routes:
+        | '/tools/'
+      views:
+        | never
+    }
+    'pages/tools/random-gen.md': {
+      routes:
+        | '/tools/random-gen'
       views:
         | never
     }
