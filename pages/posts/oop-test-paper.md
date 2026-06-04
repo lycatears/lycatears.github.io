@@ -280,6 +280,35 @@ class TrainingProgramming {
   vector<Course*> courses;
 }
 ```
+- 注：如果不是菱形继承，下面的代码会出现编译错误。
+```cpp:line-numbers
+class A{
+public:
+	virtual void f(){
+		printf("a");
+	}
+};
+
+class B{
+public:
+	virtual void f(){
+		printf("b");
+	}
+};
+
+class C:virtual public A, virtual public B{
+};
+
+int main(void) {
+	C* c = new C;
+	c->f();
+	return 0;
+}
+// In function 'int main()':
+// request for member 'f' is ambiguous
+// candidates are: 'virtual void B::f()'
+//                  'virtual void A::f()'
+```
 ## 代码阅读题
 一般都是关于类的构造顺序、析构顺序、多态的。基本上必考。
 ### 问题描述

@@ -15,6 +15,8 @@ tags:
 本文是猫娘**复习**Java时所做的笔记，主要是为了巩固基础。
 
 参考文献：[【黑马程序员Java零基础视频教程_上部(Java入门，含斯坦福大学练习题+力扣算法题和大厂java面试题）】](https://www.bilibili.com/video/BV17F411T7Ao?p=63&vd_source=91ec06d110e5e750b94a5c71d6934019)
+
+试卷下载：[百度网盘](https://pan.baidu.com/s/1oi5kkmgDdxZNFFHXev37Sw?pwd=kdge)
 ## Java相关概念
 - JVM：Java Virtual Machine，Java虚拟机，负责解释和执行Java代码。
 - JRE：Java Runtime Environment，Java运行时环境。包含JVM和核心类库。
@@ -214,3 +216,190 @@ Student stu2 = new Student("lisi", 20, 'male');
 - 代表当前对象，与C++的`this`指针类似。
 - 每个非静态方法都会被隐式的传递一个`this`参数，代表当前的对象，作为方法的第一个参数。
 - `this`也可用于在一个构造器中调用本类中其他的构造器，且必须在构造器的第一行。
+### 静态成员
+- 由该类所有对象共享的成员或者方法，可以将它设为静态成员。与C++不同的是，Java的静态成员可通过成员访问，也可通过类名访问。静态成员随着类的加载而被加载，先于所有对象存在。
+- 静态成员属于类，而不属于任何一个对象。
+- 静态方法常用于工具类和测试类中。
+- 静态方法只能访问静态变量和静态方法，且没有this，因为它不属于任何一个对象，而是属于类本身。非静态方法可以访问所有静态/非静态的成员。
+```java:line-numbers
+public class HelloWorld {
+    public static void main(String[] args) {
+        Student s1 = new Student(20, "lisi");
+        Student s2 = new Student(21, "wangwu");
+        Student s3 = new Student();
+        System.out.println(Student.getCount());
+    }
+
+
+}
+
+class Student {
+    private int age;
+    private String name;
+    private static int count = 0;
+    public Student(int age, String name) {
+        this.age = age;
+        this.name = name;
+        count++;
+    }
+
+    public Student() {
+        this(18, "zhangsan");
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public static int getCount() {
+        return count;
+    }
+}
+```
+### 继承
+- 继承适合描述具有共同特征，而在具体行为上又有差异的事物。Java中，继承需要使用关键字`extends`，例如定义一个基于人类`Person`的学生类`Student`可以这样定义：`public class Student extends Person`。所有类的公共祖先类都是~~余胜军~~`Object`。
+- 被继承的类称为父类（或者基类、超类），继承其他类的类叫做子类（或者派生类）。
+- 使用继承，多个子类中实现相似功能的代码可以提取到父类中，无需重复实现，提高代码复用性。子类是父类的“一种特化”，可在父类的基础上增加更多行为、功能。
+- Java**不支持**多继承，一个子类只能继承一个父类。但是，可以多层继承，例如C继承于B，而B又继承于A是可以的，B是C的直接父类，A叫做C的间接父类或者祖先类。
+## 字符串
+- 字符串是`java.lang`包中提供的类`String`，无需导入。
+- 字符串创建后，其值不可修改。
+- 使用`String s1 = "abc";`这样形式创建的字符串，`abc`常量存储在常量池中，如果再创建一个`String s2 = "abc";`，则s1与s2指向的数组是同一个。
+- 使用`byte[] b = new byte[]{'a', 'b', 'c'}; String s3 = new String(b);`创建的字符串，每次初始化都会拷贝该字符数组。`String s4 = new String(b);`s3与s4指向的字符数组不是同一个。
+::: code-group
+```java:line-numbers[StringFromConstant.java]
+public class StringFromConstant {
+    public static void main(String[] args) {
+        String s1 = "114514";
+        String s2 = "114514";
+        System.out.println(s1);
+        System.out.println(s2);
+        System.out.println(s1==s2);
+    }
+}
+// 输出：114514 114514 true
+```
+```java:line-numbers[StringFromConstructor.java]
+public class StringFromConstructor {
+    public static void main(String[] args) {
+        byte[] b = new byte[]{97, 98};
+        String s1 = new String(b);
+        String s2 = new String(b);
+        System.out.println(s1);
+        System.out.println(s2);
+        System.out.println(s1==s2);
+    }
+}
+// 输出：ab ab false
+```
+:::
+- 如需比较两个字符串的值，可以用`equals`（考虑大小写）或者`equalsIgnoreCase`（忽略大小写）方法，返回值均为布尔型。
+```java:line-numbers
+public class HelloWorld {
+    public static void main(String[] args) {
+        String s1 = "114514abc";
+        String s2 = "114514Abc";
+        String s3 = "114514abc";
+        System.out.println(s1.equals(s2));
+        System.out.println(s1.equals(s3));
+        System.out.println(s2.equalsIgnoreCase(s3));
+    }
+}
+// 输出：false true true
+```
+- Java8之后，如果几个常量字符串拼接，编译时会提前优化。例如`String s1 = "abc"; String s2 = "a"+"b"+"c";`中，两个字符串对象指向常量池中的同一个字符串。
+### StringBuilder
+:::warning
+如果您正在复习吉林大学相关课程的考试，您可以跳过本小节。
+:::
+- `StringBuilder`可以看作一种容器，创建之后其中的内容是可变的，能够提高对字符串的操作效率。
+- StringBuilder有两种常用的构造方法。
+  - 空参构造：创建一个空白的可变字符串对象，不含内容。
+  - 传入字符串对象：根据传入的字符串的内容，创建可变字符串对象，内容与该字符串相同。
+- 常用方法包括`append`（拼接）`reverse`（反转）等：
+```java:line-numbers
+public class HelloWorld {
+    public static void main(String[] args) {
+        StringBuilder sb = new StringBuilder("123");
+        System.out.println(sb); // 123
+        StringBuilder sb2 = sb.append("456");
+        sb.append("456");
+        System.out.println(sb); // 123456
+        System.out.println(sb.length()); // 6
+        System.out.println(sb.reverse()); // 654321
+        System.out.println(sb.toString()); // 654321
+        System.out.println(sb == sb2);
+    }
+}
+```
+- 空的StringBuilder默认创建长度为16的数组，当超出该限制需要扩容时，扩展到原限制的2倍+2；仍然不足时扩展到实际长度。
+### StringJoiner
+:::warning
+如果您正在复习吉林大学相关课程的考试，您可以跳过本小节。
+:::
+- StringJoiner是JDK8加入的特性，可以在构造字符串时添加分隔符、前缀、后缀（可以只传入分隔符）。
+```java:line-numbers
+public class HelloWorld {
+    public static void main(String[] args) {
+        int[] arr = new int[10];
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = i;
+        }
+        StringJoiner sj = new StringJoiner(", ", "[", "]");
+        for (int i = 0; i < arr.length; i++) {
+            sj.add(String.valueOf(arr[i]));
+        }
+        System.out.println(sj);
+    }
+}
+// [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+```
+## 常用容器
+:::warning
+如果您正在复习吉林大学相关课程的考试，您可以跳过本小节。
+:::
+### ArrayList
+- ArrayList使用了泛型，创建一个`ArrayList`需要传入一个类型参数。注意，基本类型是不能传递给泛型参数的，我们需要传递对应的包装类。
+- `ArrayList`在`java.utils`包中，需要导入。
+- 常用方法：
+  - `add`：添加一个元素
+  - `remove`：传入整数时，为删除对应索引的元素；传入对象时，删除相应的元素（删除第一个遇到的，若不存在则不操作）。例如下面的代码中，直接传递0则会删除索引为0的元素，而传入包装类`Integer`类的0，则会直接删除元素0。
+  - `get`：得到对应索引值的元素。
+  - `set`：设置对应索引值的元素。
+  - `indexOf`：传入一个对象，查找该对象第一次出现的位置。
+```java:line-numbers
+public class HelloWorld {
+    public static void main(String[] args) {
+        ArrayList<Integer> list = new ArrayList<>();
+        Random random = new Random();
+        for (int i = 0; i < 10; i++) {
+            list.add(random.nextInt(10));
+        }
+        System.out.println(list);
+        list.remove(0); // 按照索引移除
+        // list.remove((Integer) 0); // 按照元素移除
+        // list.remove(list.indexOf(0)); // 按照元素移除
+        System.out.println(list);
+        list.set(0, 826);
+        System.out.println(list);
+        System.out.println(list.get(0));
+
+    }
+}
+// [1, 1, 6, 3, 3, 0, 1, 5, 0, 8]
+// [1, 6, 3, 3, 0, 1, 5, 0, 8]
+// [826, 6, 3, 3, 0, 1, 5, 0, 8]
+// 826
+```
