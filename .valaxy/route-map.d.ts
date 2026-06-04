@@ -150,6 +150,13 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
+    '/posts/heyiwei': RouteRecordInfo<
+      '/posts/heyiwei',
+      '/posts/heyiwei',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
     '/posts/java-review-notes': RouteRecordInfo<
       '/posts/java-review-notes',
       '/posts/java-review-notes',
@@ -318,6 +325,12 @@ declare module 'vue-router/auto-routes' {
     'pages/posts/gpa-calculator.md': {
       routes:
         | '/posts/gpa-calculator'
+      views:
+        | never
+    }
+    'pages/posts/heyiwei.md': {
+      routes:
+        | '/posts/heyiwei'
       views:
         | never
     }

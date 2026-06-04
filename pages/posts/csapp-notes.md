@@ -255,4 +255,7 @@ exit
   - `i variables`：全局、静态变量
   - `i locals`：局部变量
   - `i args`：当前函数的参数
+- `delete`(d)：删除断点
+- `disable`：禁用断点
+- `enable`：启用断点
 ### objdump
