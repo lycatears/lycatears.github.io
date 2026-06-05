@@ -37,7 +37,7 @@ export default defineValaxyConfig<UserThemeConfig>({
         color: 'dodgerblue',
       },
       {
-        name: '工具',
+        name: '神秘妙妙工具',
         url: '/tools/',
         icon: 'i-ri-tools-line',
         color: 'skyblue',

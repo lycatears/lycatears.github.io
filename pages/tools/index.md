@@ -1,5 +1,5 @@
 ---
-title: 工具
+title: 神秘妙妙工具
 ---
 
 <script setup>
@@ -10,7 +10,7 @@ title: 工具
 const tools = [
   {
     name: '随机数生成',
-    desc: '生成均匀分布的随机整数或小数',
+    desc: '生成均匀分布、正态分布的随机整数或小数',
     path: '/tools/random-gen/',
     icon: '🎲',
   },

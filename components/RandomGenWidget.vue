@@ -2,13 +2,18 @@
 import { ref, computed } from 'vue'
 
 // Current tab state
-type Tab = 'integer' | 'decimal'
+type Tab = 'integer' | 'decimal' | 'decimal_norm'
 const activeTab = ref<Tab>('integer')
 
 // Integer parameters
 const intMin = ref(0)
 const intMax = ref(100)
 const intCount = ref(5)
+
+// Decimal-Norm parameters
+const mean = ref(0)
+const std = ref(1)
+const decNormCount = ref(5)
 
 // Decimal parameters
 const decCount = ref(5)
@@ -36,10 +41,22 @@ const decCountError = computed(() => {
   return ''
 })
 
+const decNormStdError = computed(() => {
+  const stdv = std.value
+  if (stdv <= 0) {
+    return '标准差必须大于 0。'
+  }
+  return ''
+})
+
 const canGenerate = computed(() => {
-  if (activeTab.value === 'integer')
+  if (activeTab.value === 'integer') {
     return !intCountError.value && !intRangeError.value
-  return !decCountError.value
+  } else if (activeTab.value === 'decimal') {
+    return !decCountError.value
+  } else {
+    return !decNormStdError.value && !decCountError.value
+  }
 })
 
 function generate() {
@@ -54,11 +71,24 @@ function generate() {
       arr.push(Math.floor(Math.random() * (max - min + 1)) + min)
     }
     results.value = arr
-  } else {
+  } else if (activeTab.value === 'decimal') {
     const count = decCount.value
     const arr: number[] = []
     for (let i = 0; i < count; i++) {
       arr.push(Math.random())
+    }
+    results.value = arr
+  } else {
+    const meanv = mean.value
+    const stdv = std.value
+    const count = decNormCount.value
+    const arr: number[] = []
+
+    for (let i = 0; i < count; i++) {
+      const u1 = Math.random()
+      const u2 = Math.random()
+      const standard = Math.sqrt(-2 * Math.log(u1)) * Math.cos(2 * Math.PI * u2)
+      arr.push(standard * stdv + meanv);
     }
     results.value = arr
   }
@@ -80,54 +110,31 @@ async function copyResults() {
 <template>
   <div class="random-gen">
     <div class="tab-bar" flex="~" role="tablist">
-      <button
-        role="tab"
-        class="tab-item"
-        :class="{ active: activeTab === 'integer' }"
-        @click="activeTab = 'integer'"
-      >
+      <button role="tab" class="tab-item" :class="{ active: activeTab === 'integer' }" @click="activeTab = 'integer'">
         整数
       </button>
-      <button
-        role="tab"
-        class="tab-item"
-        :class="{ active: activeTab === 'decimal' }"
-        @click="activeTab = 'decimal'"
-      >
+      <button role="tab" class="tab-item" :class="{ active: activeTab === 'decimal' }" @click="activeTab = 'decimal'">
         小数
+      </button>
+      <button role="tab" class="tab-item" :class="{ active: activeTab === 'decimal_norm' }"
+        @click="activeTab = 'decimal_norm'">
+        小数（正态分布）
       </button>
     </div>
 
     <div v-if="activeTab === 'integer'" class="params">
       <div class="param-row">
         <label class="param-label">最小值</label>
-        <input
-          v-model.number="intMin"
-          type="number"
-          class="param-input"
-          placeholder="0"
-        >
+        <input v-model.number="intMin" type="number" class="param-input" placeholder="0">
       </div>
       <div class="param-row">
         <label class="param-label">最大值</label>
-        <input
-          v-model.number="intMax"
-          type="number"
-          class="param-input"
-          placeholder="100"
-        >
+        <input v-model.number="intMax" type="number" class="param-input" placeholder="100">
       </div>
       <div v-if="intRangeError" class="param-error">{{ intRangeError }}</div>
       <div class="param-row">
         <label class="param-label">生成数量</label>
-        <input
-          v-model.number="intCount"
-          type="number"
-          class="param-input"
-          min="0"
-          max="1000"
-          placeholder="5"
-        >
+        <input v-model.number="intCount" type="number" class="param-input" min="0" max="1000" placeholder="5">
       </div>
       <div v-if="intCountError" class="param-error">{{ intCountError }}</div>
     </div>
@@ -136,23 +143,29 @@ async function copyResults() {
       <p class="param-desc">生成 [0, 1] 区间均匀分布的随机小数</p>
       <div class="param-row">
         <label class="param-label">生成数量</label>
-        <input
-          v-model.number="decCount"
-          type="number"
-          class="param-input"
-          min="0"
-          max="1000"
-          placeholder="5"
-        >
+        <input v-model.number="decCount" type="number" class="param-input" min="0" max="1000" placeholder="5">
       </div>
       <div v-if="decCountError" class="param-error">{{ decCountError }}</div>
     </div>
 
-    <button
-      class="generate-btn"
-      :disabled="!canGenerate"
-      @click="generate"
-    >
+    <div v-if="activeTab === 'decimal_norm'" class="params">
+      <div class="param-row">
+        <label class="param-label">均值</label>
+        <input v-model.number="mean" type="number" class="param-input" placeholder="0">
+      </div>
+      <div class="param-row">
+        <label class="param-label">标准差</label>
+        <input v-model.number="std" type="number" class="param-input" placeholder="1">
+      </div>
+      <div v-if="decNormStdError" class="param-error">{{ decNormStdError }}</div>
+      <div class="param-row">
+        <label class="param-label">生成数量</label>
+        <input v-model.number="decNormCount" type="number" class="param-input" min="0" max="1000" placeholder="5">
+      </div>
+      <div v-if="decCountError" class="param-error">{{ decCountError }}</div>
+    </div>
+
+    <button class="generate-btn" :disabled="!canGenerate" @click="generate">
       生成随机数
     </button>
 
