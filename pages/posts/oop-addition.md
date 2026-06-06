@@ -4,7 +4,7 @@ title: 面向对象程序设计试卷大题解析（第二弹）
 date: 2026-05-30 19:56:50
 categories: 学习
 excerpt: OOP考试中可能遇到的其他大题解析
-cover: https://www.helloimg.com/i/2026/05/31/6a1b188ce9e4a.jpg
+cover: https://i.ibb.co/DfQgQG1f/176.jpg
 codeHeightLimit: 1000
 tags:
   - 编程

@@ -5,7 +5,7 @@ date: 2023-07-02 19:11:01
 updated: 2026-05-30 10:53:36
 categories: 学习
 excerpt: 手把手带你做oop期末考试大题
-cover: https://www.helloimg.com/i/2026/05/30/6a1a5a9337279.jpg
+cover: https://i.ibb.co/XxVsR8T6/172.jpg
 tags:
   - 编程
   - 学习

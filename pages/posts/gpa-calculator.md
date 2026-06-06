@@ -5,7 +5,7 @@ date: 2025-06-20 12:06:14
 updated: 2026-05-25 22:57:45
 categories: 项目
 excerpt: 一个简单的吉林大学绩点计算器，初学Qt时制作。
-cover: https://www.helloimg.com/i/2026/05/29/6a1916ad504f5.png
+cover: https://i.ibb.co/zVsn40hB/Chat-GPT-Image-2026-5-29-09-15-23.png
 medium_zoom: true
 tags:
   - 编程

@@ -171,6 +171,13 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
+    '/posts/normal-distribution-generate': RouteRecordInfo<
+      '/posts/normal-distribution-generate',
+      '/posts/normal-distribution-generate',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
     '/posts/oop-addition': RouteRecordInfo<
       '/posts/oop-addition',
       '/posts/oop-addition',
@@ -357,6 +364,12 @@ declare module 'vue-router/auto-routes' {
     'pages/posts/ml-final-2024.md': {
       routes:
         | '/posts/ml-final-2024'
+      views:
+        | never
+    }
+    'pages/posts/normal-distribution-generate.md': {
+      routes:
+        | '/posts/normal-distribution-generate'
       views:
         | never
     }

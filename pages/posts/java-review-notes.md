@@ -2,7 +2,7 @@
 layout: post
 title: Java基础知识复习笔记
 date: 2024-05-31 20:54:36
-updated: 2025-11-01 13:10:14
+updated: 2026-06-05 23:36:14
 categories: 学习
 excerpt: 太久没写Java，有些生疏，花点时间复习一下。如您在复习吉林大学《Java程序设计》课程，本文可能也有一定帮助作用。
 tags:
@@ -273,7 +273,100 @@ class Student {
 - 被继承的类称为父类（或者基类、超类），继承其他类的类叫做子类（或者派生类）。
 - 使用继承，多个子类中实现相似功能的代码可以提取到父类中，无需重复实现，提高代码复用性。子类是父类的“一种特化”，可在父类的基础上增加更多行为、功能。
 - Java**不支持**多继承，一个子类只能继承一个父类。但是，可以多层继承，例如C继承于B，而B又继承于A是可以的，B是C的直接父类，A叫做C的间接父类或者祖先类。
-- 父类中`private`私有的成员也会被子类继承，只不过子类无法直接访问。`protected`是保护成员，在本类以及自己的子类中可直接访问，但在类外不能直接访问。`public`是公共成员，类内外均可直接访问。
+- 父类中`private`私有的成员也会被子类继承，只不过子类无法直接访问。`protected`是保护成员，在本类以及自己的子类中可直接访问，但在类外不能直接访问。`public`是公共成员，类内外均可直接访问。如果未指定访问权限修饰符，则默认为包访问权限，在同一个包中的其他类中可见。
+- 父类的成员可以通过`super`关键字访问。
+- 在Java中，非静态、非私有、没有被`final`修饰的方法是虚方法，虚方法可被子类重写。建议在重写的方法上加上`@override`注解，以便发现重写中的错误。重写的方法，访问权限应该大于等于父类，以保证父类的引用可以访问这些方法；返回值类型应当小于等于父类（在类继承体系中）。
+:::code-group
+```java:line-numbers [Main.java]
+public class Main {
+    public static void main(String[] args) {
+        Animal a1 = new Cat("mimi", 3);
+        Animal a2 = new Dog("wangwang", 2);
+        a1.say();
+        a2.say();
+    }
+}
+```
+
+```java:line-numbers [Animal.java]
+public class Animal {
+    String name;
+    int age;
+    public Animal(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    public Animal() {
+        this(null, 0);
+    }
+
+    public void say() {
+        System.out.println("Hello " + name + " " + age);
+    }
+}
+```
+
+```java:line-numbers [Cat.java]
+public class Cat extends Animal {
+    public Cat(String name, int age) {
+        super(name, age);
+    }
+
+    public Cat() {
+        this(null, 0);
+    }
+
+    @Override
+    public void say() {
+        System.out.println("meow " + name + " " + age);
+    }
+}
+```
+
+```java:line-numbers [Dog.java]
+public class Dog extends Animal {
+    public Dog(String name, int age) {
+        super(name, age);
+    }
+
+    public Dog() {
+        this(null, 0);
+    }
+
+    @Override
+    public void say() {
+        System.out.println("woff " + name + " " + age);
+    }
+}
+```
+:::
+- 子类不会继承父类的构造方法，子类中所有的构造方法在默认情况下，会调用父类中的无参构造方法。子类构造方法的第一行应当为`super()`调用父类的构造方法，如果我们在代码中没有加上，编译时也会生成。想要调用有参构造，必须在`super()`中指定参数。
+- 使用`this()`调用本类中其他构造方法时，不用`super()`，因为其他构造函数会调用。
+### 多态
+
+### 包
+
+### final关键字
+
+### 权限修饰符
+
+### 代码块
+
+### 抽象类与抽象方法
+
+### 接口
+
+### 内部类
+
+#### 成员内部类
+
+#### 静态内部类
+
+#### 局部内部类
+
+#### 匿名内部类
+
 ## 字符串
 - 字符串是`java.lang`包中提供的类`String`，无需导入。
 - 字符串创建后，其值不可修改。
