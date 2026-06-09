@@ -2,7 +2,7 @@
 layout: post
 title: Java基础知识复习笔记
 date: 2024-05-31 20:54:36
-updated: 2026-06-05 23:36:14
+updated: 2026-06-09 23:36:14
 categories: 学习
 excerpt: 太久没写Java，有些生疏，花点时间复习一下。如您在复习吉林大学《Java程序设计》课程，本文可能也有一定帮助。
 tags:
@@ -531,7 +531,7 @@ class Dog extends Animal {
 
 - 内部类可以直接访问外部类的成员，包括其私有属性。
 - 外部类想要访问内部类的成员，则必须创建对象。
-- Java16前不支持内部类的静态成员，目前还没有内部类的静态方法。
+- Java16前不支持内部类的静态成员。
 #### 成员内部类
 写在类的成员部分的内部类，就是成员内部类。
 - 成员内部类可被访问控制修饰符修饰，与方法、变量的效果类似。
@@ -596,11 +596,90 @@ class Car {
 - 内部类想要访问外部类的方法、属性，可以通过`Outer.this`（Outer需要替换为实际上的外部类名）调用。Java会为内部类隐式生成一个外部类的引用，指向其对应的外部类。
 #### 静态内部类
 静态内部类是一种特殊的成员内部类，就是用`static`修饰的成员内部类。
-- 与静态方法类似，静态内部类也只能访问外部类的静态成员。如果需要访问外部类的非静态成员，需要创建对象。
+- 与静态方法类似，静态内部类也只能访问外部类的静态成员。如果需要访问外部类的非静态成员，需要创建对象。创建静态内部类的对象的格式为：`Outer.Inner oi = new Outer.Inner()`
+- 可以直接调用静态内部类的静态方法，例如`Outer.Inner.s_fun();`
+```java:line-numbers
+public class HelloWorld {
+    public static void main(String[] args) {
+        Outer.Inner oi = new Outer.Inner();
+        oi.fun();
+        Outer.Inner.s_fun();
+    }
+}
+
+class Outer {
+    public static class Inner {
+        public static void s_fun() {
+            System.out.println("Static Inner Function");
+        }
+        public void fun() {
+            System.out.println("Inner Function");
+        }
+    }
+    public void o_fun() {
+        Inner inner = new Inner();
+        inner.fun();
+        System.out.println("Outer Function");
+    }
+}
+// Inner Function
+// Static Inner Function
+```
 #### 局部内部类
+定义在方法内部的内部类叫做局部内部类，类似于局部变量。
+- 外界无法直接使用该内部类，必须在定义该内部类的方法内部创建该内部类的对象并使用。
+- 局部内部类可以直接访问外部类的成员，也可以访问方法内的局部变量。
+```java:line-numbers
+public class HelloWorld {
+    public static void main(String[] args) {
+        Outer outer = new Outer();
+        outer.o_fun();
+    }
+}
 
+class Outer {
+    public void o_fun() {
+        System.out.println("Outer o_fun");
+        class Inner {
+            public void i_fun() {
+                System.out.println("Inner i_fun");
+            }
+        }
+        Inner inner = new Inner();
+        inner.i_fun();
+    }
+}
+// Outer o_fun
+// Inner i_fun
+```
 #### 匿名内部类
+匿名内部类是没有标识符的内部类，在四种内部类中最为重要。
+- 匿名内部类的定义格式可参考如下代码：
+```java:line-numbers
+public class HelloWorld {
+    public static void main(String[] args) {
+        new CatchMouse() {
+            @Override
+            public void catchMouse() {
+                System.out.println("猫抓老鼠");
+            }
+        }.catchMouse();
+    }
+}
 
+interface CatchMouse {
+    public abstract void catchMouse();
+}
+```
+- 可以看到，创建的匿名内部类在定义时移除了`class`关键字和类的名称。该类实现了`CatchMouse`接口，重写了该接口中的所有方法，接口名写在大括号之前，就表示该匿名内部类实现的是该接口。匿名内部类就是一个类的子类或接口的实现类。
+- 匿名内部类的定义就是`new CatchMouse()`之后大括号中的内容，`new`关键字创建的是这个匿名内部类的对象，而不是接口`CatchMouse`的实例。
+- 匿名内部类的定义、创建对象中，我们可以看到三种要素：
+  - 实现/继承关系：实现一个接口，或者继承其他类。
+  - 重写方法：重写所有抽象方法。
+  - 创建对象：创建了匿名内部类的对象。
+- 匿名内部类可以写在方法内，也可以写在类的成员位置。
+- 当方法的参数需要传递接口或者类时，但该实现类只需要使用一次，如果直接编写实现类过于麻烦，我们就可以用匿名内部类简化代码。
+- 匿名内部类对象如果想多次使用，可以把该匿名内部类的对象传递给一个被继承/实现的类/接口的引用。
 ## 字符串
 - 字符串是`java.lang`包中提供的类`String`，无需导入。
 - 字符串创建后，其值不可修改。
