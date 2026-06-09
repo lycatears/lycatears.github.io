@@ -4,7 +4,7 @@ title: Java基础知识复习笔记
 date: 2024-05-31 20:54:36
 updated: 2026-06-05 23:36:14
 categories: 学习
-excerpt: 太久没写Java，有些生疏，花点时间复习一下。如您在复习吉林大学《Java程序设计》课程，本文可能也有一定帮助作用。
+excerpt: 太久没写Java，有些生疏，花点时间复习一下。如您在复习吉林大学《Java程序设计》课程，本文可能也有一定帮助。
 tags:
   - 编程
   - 学习
@@ -13,7 +13,9 @@ tags:
 ---
 # Java基础知识复习笔记
 本文是猫娘**复习**Java时所做的笔记，主要是为了巩固基础。
-
+:::danger
+本文不包含吉林大学软件学院Java程序设计课程中的GUI部分。
+:::
 参考文献：[【黑马程序员Java零基础视频教程_上部(Java入门，含斯坦福大学练习题+力扣算法题和大厂java面试题）】](https://www.bilibili.com/video/BV17F411T7Ao?p=63&vd_source=91ec06d110e5e750b94a5c71d6934019)
 
 试卷下载：[百度网盘](https://pan.baidu.com/s/1oi5kkmgDdxZNFFHXev37Sw?pwd=kdge)
@@ -344,25 +346,257 @@ public class Dog extends Animal {
 - 子类不会继承父类的构造方法，子类中所有的构造方法在默认情况下，会调用父类中的无参构造方法。子类构造方法的第一行应当为`super()`调用父类的构造方法，如果我们在代码中没有加上，编译时也会生成。想要调用有参构造，必须在`super()`中指定参数。
 - 使用`this()`调用本类中其他构造方法时，不用`super()`，因为其他构造函数会调用。
 ### 多态
-
+Java的多态与C++的基本上一样，都是通过父类指针调用不同的子类方法，产生不同的行为。可参考上面的动物类，初步了解Java多态的实现。
+- 多态需要继承（或者实现）关系，要用父类引用指向子类对象，且需要子类重写父类的方法。
+- 通过父类引用只能访问父类中包含的成员，子类自行增加的成员则不能通过父类引用访问。例如在上面的动物类中，假如`Cat`类新增了一个`catchMouse()`方法，则`Animal a = Cat(); a.catchMouse();`会导致编译错误。
+- 在程序运行时，实际上运行的是具体的子类的方法。
+- `instanceof`关键字可以判断一个对象是否是某个类的实例。如果想要调用某个子类的特有方法，但又不知道这个对象具体是什么类，就可以通过这个关键字判断（例如：`if(a instanceof A){}`），避免出现类型转换错误。
 ### 包
-
+- Java中的包可以对各种类进行分门别类的管理，便于管理和使用。
+- 一般情况下，包名采用公司域名反写，全英文+小写，需要见名知义。
+- Java文件的第一行用`package com.example.mypackage;`声明包名。
+- 全类名/全限定名：一个类的完整标识，包括它所在的包名和自身的类名，可以唯一标识一个类，能够避免同名的类发生名称冲突。假如我们在`com.example.mypackage`包中定义了`Student`类，则该类的全类名为`com.example.mypackage.Student`。
+- 使用其他类时，最完整的类名实际上应该是全类名。但是全类名过于复杂，使用非常不方便，因此需要使用`import`关键字导入这些类。
+  - 同一个包中的其他类不需要导入。
+  - `java.lang`中的包不需要导入。
+  - 除上述两种情况之外，都需要导入包。
+  - 如果同时使用了来自不同包的同名的类，只能使用全类名。
 ### final关键字
-
+- final的字面意思，就是"最终"。在Java中，final可以修饰类、方法、变量。
+- final修饰类时，表示该类是最终类，不能被继承。
+- final修饰方法，该方法不能被子类重写。
+- final修饰变量时，该变量成为常量，赋值后不能被修改。基本数据类型的常量，其值不能被修改；引用数据类型的常量，其指向的对象不能更换，但是仍然可以调用该对象的方法，修改该对象内部的数据。
 ### 权限修饰符
-
+Java中，类的成员访问权限共有四种，分别是私有、默认、保护、公共。
+| 修饰符 | 类内 | 同一个包内 | 其他包子类 | 不同包的无关类 |
+| ------ | ---- | ---------- | ---------- | -------------- |
+|`private`|✅|❌|❌|❌|
+|默认|✅|✅|❌|❌|
+|`protected`|✅|✅|✅|❌|
+|`public`|✅|✅|✅|✅|
 ### 代码块
+:::warning
+如果您正在复习吉林大学相关课程的考试，您可以跳过本小节。
+:::
+#### 局部代码块
+- 局部代码块是写在**方法内**的一对单独的大括号内的代码，其作用主要是提前结束变量的生命周期。
+```java:line-numbers
+public class HelloWorld {
+    public static void main(String[] args) {
+        {
+            int a = 1;
+            System.out.println(a);
+        }
+        //  会导致编译错误
+        //  System.out.println(a);
+    }
+}
+```
+#### 构造代码块
+- 构造代码块需要写在类成员的位置，在构造该类的对象时，会优先于构造方法执行。多个构造方法中重复的内容可以提取到构造代码块中。
+```java:line-numbers
+public class HelloWorld {
+    public static void main(String[] args) {
+        Cat c1 = new Cat();
+        Cat c2 = new Cat();
+    }
+}
 
+class Cat {
+    {
+        System.out.println("Meow~");
+    }
+    Cat() {
+        System.out.println("喵~");
+    }
+}
+// Meow~
+// 喵~
+// Meow~
+// 喵~
+```
+#### 静态代码块
+- 静态代码块是通过`static`关键字修饰的构造代码块，随着**类**的加载而执行，自动触发，而且只会被执行一次。
+- 一般在类加载时，需要进行数据初始化时使用。
+```java:line-numbers
+public class HelloWorld {
+    public static void main(String[] args) {
+        Cat c1 = new Cat();
+        Cat c2 = new Cat();
+    }
+}
+
+class Cat {
+    static {
+        System.out.println("Meow~");
+    }
+    Cat() {
+        System.out.println("喵~");
+    }
+}
+// Meow~
+// 喵~
+// 喵~
+```
 ### 抽象类与抽象方法
+- 如果在父类中抽取了各个子类的共性方法，但是不能确定该父类的具体方法体，这时候就可以使用抽象类和抽象方法。
+- 如果一个类中定义了抽象方法，则必须声明为抽象类。与C++不同的是，抽象类必须用`abstract`关键字声明。抽象类和抽象方法的定义如下所述：
+```java:line-numbers
+public class HelloWorld {
+    public static void main(String[] args) {
+        Animal cat = new Cat();
+        Animal dog = new Dog();
+        cat.say();
+        dog.say();
+    }
+}
 
+abstract class Animal {
+    public abstract void say();
+}
+
+class Cat extends Animal {
+    @Override
+    public void say() {
+        System.out.println("Meow");
+    }
+}
+
+class Dog extends Animal {
+    @Override
+    public void say() {
+        System.out.println("Woff");
+    }
+}
+```
+- 抽象方法的定义不能有方法体。
+- 抽象类不能实例化，也就是说不能创建抽象类的对象。
+- 抽象类不一定有抽象方法，但有抽象方法的类必须是抽象类。
+- 抽象类可以有构造方法，创建子类对象时用于给成员变量赋值。
+- 抽象类的子类必须重写所有的抽象方法，或者为抽象类。因此抽象方法不得定义为`private`，因为这样的方法无法被子类重写。
 ### 接口
+- 相较于抽象类，接口是对行为的抽象，更偏向对方法定义的约定。
+- 接口用关键字`interface`定义，接口和类之间是实现关系，用关键字`implements`表示。
+- 接口不能被实例化。接口的实现类必须重写接口中的所有方法，或者为抽象类。
+- 一个类可以实现多个接口，可以在继承一个抽象类的同时实现多个接口。
+- 与类一样，`public`修饰的接口，其所在的文件名必须与该接口名称相同。
+```java:line-numbers
+public class HelloWorld {
+    public static void main(String[] args) {
+        CatchMouse cm = new Cat();
+        cm.catchMouse();
+    }
+}
 
+abstract class Animal {
+    public abstract void say();
+}
+
+interface CatchMouse {
+    void catchMouse();
+}
+
+
+class Cat extends Animal implements CatchMouse {
+    @Override
+    public void say() {
+        System.out.println("Meow");
+    }
+
+    @Override
+    public void catchMouse() {
+        System.out.println("Caught 1 mouse");
+    }
+}
+
+class Dog extends Animal {
+    @Override
+    public void say() {
+        System.out.println("Woff");
+    }
+}
+```
+- 接口可以定义成员变量，但只能是静态常量，默认会添加`public static final`修饰。成员方法默认为`public abstract`关键字修饰，也就是抽象方法。由于接口没有继承，只有实现，因此接口的成员都是公共的。
+- 接口没有构造方法。
+- 如果一个类继承了多个接口，这些接口有重名的方法，则只需要实现一次即可。通过哪个接口的引用来调用该方法，调用的都是子类中重写的这个方法。
+- 接口和接口之间可以多继承。
+- JDK8加入了接口的默认方法，可以给接口中的方法编写方法体，主要是为了更新接口时更方便，需要使用`default`关键字，例如`public default void fun(){}`。默认方法不是抽象方法，可以不重写；但是如果实现了多个接口，而这些接口中有同名的默认方法，则必须重写。实现类重写接口中的默认方法时，应当去掉`default`关键字。
+- JDK9可以在接口中加入私有方法，可抽取各个默认方法中的重复代码。
+- 适配器模式：如果一个接口中的方法太多，而我们并不需要全部的方法，可以设计一个中间的适配器类，实现所有方法（但都是空方法，这个类一般声明为抽象类），再编写我们需要的类，继承这个适配器类，然后只重写需要的方法即可。
 ### 内部类
+:::warning
+内部类在吉大软院期末考察较少。如果时间紧迫，建议跳过。
+:::
+类的成员包括属性、方法、构造方法、代码块、内部类。内部类就是在一个类的内部再定义一个类，例如在A类的内部定义了B类，则B类称为内部类。一般情况下，内部类表示的事物是外部类的一部分，且内部类单独出现无意义，这时候我们会考虑使用内部类。
 
+- 内部类可以直接访问外部类的成员，包括其私有属性。
+- 外部类想要访问内部类的成员，则必须创建对象。
+- Java16前不支持内部类的静态成员，目前还没有内部类的静态方法。
 #### 成员内部类
+写在类的成员部分的内部类，就是成员内部类。
+- 成员内部类可被访问控制修饰符修饰，与方法、变量的效果类似。
+- 获取内部类的对象有两种方法：
+  - 所在的外部类编写方法，对外提供内部类的对象。
+  - 直接创建。
+```java:line-numbers
+public class HelloWorld {
+    public static void main(String[] args) {
+      // 直接创建
+        Car.Engine ce = new Car("高级轿车", "黑色", 24)
+                .new Engine("田所发动机", 24);
+        ce.show();
+    }
+}
 
+class Car {
+    private String carName;
+    private String carColor;
+    private int carAge;
+
+    public void show() {
+        System.out.println("Car Name: " + carName);
+        System.out.println("Car Color: " + carColor);
+        System.out.println("Car Age: " + carAge);
+    }
+
+    class Engine {
+        private String engineName;
+        private int engineAge;
+        public void show() {
+            Car.this.show(); // 外部类this
+            System.out.println(carName + " " + carColor + " " + engineName + " " + engineAge);
+        }
+
+        public Engine(String engineName, int engineAge) {
+          // 内部类this正常发挥作用
+            this.engineName = engineName;
+            this.engineAge = engineAge;
+        }
+    }
+
+    private Engine engine;
+
+    public Car(String carName, String carColor, int carAge) {
+        this.carName = carName;
+        this.carColor = carColor;
+        this.carAge = carAge;
+        // 外部类中可以直接创建
+        this.engine = new Engine(carName, carAge);
+    }
+
+    public Engine getEngine() {
+        return engine;
+    }
+}
+// Car Name: 高级轿车
+// Car Color: 黑色
+// Car Age: 24
+// 高级轿车 黑色 田所发动机 24
+```
+- 内部类想要访问外部类的方法、属性，可以通过`Outer.this`（Outer需要替换为实际上的外部类名）调用。Java会为内部类隐式生成一个外部类的引用，指向其对应的外部类。
 #### 静态内部类
-
+静态内部类是一种特殊的成员内部类，就是用`static`修饰的成员内部类。
+- 与静态方法类似，静态内部类也只能访问外部类的静态成员。如果需要访问外部类的非静态成员，需要创建对象。
 #### 局部内部类
 
 #### 匿名内部类

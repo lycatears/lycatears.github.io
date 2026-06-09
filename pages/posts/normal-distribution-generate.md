@@ -3,7 +3,7 @@ layout: post
 title: 如何生成服从正态分布的随机数
 date: 2024-06-05 23:44:01
 categories: 学习
-excerpt: 在没有randn()的情况下手撕正态分布的随机数生成
+excerpt: 在没有randn()的情况下，手撕正态分布的随机数生成
 tags:
   - 编程
   - 学习
@@ -63,7 +63,7 @@ tags:
   根据极坐标变换公式$X=R\cos \Theta, Y=R\sin \Theta$，有
   $$f(r,\theta)=\dfrac{r}{2\pi}\mathrm{e}^{-\frac{r^2}{2}}$$
   因此，$R,\Theta$的分布函数为
-  $$F_R(r)=P\{R\leq r\}=\int_0^r \int_0^{2\pi}\dfrac{R}{2\pi}\mathrm{e}^{-\frac{R^2}{2}}d\Theta dR=1-\mathrm{e}^{\frac{r^2}{2}}$$
+  $$F_R(r)=P\{R\leq r\}=\int_0^r \int_0^{2\pi}\dfrac{R}{2\pi}\mathrm{e}^{-\frac{R^2}{2}}d\Theta dR=1-\mathrm{e}^{-\frac{r^2}{2}}$$
   $$F_\Theta(\theta)=P\{\Theta \leq \theta \}=\int_0^\theta \int _0^{+\infty} \dfrac{R}{2\pi}\mathrm{e}^{-\frac{R^2}{2}}d\Theta dR=\dfrac{\theta}{2\pi}$$
   设$U_1,U_2$相互独立，且均服从$(0,1)$上的均匀分布，经过反函数$F_R^{-1}$映射为
   $$F_R^{-1}(U_1)=\sqrt{-2\ln(1-U_1)}$$
