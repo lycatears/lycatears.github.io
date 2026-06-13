@@ -774,9 +774,6 @@ public class HelloWorld {
 // [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 ```
 ## 常用容器
-:::warning
-如果您正在复习吉林大学相关课程的考试，您可以跳过本小节。
-:::
 ### ArrayList
 - ArrayList使用了泛型，创建一个`ArrayList`需要传入一个类型参数。注意，基本类型是不能传递给泛型参数的，我们需要传递对应的包装类。
 - `ArrayList`在`java.utils`包中，需要导入。
@@ -810,3 +807,131 @@ public class HelloWorld {
 // [826, 6, 3, 3, 0, 1, 5, 0, 8]
 // 826
 ```
+## 常用API
+:::warning
+如果您正在复习吉林大学相关课程的考试，您可以跳过本小节。
+:::
+### Math
+`Math`是一个用于数学计算的工具类。它的构造方法是私有的，且为`final`修饰的类，所有方法都是静态方法。
+- 常见的数学函数`abs` `ceil` `floor` `log`...与其他语言类似，且提供了针对不同数据类型的重载函数。
+- -2147483648 通过`Math.abs()`不能得到正确的绝对值，计算结果仍是它本身。这是因为补码规则下该数字没有32位整数范围内的绝对值，在JDK15后可使用`Math.absExact()`，这时会抛出异常。
+### System
+`System`也是一个工具类，提供了与系统相关的操作和信息访问功能。
+- `System.exit()` 退出当前运行的Java虚拟机。
+- `System.currentTimeMillis()` 返回当前系统的时间，返回`long`类型的毫秒数。
+- `System.arraycopy()` 提供数组拷贝的方法。
+- `System.gc()` 运行垃圾回收器。
+- `in`（标准输入流） `out`（标准输出流） `err`（标准错误输出流）是三个常用的静态字段。
+```java:line-numbers
+public class HelloWorld {
+    public static void main(String[] args) {
+        System.out.println(System.currentTimeMillis()); // 1781170338637
+        System.out.println(System.getProperty("user.dir")); // F:\projects\java-review\java-review
+        System.out.println(System.getProperties()); // {java.specification.version=24, sun.cpu.isalist=amd64, sun.jnu.encoding=GBK,。。。
+        System.err.println(114514); // 114514
+    }
+}
+```
+### Runtime
+`Runtime`提供了与Java运行时环境交互的方法，采用单例模式，不能直接创建该类的对象。
+```java:line-numbers
+public class HelloWorld {
+    public static void main(String[] args) throws IOException {
+        Runtime runtime = Runtime.getRuntime();
+        System.out.println("Total memory: " + runtime.totalMemory()); // JVM已获取的内存大小
+        System.out.println("Free memory: " + runtime.freeMemory()); // JVM的可用内存大小
+        System.out.println("Max memory: " + runtime.maxMemory()); // JVM可以使用的总内存大小
+        System.out.println("available processors: " + runtime.availableProcessors()); // 线程数
+        runtime.exec("taskmgr"); // 打开任务管理器
+        runtime.exit(0);
+    }
+}
+// Total memory: 266338304
+// Free memory: 260980088
+// Max memory: 4223664128
+// available processors: 16
+```
+### Object
+~~余胜军~~`Object`是Java中所有类的公共祖先类，所有的类都直接或者间接的继承了`Object`类。
+- `toString()`方法是将对象转换成字符串的方法，我们在调用`System.out.println()`时，传入非字符串对象也能打印出语句，就是调用了这个方法。重写这个方法可以自定义对象转换为字符串的格式。
+- `equals()`方法用于对比两个对象是否相同。默认情况下使用`==`运算符比较两个对象，但是这样比较的是两个对象的地址值，我们可以重写该方法自定义对比的规则，例如比较对象的属性值。建议在重写时，首先判断传入的另一个对象是否为空。
+  - `Object`提供静态方法`equals(Object a, Object b)`判断两个对象是否相同。若`a` `b`是同一个对象，则返回`true`，否则，如果`a`是`null`，则返回`false`；最后调用`a`的`equals`方法判断。
+  - `isNull` `nonNull`也是`Object`提供的判断对象是否为空的静态方法。
+- `clone()` 方法用于对象拷贝（复制），把一个对象的属性值完全拷贝给另一个对象。创建可拷贝的类时要实现`Clonable`接口，这是一个标记性接口，没有任何抽象方法需要实现。
+- `hashCode()`方法，计算对象的哈希值。
+  - 在同一对象上多次调用 `hashCode` 方法时，必须一致地返回相同的整数值，前提是对象在 `equals` 比较中使用的信息没有被修改。
+  - 如果两个对象根据 `equals` 方法是相等的，则调用 `hashCode` 方法时必须返回相同的值。
+  - 如果两个对象根据 `equals` 方法是不相等的，不要求 `hashCode` 方法时返回不同的整数值，但返回不同的值可以提高哈希表的性能。
+```java:line-numbers
+@Override
+public int hashCode() {
+   int hash = 7;
+   hash = 31 * hash + (int) id;
+   hash = 31 * hash + (name == null ? 0 : name.hashCode());
+   hash = 31 * hash + (email == null ? 0 : email.hashCode());
+   return hash;
+}
+```
+### BigInteger
+`BigInteger`是Java提供的大整数类，在`java.math`包中，需要导入。
+- 常用的构造方法有三种：
+  - `BigInteger(int num, Random rnd)`传入整数`num`和随机数生成器`rnd`，返回一个$[0, 2^{num} - 1]$范围内的大整数。
+  - `BigInteger(String val)`获取指定的十进制大整数。需要注意传入的字符串只能是整数，不能出现小数等。
+  - `BigInteger(String val, int radix)`获取`radix`进制的大整数。
+```java:line-numbers
+public class HelloWorld {
+    public static void main(String[] args) throws IOException {
+        BigInteger bi1 = new BigInteger("1145141919810");
+        BigInteger bi2 = new BigInteger(128, new Random(19260817));
+        BigInteger bi3 = new BigInteger("1234567890abcdef", 16);
+
+        System.out.println(bi1);
+        System.out.println(bi2);
+        System.out.println(bi3);
+    }
+}
+// 1145141919810
+// 163610571792295475396706436168772444707
+// 1311768467294899695
+```
+- `BigInteger`类提供了静态方法`valueOf()`，传入`long`类型的数字，返回对应的大整数对象。该类含有一个静态代码块，提前对$[-16, 16]$范围内的整数创建了相应的对象，需要这些较小的整数时，直接返回这些创建好的对象（享元模式）。
+- 与字符串类似，大整数对象创建后不能修改其值。只要进行了计算，就会创建新的对象。
+```java:line-numbers
+public class HelloWorld {
+    public static void main(String[] args) {
+        BigInteger b1 = BigInteger.valueOf(1);
+        BigInteger b2 = BigInteger.valueOf(2);
+        BigInteger b3 = b1.add(b2);
+        BigInteger b4 = BigInteger.valueOf(1);
+
+        System.out.println(b1 == b4); // true
+        System.out.println(b3 == b1); // false
+    }
+}
+```
+
+```java:line-numbers
+public class HelloWorld {
+    public static void main(String[] args) throws IOException {
+        BigInteger b1 = BigInteger.valueOf(1919810);
+        BigInteger b2 = BigInteger.valueOf(114514);
+
+        System.out.println(b1.add(b2)); // 加法 2034324
+        System.out.println(b1.subtract(b2)); // 减法 1805296
+        System.out.println(b1.multiply(b2)); // 乘法 219845122340
+        System.out.println(b1.divide(b2)); // 整数除法 16
+        System.out.println(Arrays.toString(b1.divideAndRemainder(b2))); // 整除+余数 [16， 87586]
+        System.out.println(b1.mod(b2)); // 取余 87586
+        System.out.println(b1.pow(3)); // 指数，传入的是int 7075786959929141000
+        System.out.println(b1.modPow(b1, b2)); // a^b mod c的值 50896
+        System.out.println(b1.equals(b2)); // 比较是否相等 false
+        System.out.println(b1.compareTo(b2)); // 比较大小，返回-1 0 1 int型 1
+        System.out.println(b1.max(b2)); // 求两数较大值 1919810
+        System.out.println(b1.min(b2)); // 较小值 114514
+        System.out.println(b1.intValue()); // 返回int型数值，过大时取末尾32bit 1919810
+        // 需要在数值过大时抛出异常，使用带有Exact的方法
+        System.out.println(b1.longValue()); // 返回long型整数值，过大取末尾64bit 1919810
+    }
+}
+```
+### BigDecimal
