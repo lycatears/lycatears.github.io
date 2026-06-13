@@ -935,3 +935,67 @@ public class HelloWorld {
 }
 ```
 ### BigDecimal
+`BigDecimal`是`java.math`包下的不可变任意精度十进制小数类型。
+- 构造方法与`BigInteger`类似，可以传入浮点数，或者小数字符串。
+  - 静态方法`BigDecimal.valueOf()`也可将浮点数转化为`BigDecimal`。
+  - 整数0-10与`BigInteger`中的-16~+16类似，都会提前创建这些对象。
+- 四则运算的方法名称与`BigDecimal`基本上相同。
+```java:line-numbers
+public class HelloWorld {
+    public static void main(String[] args) {
+        BigDecimal bd1 = new BigDecimal("1.14514");
+        BigDecimal bd2 = BigDecimal.valueOf(1.91981);
+        BigDecimal bd3 = new BigDecimal(1.155); // 可能导致精度丢失
+
+        System.out.println(bd1.add(bd2)); // 3.06495
+        System.out.println(bd1.subtract(bd2)); // -0.77467
+        System.out.println(bd1.multiply(bd2)); // 2.1984512234
+        System.out.println(bd1.divide(bd2, 2, RoundingMode.HALF_UP)); // 0.60
+        System.out.println(bd1.sqrt(MathContext.DECIMAL32)); // 1.070112
+    }
+}
+```
+## 异常
+异常代表程序出现的问题。程序运行时抛出异常，我们要想办法去处理异常。异常体系最上层是`java.lang`包下的`Throwable`类，分为`Error` `Exception`两种，其中`Error`（错误）一般是Java内部的问题（如JVM运行错误），程序无法处理错误。`Exception`（异常）是程序可以处理的，又分为`RuntimeException`（运行时异常，例如数组越界）和编译时异常（例如IO异常、SQL异常）两类。运行时异常通常是程序存在逻辑错误引起的，编译时不做检查；其他异常会在编译时被检查，如果没有通过`throws`抛出异常或者处理该异常，则会发生编译错误。
+
+## 流
+
+## 方法引用
+:::warning
+如果您正在复习吉林大学相关课程的考试，您可以跳过本小节。
+:::
+
+## 多线程
+
+## 网络编程
+
+## 反射
+:::warning
+如果您正在复习吉林大学相关课程的考试，您可以跳过本小节。
+:::
+
+## 动态代理
+:::warning
+如果您正在复习吉林大学相关课程的考试，您可以跳过本小节。
+:::
+
+## 泛型
+:::warning
+如果您正在复习吉林大学相关课程的考试，您可以跳过本小节。
+:::
+
+## JDBC数据库连接相关
+:::warning
+如果您是普班同学，且正在复习吉林大学相关课程的考试，您可以跳过本小节。本节内容在黑马程序员的Java基础课程上并未讲解，您可搜索该机构的Java Web相关课程学习；本节笔记为本人根据DB2考试经验自行整理，请谨慎参考。
+:::
+:::tip
+根据本人在读时的考试经验，普班对该部分不做考察要求。卓班/唐班可能有单独的附加题考察。
+:::
+## 2019级真题参考答案与解析
+:::warning
+仅供参考，不保证正确。
+:::
+## 2020级真题参考答案与解析
+:::warning
+仅供参考，不保证正确。
+:::
