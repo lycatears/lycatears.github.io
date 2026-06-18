@@ -129,6 +129,13 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
+    '/posts/deep-learning-notes': RouteRecordInfo<
+      '/posts/deep-learning-notes',
+      '/posts/deep-learning-notes',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
     '/posts/diary1': RouteRecordInfo<
       '/posts/diary1',
       '/posts/diary1',
@@ -167,6 +174,20 @@ declare module 'vue-router/auto-routes' {
     '/posts/java-review-notes': RouteRecordInfo<
       '/posts/java-review-notes',
       '/posts/java-review-notes',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/posts/js-review-notes': RouteRecordInfo<
+      '/posts/js-review-notes',
+      '/posts/js-review-notes',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/posts/machine-learning-basics': RouteRecordInfo<
+      '/posts/machine-learning-basics',
+      '/posts/machine-learning-basics',
       Record<never, never>,
       Record<never, never>,
       | never
@@ -338,6 +359,12 @@ declare module 'vue-router/auto-routes' {
       views:
         | never
     }
+    'pages/posts/deep-learning-notes.md': {
+      routes:
+        | '/posts/deep-learning-notes'
+      views:
+        | never
+    }
     'pages/posts/diary1.md': {
       routes:
         | '/posts/diary1'
@@ -371,6 +398,18 @@ declare module 'vue-router/auto-routes' {
     'pages/posts/java-review-notes.md': {
       routes:
         | '/posts/java-review-notes'
+      views:
+        | never
+    }
+    'pages/posts/js-review-notes.md': {
+      routes:
+        | '/posts/js-review-notes'
+      views:
+        | never
+    }
+    'pages/posts/machine-learning-basics.md': {
+      routes:
+        | '/posts/machine-learning-basics'
       views:
         | never
     }

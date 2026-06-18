@@ -38,6 +38,11 @@ links:
     desc: 栽种绝处的花
     avatar: https://gcore.jsdelivr.net/gh/LawrenceSivan/cdn@master/pictures/avatar.jpg
     color: "#ffffff"
+  - url: https://dcrlike.github.io/
+    blog: DCRLike
+    desc: Dor的洞天
+    avatar: https://i.ibb.co/G3H0JXZ0/dcrlike-avatar.jpg
+    color: "#ffffff"
 random: true
 ---
 
