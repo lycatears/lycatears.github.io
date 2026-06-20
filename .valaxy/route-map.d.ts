@@ -185,6 +185,13 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
+    '/posts/leetcode-hot100': RouteRecordInfo<
+      '/posts/leetcode-hot100',
+      '/posts/leetcode-hot100',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
     '/posts/machine-learning-basics': RouteRecordInfo<
       '/posts/machine-learning-basics',
       '/posts/machine-learning-basics',
@@ -404,6 +411,12 @@ declare module 'vue-router/auto-routes' {
     'pages/posts/js-review-notes.md': {
       routes:
         | '/posts/js-review-notes'
+      views:
+        | never
+    }
+    'pages/posts/leetcode-hot100.md': {
+      routes:
+        | '/posts/leetcode-hot100'
       views:
         | never
     }
