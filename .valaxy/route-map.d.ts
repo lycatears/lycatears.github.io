@@ -20,9 +20,9 @@ import type {
 
 declare module 'vue-router' {
   interface TypesConfig {
-    ParamParsers:
-      | never
+    _ParamParsers: {}
     RouteNamedMap: import('vue-router/auto-routes').RouteNamedMap
+    _RouteFileInfoMap: import('vue-router/auto-routes')._RouteFileInfoMap
   }
 }
 
@@ -289,22 +289,28 @@ declare module 'vue-router/auto-routes' {
    * @internal
    */
   export interface _RouteFileInfoMap {
-    'node_modules/.pnpm/valaxy-theme-yun@0.28.8_mag_9bcc89a3045b97fb44840e9820e926f7/node_modules/valaxy-theme-yun/pages/index.vue': {
+    'node_modules/.pnpm/valaxy-theme-yun@0.28.8_mag_4d80c3d6f2f8702a98a7635e2ce10086/node_modules/valaxy-theme-yun/pages/index.vue': {
       routes:
         | '/'
       views:
         | never
+      pathParamNames:
+        | never
     }
-    'node_modules/.pnpm/valaxy@0.28.8_@babel+parser_44f63cd86840722f564e6d3332198978/node_modules/valaxy/client/pages/[...path].vue': {
+    'node_modules/.pnpm/valaxy@0.28.8_@babel+parser_bea03d51724413c53bf26f98771e1c45/node_modules/valaxy/client/pages/[...path].vue': {
       routes:
         | '/[...path]'
       views:
         | never
+      pathParamNames:
+        | 'path'
     }
     'pages/404.md': {
       routes:
         | '/404'
       views:
+        | never
+      pathParamNames:
         | never
     }
     'pages/about/index.md': {
@@ -312,11 +318,15 @@ declare module 'vue-router/auto-routes' {
         | '/about/'
       views:
         | never
+      pathParamNames:
+        | never
     }
     'pages/about/site.md': {
       routes:
         | '/about/site'
       views:
+        | never
+      pathParamNames:
         | never
     }
     'pages/archives/index.md': {
@@ -324,11 +334,15 @@ declare module 'vue-router/auto-routes' {
         | '/archives/'
       views:
         | never
+      pathParamNames:
+        | never
     }
     'pages/categories/index.md': {
       routes:
         | '/categories/'
       views:
+        | never
+      pathParamNames:
         | never
     }
     'pages/links/index.md': {
@@ -336,17 +350,23 @@ declare module 'vue-router/auto-routes' {
         | '/links/'
       views:
         | never
+      pathParamNames:
+        | never
     }
-    'node_modules/.pnpm/valaxy-theme-yun@0.28.8_mag_9bcc89a3045b97fb44840e9820e926f7/node_modules/valaxy-theme-yun/pages/page/[page].vue': {
+    'node_modules/.pnpm/valaxy-theme-yun@0.28.8_mag_4d80c3d6f2f8702a98a7635e2ce10086/node_modules/valaxy-theme-yun/pages/page/[page].vue': {
       routes:
         | '/page/[page]'
       views:
         | never
+      pathParamNames:
+        | 'page'
     }
-    'node_modules/.pnpm/valaxy-theme-yun@0.28.8_mag_9bcc89a3045b97fb44840e9820e926f7/node_modules/valaxy-theme-yun/pages/posts/index.vue': {
+    'node_modules/.pnpm/valaxy-theme-yun@0.28.8_mag_4d80c3d6f2f8702a98a7635e2ce10086/node_modules/valaxy-theme-yun/pages/posts/index.vue': {
       routes:
         | '/posts/'
       views:
+        | never
+      pathParamNames:
         | never
     }
     'pages/posts/apply-for-graduate-student.md': {
@@ -354,11 +374,15 @@ declare module 'vue-router/auto-routes' {
         | '/posts/apply-for-graduate-student'
       views:
         | never
+      pathParamNames:
+        | never
     }
     'pages/posts/comic-magazines.md': {
       routes:
         | '/posts/comic-magazines'
       views:
+        | never
+      pathParamNames:
         | never
     }
     'pages/posts/csapp-notes.md': {
@@ -366,11 +390,15 @@ declare module 'vue-router/auto-routes' {
         | '/posts/csapp-notes'
       views:
         | never
+      pathParamNames:
+        | never
     }
     'pages/posts/db2.md': {
       routes:
         | '/posts/db2'
       views:
+        | never
+      pathParamNames:
         | never
     }
     'pages/posts/deep-learning-notes.md': {
@@ -378,11 +406,15 @@ declare module 'vue-router/auto-routes' {
         | '/posts/deep-learning-notes'
       views:
         | never
+      pathParamNames:
+        | never
     }
     'pages/posts/diary1.md': {
       routes:
         | '/posts/diary1'
       views:
+        | never
+      pathParamNames:
         | never
     }
     'pages/posts/gaokao-1.md': {
@@ -390,11 +422,15 @@ declare module 'vue-router/auto-routes' {
         | '/posts/gaokao-1'
       views:
         | never
+      pathParamNames:
+        | never
     }
     'pages/posts/gaokao-2.md': {
       routes:
         | '/posts/gaokao-2'
       views:
+        | never
+      pathParamNames:
         | never
     }
     'pages/posts/goodbye-forever-c.md': {
@@ -402,11 +438,15 @@ declare module 'vue-router/auto-routes' {
         | '/posts/goodbye-forever-c'
       views:
         | never
+      pathParamNames:
+        | never
     }
     'pages/posts/gpa-calculator.md': {
       routes:
         | '/posts/gpa-calculator'
       views:
+        | never
+      pathParamNames:
         | never
     }
     'pages/posts/heyiwei.md': {
@@ -414,11 +454,15 @@ declare module 'vue-router/auto-routes' {
         | '/posts/heyiwei'
       views:
         | never
+      pathParamNames:
+        | never
     }
     'pages/posts/java-review-notes.md': {
       routes:
         | '/posts/java-review-notes'
       views:
+        | never
+      pathParamNames:
         | never
     }
     'pages/posts/js-review-notes.md': {
@@ -426,11 +470,15 @@ declare module 'vue-router/auto-routes' {
         | '/posts/js-review-notes'
       views:
         | never
+      pathParamNames:
+        | never
     }
     'pages/posts/leetcode-hot100.md': {
       routes:
         | '/posts/leetcode-hot100'
       views:
+        | never
+      pathParamNames:
         | never
     }
     'pages/posts/machine-learning-basics.md': {
@@ -438,11 +486,15 @@ declare module 'vue-router/auto-routes' {
         | '/posts/machine-learning-basics'
       views:
         | never
+      pathParamNames:
+        | never
     }
     'pages/posts/ml-final-2024.md': {
       routes:
         | '/posts/ml-final-2024'
       views:
+        | never
+      pathParamNames:
         | never
     }
     'pages/posts/normal-distribution-generate.md': {
@@ -450,11 +502,15 @@ declare module 'vue-router/auto-routes' {
         | '/posts/normal-distribution-generate'
       views:
         | never
+      pathParamNames:
+        | never
     }
     'pages/posts/oop-addition.md': {
       routes:
         | '/posts/oop-addition'
       views:
+        | never
+      pathParamNames:
         | never
     }
     'pages/posts/oop-test-paper.md': {
@@ -462,11 +518,15 @@ declare module 'vue-router/auto-routes' {
         | '/posts/oop-test-paper'
       views:
         | never
+      pathParamNames:
+        | never
     }
     'pages/posts/python-review-notes.md': {
       routes:
         | '/posts/python-review-notes'
       views:
+        | never
+      pathParamNames:
         | never
     }
     'pages/posts/software-engineering-notes.md': {
@@ -474,11 +534,15 @@ declare module 'vue-router/auto-routes' {
         | '/posts/software-engineering-notes'
       views:
         | never
+      pathParamNames:
+        | never
     }
     'pages/posts/valaxy.md': {
       routes:
         | '/posts/valaxy'
       views:
+        | never
+      pathParamNames:
         | never
     }
     'pages/tags/index.md': {
@@ -486,17 +550,23 @@ declare module 'vue-router/auto-routes' {
         | '/tags/'
       views:
         | never
+      pathParamNames:
+        | never
     }
     'pages/tools/index.md': {
       routes:
         | '/tools/'
       views:
         | never
+      pathParamNames:
+        | never
     }
     'pages/tools/random-gen.md': {
       routes:
         | '/tools/random-gen'
       views:
+        | never
+      pathParamNames:
         | never
     }
   }

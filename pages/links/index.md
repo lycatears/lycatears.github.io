@@ -46,7 +46,7 @@ links:
 random: true
 ---
 
-<YunLinks :links="frontmatter.links" :random="frontmatter.random" />
+<YunLinks :links="$frontmatter.links" :random="$frontmatter.random" />
 
 - 如需交换友链，请直接联系猫娘！您也可在下方评论区留言。
 - 交换友链需要以下信息：链接、ID、简介（可选）、头像（可选）、代表色（可选）。
