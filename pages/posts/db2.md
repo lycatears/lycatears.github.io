@@ -26,7 +26,7 @@ tags:
 - 两门课程的PPT、相关课程资料等【其实直接在学习通下载更方便】[百度网盘](https://pan.baidu.com/s/1mfmzdJUvqVDRD4pbWSiXWw?pwd=9cqt) [蓝奏云](https://wwarm.lanzouv.com/b0o0315od
 )【密码:2295】
 - 课程要求编辑的单个文件代码，可能需要您在压缩包`cg113labfiles.zip`中的`CG113`目录下自行寻找。受限于<u>8.3文件名格式</u>（详见文末附录），部分代码的文件名变为类似于`LABUPD~1.JAV`的形式，需要您自行修改文件名。
-- 如需配置DB2服务器，使用现代Java连接，可参考`db2连接指南.pdf`
+- 如需配置DB2服务器，使用现代Java连接，可参考`db2连接指南.pdf`（见上面的网盘链接）
 
 ### 旧版软件类
 - XP SP3系统镜像【因蓝奏云100MB限制，只有百度网盘链接】【**仅当虚拟机系统无法正常使用时才需要重新安装**】[百度网盘链接](https://pan.baidu.com/s/18IMyug6fsDPk6tyybQ2-tw?pwd=189b)

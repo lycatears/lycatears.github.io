@@ -178,6 +178,13 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
+    '/posts/java-final-2019': RouteRecordInfo<
+      '/posts/java-final-2019',
+      '/posts/java-final-2019',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
     '/posts/java-review-notes': RouteRecordInfo<
       '/posts/java-review-notes',
       '/posts/java-review-notes',
@@ -251,6 +258,13 @@ declare module 'vue-router/auto-routes' {
     '/posts/valaxy': RouteRecordInfo<
       '/posts/valaxy',
       '/posts/valaxy',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/posts/zhongkao-math-answer-sheet': RouteRecordInfo<
+      '/posts/zhongkao-math-answer-sheet',
+      '/posts/zhongkao-math-answer-sheet',
       Record<never, never>,
       Record<never, never>,
       | never
@@ -457,6 +471,14 @@ declare module 'vue-router/auto-routes' {
       pathParamNames:
         | never
     }
+    'pages/posts/java-final-2019.md': {
+      routes:
+        | '/posts/java-final-2019'
+      views:
+        | never
+      pathParamNames:
+        | never
+    }
     'pages/posts/java-review-notes.md': {
       routes:
         | '/posts/java-review-notes'
@@ -540,6 +562,14 @@ declare module 'vue-router/auto-routes' {
     'pages/posts/valaxy.md': {
       routes:
         | '/posts/valaxy'
+      views:
+        | never
+      pathParamNames:
+        | never
+    }
+    'pages/posts/zhongkao-math-answer-sheet.md': {
+      routes:
+        | '/posts/zhongkao-math-answer-sheet'
       views:
         | never
       pathParamNames:
