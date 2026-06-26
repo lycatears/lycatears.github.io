@@ -8,6 +8,7 @@ tags:
   - LaTeX
   - 考试
   - 中学
+  - 项目
 ---
 ## 前言
 高中刷题的时候发现有很多人做高考模拟答题卡，但是最近搜了一下网上的资源，似乎并没有做中考答题卡的。正好最近在学LaTeX，就拿这个练手了。
@@ -18,9 +19,9 @@ tags:
 
 ## 介绍
 好了，废话不多说了，接下来介绍一下我（和AI一起）设计的这个答题卡：
-![page2](https://www.helloimg.com/i/2026/06/24/6a3b74d2e1e14.png)
+![page1](https://www.helloimg.com/i/2026/06/24/6a3b74d2e1e14.png)
 
-![page1](https://www.helloimg.com/i/2026/06/24/6a3b74d2df2ff.png)
+![page2](https://www.helloimg.com/i/2026/06/24/6a3b74d2df2ff.png)
 
 - 尺寸A3。
 - 由于学姐没有拿到过20年之后的正式答题卡，尺寸字号什么的都是参考高考答题卡设计的，如果有跟考试不一样的地方还请批评指正。

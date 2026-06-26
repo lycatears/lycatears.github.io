@@ -370,12 +370,12 @@ Java的多态与C++的基本上一样，都是通过父类指针调用不同的�
 - final修饰变量时，该变量成为常量，赋值后不能被修改。基本数据类型的常量，其值不能被修改；引用数据类型的常量，其指向的对象不能更换，但是仍然可以调用该对象的方法，修改该对象内部的数据。
 ### 权限修饰符
 Java中，类的成员访问权限共有四种，分别是私有、默认、保护、公共。
-| 修饰符 | 类内 | 同一个包内 | 其他包子类 | 不同包的无关类 |
-| ------ | ---- | ---------- | ---------- | -------------- |
-|`private`|✅|❌|❌|❌|
-|默认|✅|✅|❌|❌|
-|`protected`|✅|✅|✅|❌|
-|`public`|✅|✅|✅|✅|
+| 修饰符      | 类内 | 同一个包内 | 其他包子类 | 不同包的无关类 |
+| ----------- | ---- | ---------- | ---------- | -------------- |
+| `private`   | ✅    | ❌          | ❌          | ❌              |
+| 默认        | ✅    | ✅          | ❌          | ❌              |
+| `protected` | ✅    | ✅          | ✅          | ❌              |
+| `public`    | ✅    | ✅          | ✅          | ✅              |
 ### 代码块
 :::warning
 如果您正在复习吉林大学相关课程的考试，您可以跳过本小节。
@@ -810,9 +810,6 @@ public class HelloWorld {
 // 826
 ```
 ## 常用API
-:::warning
-如果您正在复习吉林大学相关课程的考试，您可以跳过本小节。
-:::
 ### Math
 `Math`是一个用于数学计算的工具类。它的构造方法是私有的，且为`final`修饰的类，所有方法都是静态方法。
 - 常见的数学函数`abs` `ceil` `floor` `log`...与其他语言类似，且提供了针对不同数据类型的重载函数。
@@ -875,6 +872,9 @@ public int hashCode() {
 }
 ```
 ### BigInteger
+:::warning
+如果您正在复习吉林大学相关课程的考试，您可以跳过本小节。
+:::
 `BigInteger`是Java提供的大整数类，在`java.math`包中，需要导入。
 - 常用的构造方法有三种：
   - `BigInteger(int num, Random rnd)`传入整数`num`和随机数生成器`rnd`，返回一个$[0, 2^{num} - 1]$范围内的大整数。
@@ -937,6 +937,9 @@ public class HelloWorld {
 }
 ```
 ### BigDecimal
+:::warning
+如果您正在复习吉林大学相关课程的考试，您可以跳过本小节。
+:::
 `BigDecimal`是`java.math`包下的不可变任意精度十进制小数类型。
 - 构造方法与`BigInteger`类似，可以传入浮点数，或者小数字符串。
   - 静态方法`BigDecimal.valueOf()`也可将浮点数转化为`BigDecimal`。
@@ -958,11 +961,79 @@ public class HelloWorld {
 }
 ```
 ### 包装类
+包装类是基本数据类型所对应的引用数据类型，可以创建对象。
+- 接受`Object`参数的函数，如果传入基本数据类型，会自动装箱（就是转化为对应的包装类）。
+- 泛型参数（例如集合的类型参数）必须是类，不能是基本数据类型，这时候需要使用包装类。
+
+基本数据类型对应的包装类如下表：
+| 基本数据类型 | 包装类      |
+| ------------ | ----------- |
+| `int`        | `Integer`   |
+| `byte`       | `Byte`      |
+| `short`      | `Short`     |
+| `long`       | `Long`      |
+| `float`      | `Float`     |
+| `double`     | `Double`    |
+| `char`       | `Character` |
+| `boolean`    | `Boolean`   |
+
+- 包装类对象可通过各类的构造方法，或者`valueOf()`静态方法获取。
+- 与其他类一样，`new`创建的对象都是新创建的；但是`valueOf`方法对-128~127范围内的整数进行了优化，用该方法获取该范围内的整数包装类对象会直接从预先创建的对象数组中返回。
+```java:line-numbers
+public class HelloWorld {
+    public static void main(String[] args) {
+        Integer i1 = new Integer(127);
+        Integer i2 = new Integer(127);
+        System.out.println(i1.equals(i2)); // true
+        System.out.println(i1 == i2); // false
+
+        Integer i3 = new Integer(128);
+        Integer i4 = new Integer(128);
+        System.out.println(i3.equals(i4)); // true
+        System.out.println(i3 == i4); // false
+
+        Integer i5 = Integer.valueOf(127);
+        Integer i6 = Integer.valueOf(127);
+        System.out.println(i5.equals(i6)); // true
+        System.out.println(i5 == i6); // true
+
+        Integer i7 = Integer.valueOf(128);
+        Integer i8 = Integer.valueOf(128);
+        System.out.println(i7.equals(i8)); // true
+        System.out.println(i7 == i8); // false
+    }
+}
+```
+- 得到包装类中的基本数据类型的数据，可以使用`intValue` `doubleValue`……方法。
+- JDK5引入了自动装箱、自动装箱，赋值、传参等场景会自动在包装类和基本数据类型之间转化。例如`Integer i3 = i1 + i2`（假设`i1` `i2`都是`Integer`类对象）会先对两个加数自动拆箱，进行加法运算后得到结果，再自动装箱。
+- 除了`Character`外，各个包装类提供了一组`parse`方法相互转换。
+```java:line-numbers
+public class HelloWorld {
+    public static void main(String[] args) {
+        Integer i1 = new Integer(127);
+
+        System.out.println(Integer.toBinaryString(i1)); // 1111111
+        System.out.println(Integer.toOctalString(i1)); // 177
+        System.out.println(Integer.toHexString(i1)); // 7f
+        System.out.println(Integer.parseInt("1919810")); // 1919810
+        System.out.println(Integer.parseInt("114514", 16)); // 1131796 只能传入纯数字的字符串
+        System.out.println(Double.parseDouble("826.132")); // 826.132
+        System.out.println(Boolean.parseBoolean("")); // false
+    }
+}
+```
+### Arrays工具类
+:::warning
+如果您正在复习吉林大学相关课程的考试，您可以跳过本小节。
+:::
 ## 异常
 异常代表程序出现的问题。程序运行时抛出异常，我们要想办法去处理异常。异常体系最上层是`java.lang`包下的`Throwable`类，分为`Error` `Exception`两种，其中`Error`（错误）一般是Java内部的问题（如JVM运行错误），程序无法处理错误。`Exception`（异常）是程序可以处理的，又分为`RuntimeException`（运行时异常，例如数组越界）和编译时异常（例如IO异常、SQL异常）两类。运行时异常通常是程序存在逻辑错误引起的，编译时不做检查；其他异常会在编译时被检查，如果没有通过`throws`抛出异常或者处理该异常，则会发生编译错误。
 
 ## 流
 ### Stream流
+:::warning
+如果您正在复习吉林大学相关课程的考试，您可以跳过本小节。
+:::
 ### IO流
 
 ## 方法引用
