@@ -13,7 +13,7 @@ export default defineSiteConfig({
       message: 'I am watching you.',
     },
   },
-  description: '洛樱的神秘博客',
+  description: '天才少女洛樱！',
   social: [
     // {
     //   name: 'RSS',

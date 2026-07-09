@@ -108,6 +108,13 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
+    '/posts/calculus-a3-2024': RouteRecordInfo<
+      '/posts/calculus-a3-2024',
+      '/posts/calculus-a3-2024',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
     '/posts/comic-magazines': RouteRecordInfo<
       '/posts/comic-magazines',
       '/posts/comic-magazines',
@@ -237,6 +244,13 @@ declare module 'vue-router/auto-routes' {
     '/posts/oop-test-paper': RouteRecordInfo<
       '/posts/oop-test-paper',
       '/posts/oop-test-paper',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/posts/probability-a-2024': RouteRecordInfo<
+      '/posts/probability-a-2024',
+      '/posts/probability-a-2024',
       Record<never, never>,
       Record<never, never>,
       | never
@@ -391,6 +405,14 @@ declare module 'vue-router/auto-routes' {
       pathParamNames:
         | never
     }
+    'pages/posts/calculus-a3-2024.md': {
+      routes:
+        | '/posts/calculus-a3-2024'
+      views:
+        | never
+      pathParamNames:
+        | never
+    }
     'pages/posts/comic-magazines.md': {
       routes:
         | '/posts/comic-magazines'
@@ -538,6 +560,14 @@ declare module 'vue-router/auto-routes' {
     'pages/posts/oop-test-paper.md': {
       routes:
         | '/posts/oop-test-paper'
+      views:
+        | never
+      pathParamNames:
+        | never
+    }
+    'pages/posts/probability-a-2024.md': {
+      routes:
+        | '/posts/probability-a-2024'
       views:
         | never
       pathParamNames:
