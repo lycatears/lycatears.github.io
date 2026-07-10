@@ -83,6 +83,19 @@ tags:
 
     D. $\text{Cov}(X_1,Y)=\sigma^2$
 
+> 根据样本方差的定义有
+> $$\text{Cov}(X_1,Y)=\text{Cov}(X_1,\dfrac{1}{n}\sum_{i-1}^n X_i)=\dfrac{1}{n}\sum_{i=1}^n\text{Cov}(X_1,X_i)$$
+> 由于 $X_1,X_2,\cdots,X_n$ 独立同分布，因此它们之间两两不相关，即
+> $$\text{Cov}(X_i,X_j)=0 (1\le i,j \le n,i\neq j)$$
+> 用人话来说就是随便拿出来两个不同的样本，他们的协方差都是0. 由此可得
+> $$\dfrac{1}{n}\sum_{i=1}^n\text{Cov}(X_1,X_i)=\dfrac{1}{n}\text{Cov}(X_1,X_1)=\dfrac{D(X_1)}{n}=\dfrac{\sigma^2}{n}$$
+> 故C正确，D错误.
+>
+> 下面证明A，B错误.
+> $$D(X_1+Y)=D(X_1)+D(Y)+2\text{Cov}(X_1,Y)=\sigma^2+\dfrac{\sigma^2}{n}+\dfrac{2\sigma^2}{n}=\dfrac{(n+3)\sigma^2}{n}$$
+> $$D(X_1-Y)=D(X_1)+D(Y)-2\text{Cov}(X_1,Y)=\sigma^2+\dfrac{\sigma^2}{n}-\dfrac{2\sigma^2}{n}=\dfrac{(n-1)\sigma^2}{n}$$
+> 因此A，B两项错误. 综上所述，选择C.
+
 5. 将一枚硬币重复掷$n$次，以$X$和$Y$分别表示正面朝上和反面朝上的次数，则$X$与$Y$的相关系数为
 
     A. $1$
@@ -93,6 +106,17 @@ tags:
 
     D. $0.5$
 
+
+> $\text{Cov}(X,Y)=\text{Cov}(X,n-X)=E(nX-X^2)-E(X)E(n-X) \\ =[nE(X)-E(X^2)]-[nE(X)-E(X)^2] \\ =-E(X^2)+E(X)^2\\ =-D(X)\\=-\dfrac{n}{4}$
+>
+> 易得 $X,Y$均服从二项分布 $B\left(n,\dfrac{1}{2}\right)$，因此$D(X)=D(Y)=\dfrac{n}{4}$.
+>
+> 相关系数为
+> $$\rho_{XY}=\dfrac{\text{Cov}(X,Y)}{\sqrt{D(X)}\sqrt{D(Y)} }=-1.$$
+> 故选B.
+>
+> 由于 $P\{Y=n-X\}=1$，可得$|\rho_{XY}|=1$. 又有$X,Y$负相关，因此$\rho_{XY}=-1.$ 故选B.
+
 6. 设总体$X\sim N(\mu ,1),X_1,X_2,\cdots,X_n$是来自总体$X$的样本，检验假设为$H_0:\mu=0,H_1:\mu \neq 0$，则应取检验统计量
 
     A. $\sum \limits_{i=1}^n X_i^2$
@@ -102,6 +126,12 @@ tags:
     C. $\dfrac{\overline{X}}{S}\sqrt{n}$
 
     D. $\sqrt{n} \overline{X}$
+
+> 根据题设的检验假设，本题是 $\sigma^2$ 已知，关于 $\mu$ 的假设检验，因此采用 $u$ 检验即可.
+>
+> 所取的检验统计量为 $u=\dfrac{\bar{X}-\mu_0}{\sigma / \sqrt{n}}$，代入 $\sigma = 1,\mu_0=0$ 得 $u=\sqrt{n}\bar{X}$.故选D.
+> 
+> **突击请看教材204页表格**
 
 ## 填空题
 7. 已知$P(A)=\dfrac{1}{4},P(B|A)=\dfrac{1}{3}$，则$P(A\overline{B})=\underline{\hspace{4em}}$.
@@ -190,6 +220,16 @@ $$
 > $$E\left[(\bar{X}S^2)^2\right]=E(\bar{X}^2)E\left[(S^2)^2\right]=\dfrac{n+1}{n(n-1)}$$
 
 12. 设$X_1,X_2,\cdots,X_n$为来自总体$X\sim N(\mu ,\sigma^2)$的样本，若$\sigma^2$未知，$\overline{X}$和$S^2$分别为样本均值和样本方差，则$\mu$的置信水平为$1-\alpha$的置信区间为$\underline{\hspace{4em}}$.
+
+> $X$ 服从正态分布，由于 $\sigma^2$ 未知，采用 $t=\dfrac{\bar{X}-\mu}{S}\sqrt{n}\sim t(n-1)$ 进行参数估计.
+>
+> 对于给定的置信水平 $1-\alpha$ ，根据 $t$ 分布的对称性，有 $-t_{\frac{\alpha}{2}}(n-1)<\dfrac{\bar{X}-\mu}{S}\sqrt{n}< t_{\frac{\alpha}{2}}(n-1)$
+>
+> 解得
+> $$\bar{X}-\dfrac{S}{\sqrt{n}}t_{\frac{\alpha}{2}}(n-1)<\mu<\bar{X}+\dfrac{S}{\sqrt{n}}t_{\frac{\alpha}{2}}(n-1)$$
+> 所求置信区间为
+> $$\left(\bar{X}-\dfrac{S}{\sqrt{n}}t_{\frac{\alpha}{2}}(n-1),\bar{X}+\dfrac{S}{\sqrt{n}}t_{\frac{\alpha}{2}}(n-1)\right)$$
+> 区间估计虽然看着吓人，但其实全是套公式的套路题。
 
 ## 解答题
 13. (10分) 已知来自甲、乙、丙三个学校的学生进行体质达标测试，每个学校参与测试的人数相同，测试不合格的学生分别占7%、12%、11%.现随机抽取一名学生，求：
@@ -348,7 +388,7 @@ $$
 > $$\text{Cov}(X,Y)=E(XY)-E(X)E(Y)=-\dfrac{1}{36}$$
 > $$D(X)=E(X^2)-\left[E(X)\right]^2=\dfrac{11}{36}$$
 > $$D(Y)=E(Y^2)-\left[E(Y)\right]^2=\dfrac{11}{36}$$
-> $$\rho_{XY}=\dfrac{\text{Cov}(X,Y)}{\sqrt{D(X)}\sqrt{D(Y)}}=-\dfrac{1}{11}$$
+> $$\rho_{XY}=\dfrac{\text{Cov}(X,Y)}{\sqrt{D(X)}\sqrt{D(Y)} }=-\dfrac{1}{11}$$
 > 没啥好说的，纯计算题，考察对公式的理解和记忆，公式别记混了就行。
 
 ---
@@ -365,5 +405,52 @@ $$
 - (1) 当 $\alpha=1$ 时，求未知参数 $\beta$ 的矩估计量和最大似然估计量；
 - (2) 当 $\beta=2$ 时，求未知参数 $\alpha$ 的最大似然估计量.
 
+> (1) 当 $\alpha = 1$ 时，$X$ 在区间 $(1,+\infty)$ 上的分布函数为
+> $$F(x)=1-\left( \dfrac{1}{x} \right)^\beta=1-x^{-\beta}$$
+> 求导得 $X$ 的概率密度函数为
+> $$f(x)=F'(x)=\beta x^{-(\beta+1)}$$
+> 易得 $X$ 在区间 $\left(-\infty,1\right]$ 上的概率密度恒为$0$.
+>
+> **先求矩估计量**：
+> $$\mu_1=E(X)=\int_{-\infty}^{1}0\mathrm{d}x + \int_{1}^{\infty}\beta x \cdot x^{-(\beta+1)}\mathrm{d}x=\int_{1}^{+\infty}\beta x^{-\beta}\mathrm{d}x$$
+> 由于 $\beta > 1$，该反常积分收敛. 计算得总体的均值（一阶矩）为
+> $$\left[\dfrac{-\beta x^{-(\beta-1)}}{\beta-1}\right]^{+\infty}_{1}=\dfrac{\beta}{\beta-1}$$
+> 样本均值为
+> $$\bar{X}=\dfrac{1}{n}\sum_{i=1}^{n}X_i=\dfrac{\beta}{\beta-1}$$
+> 解得 $\beta$ 的矩估计量为
+> $$\hat{\beta} = \dfrac{\bar{X}}{\bar{X}-1}=\dfrac{\dfrac{1}{n}\sum\limits_{i-1}^{n}X_i}{\dfrac{1}{n}\sum\limits_{i-1}^{n}X_i -1}$$
+> > 这里题目条件没给 $\bar{X}$ 这个符号，不知道考试的时候能不能直接写，所以这里的解析都是把样本均值展开写的，看起来形式很繁琐.
+>
+> **再求最大似然估计量**：
+>
+> 似然函数为
+> $$L(\beta)=\prod_{i=1}^{n}f(x_i)=\prod_{i=1}^{n}\beta x^{-(\beta+1)}=\beta^n(\prod_{i=1}^{n}x_i)^{-(\beta+1)}$$
+> 两边取对数，得到对数似然函数为
+> $$\ln L(\beta)=n\ln \beta-(\beta+1)\sum_{i=1}^{n}\ln x_i$$
+> 对数似然函数关于 $\beta$ 的偏导数为
+> $$\dfrac{\partial \ln L(\beta)}{\partial \beta}=\dfrac{n}{\beta}-\sum_{i=1}^{n}\ln x_i$$
+> 令该偏导数为 $0$，解得 $\beta$ 的最大似然估计值为
+> $$\hat{\beta}_0=\dfrac{n}{\sum\limits_{i=1}^{n}\ln x_i}$$
+> 即最大似然估计量为
+> $$\hat{\beta}=\dfrac{n}{\sum\limits_{i=1}^{n}\ln X_i}$$
+> > 注意：这里要区分 **最大似然估计值** 和 **最大似然估计量** . 估计值是由随机变量的 **观测值** 计算得到的，观测值一般用小写字母表示. 估计量是随机变量的函数，随机变量一般用大写字母表示.
+>
+> (2) 当 $\beta=2$ 时，$X$ 在区间 $(\alpha,+\infty)$ 的分布函数为
+> $$F(x)=1-\left(\dfrac{\alpha}{x}\right)^2=1-\alpha^2x^{-2}$$
+> 求导得 $X$ 的概率密度函数为
+> $$f(x)=\dfrac{1}{2}\alpha^2 x^{-3}$$
+> 易得 $(-\infty,\alpha]$ 上概率密度恒为 $0$. 似然函数为
+> $$L(\alpha)=\prod_{i=1}^{n}\dfrac{1}{2}\alpha^2x^{-3}=\dfrac{1}{2^n}\alpha^{2n}\prod_{i=1}^{n}x_i^{-3}$$
+> **注意到** $L(\alpha)$ 是关于 $\alpha$ 的单调增加函数，注意力不够的看下面：
+>
+> 两边取对数，得到对数似然函数
+> $$\ln L(\alpha) = -n\ln 2+2n\ln \alpha-3\sum_{i=1}^{n}x_i$$
+> 求关于 $\alpha$ 的偏导数，由于$\alpha>0,n>0$，得
+> $$\dfrac{\partial \ln L(\alpha)}{\partial \alpha}=\dfrac{2n}{\alpha}>0$$
+> 因此 $L(\alpha)$ 是关于 $\alpha$ 的单调增加函数.
+>
+> 设 $x_{(1)}=\min(x_1,x_2,\cdots,x_n)$，而所有样本的观测值都在区间 $(\alpha,+\infty)$ 上，$\alpha$ 必定严格小于所有的样本观测值，故有 $0<\alpha < x_{(1)}$，$\alpha$ 的估计值取边界值 $\min(x_1,x_2,\cdots,x_n)$.
+>
+> 因此，$\alpha$ 的最大似然估计量为 $\hat{\alpha}=\min(X_1,X_2,\cdots,X_n)$.
 
 
