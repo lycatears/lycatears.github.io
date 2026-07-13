@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 《概率论与数理统计A》2024年试题解析
-date: 2024-07-02 20:13:28
+date: 2025-07-02 20:13:28
 categories: 学习
 # hide: true
 excerpt: 中规中矩的一套概率论试题
@@ -130,7 +130,7 @@ tags:
 > 根据题设的检验假设，本题是 $\sigma^2$ 已知，关于 $\mu$ 的假设检验，因此采用 $u$ 检验即可.
 >
 > 所取的检验统计量为 $u=\dfrac{\bar{X}-\mu_0}{\sigma / \sqrt{n}}$，代入 $\sigma = 1,\mu_0=0$ 得 $u=\sqrt{n}\bar{X}$.故选D.
-> 
+>
 > **突击请看教材204页表格**
 
 ## 填空题
@@ -169,7 +169,7 @@ f(x)=\begin{equation*}
 $$
   则随机变量$Y=2X+8$的概率密度为$f_Y(y)=\underline{\hspace{4em}}$.
 
-> $X$的分布函数为$F_X(x)=\int f(x) \mathrm{d}x = \dfrac{1}{16}x^2+C$，易得$C=0$，则$F_X(x)=\dfrac{1}{16}x^2(0\le x \le 4)$.
+> $X$的分布函数为$F_X(x)=\int_{0}^{x} f(t) \mathrm{d}t = \dfrac{1}{16}x^2$，则$F_X(x)=\dfrac{1}{16}x^2(0\le x \le 4)$.
 >
 > 因此$Y$的分布函数为 $F_Y(y)=P\{Y\le y\}=P\{2X+8\le y\}=P\{X \le \dfrac{y-8}{2}\}=F_X(\dfrac{y-8}{2})=\dfrac{(y-8)^2}{64}$.
 >
@@ -444,7 +444,7 @@ $$
 > **注意到** $L(\alpha)$ 是关于 $\alpha$ 的单调增加函数，注意力不够的看下面：
 >
 > 两边取对数，得到对数似然函数
-> $$\ln L(\alpha) = -n\ln 2+2n\ln \alpha-3\sum_{i=1}^{n}x_i$$
+> $$\ln L(\alpha) = -n\ln 2+2n\ln \alpha-3\sum_{i=1}^{n}\ln x_i$$
 > 求关于 $\alpha$ 的偏导数，由于$\alpha>0,n>0$，得
 > $$\dfrac{\partial \ln L(\alpha)}{\partial \alpha}=\dfrac{2n}{\alpha}>0$$
 > 因此 $L(\alpha)$ 是关于 $\alpha$ 的单调增加函数.
