@@ -269,9 +269,16 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
-    '/posts/probability-review-notes': RouteRecordInfo<
-      '/posts/probability-review-notes',
-      '/posts/probability-review-notes',
+    '/posts/probability-review-notes-1': RouteRecordInfo<
+      '/posts/probability-review-notes-1',
+      '/posts/probability-review-notes-1',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/posts/probability-review-notes-2': RouteRecordInfo<
+      '/posts/probability-review-notes-2',
+      '/posts/probability-review-notes-2',
       Record<never, never>,
       Record<never, never>,
       | never
@@ -610,9 +617,17 @@ declare module 'vue-router/auto-routes' {
       pathParamNames:
         | never
     }
-    'pages/posts/probability-review-notes.md': {
+    'pages/posts/probability-review-notes-1.md': {
       routes:
-        | '/posts/probability-review-notes'
+        | '/posts/probability-review-notes-1'
+      views:
+        | never
+      pathParamNames:
+        | never
+    }
+    'pages/posts/probability-review-notes-2.md': {
+      routes:
+        | '/posts/probability-review-notes-2'
       views:
         | never
       pathParamNames:
