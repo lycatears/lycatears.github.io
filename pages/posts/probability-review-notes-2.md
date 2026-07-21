@@ -114,7 +114,7 @@ $$t=\dfrac{X}{\sqrt{Y/n}}$$
   简单推导：
   $$X_{n+1}-\bar{X}_n\sim N\left(0,\dfrac{n+1}{n}\sigma^2\right)$$
   $$\sqrt{\dfrac{n}{n+1}}\cdot\dfrac{X_{n+1}-\bar{X}_n}{S_n}=\dfrac{(X_{n+1}-\bar{X}_n-0)/\sqrt{\dfrac{n+1}{n}}\sigma}{S_n\sigma}$$
-  $$=\dfrac{(X_{n+1}-\bar{X}_n-0)/\sqrt{\dfrac{n+1}{n}}\sigma}{\sqrt\dfrac{{S_n^2(n-1)}}{(n-1)\sigma^2}}=\dfrac{u}{\sqrt{\chi^2(n-1)/(n-1)}}$$
+  $$=\dfrac{(X_{n+1}-\bar{X}_n-0)/\sqrt{\dfrac{n+1}{n}}\sigma}{\sqrt\dfrac{S_n^2(n-1)}{(n-1)\sigma^2}}=\dfrac{u}{\sqrt{\chi^2(n-1)/(n-1)}}$$
 - 若从两个正态总体 $N(\mu_1,\sigma^2),N(\mu_2,\sigma^2)$（注意这两个正态总体是方差相同、均值不同的）分别独立地抽取样本，样本容量分别为 $n_1,n_2$，样本均值分别为 $\bar{X},\bar{Y}$，样本方差分别为 $S_1^2,S_2^2$，记
   $$S_W=\sqrt{\dfrac{(n_1-1)S_1^2+(n_2-1)S^2}{n_1+n_2-2}}$$
   则随机变量
@@ -153,6 +153,8 @@ $$F=\dfrac{X/n_1}{Y/n_2}$$
   简单推导：
   $$F=\dfrac{\ \dfrac{(n_1-1)S_1^2}{(n_1-1)\sigma_1^2}\ }{\dfrac{(n_2-1)S_2^2}{(n_2-2)\sigma_2^2}}=\dfrac{\chi_1^2/(n_1-1)}{\chi^2_2/(n_2-1)}\sim F(n_1,n_2)$$
 
+- 上面提到的几个统计量非常重要，后面参数估计和假设检验会经常用到
+
 ## 参数估计
 参数估计解决的是总体分布类型已知，但参数未知的情况.
 ### 参数的点估计
@@ -164,4 +166,200 @@ $$F=\dfrac{X/n_1}{Y/n_2}$$
 ### 矩估计法
 设总体 $X$ 的分布含有 $r$ 个未知参数 $\theta_1,\theta_2,\cdots,\theta_r$，总体的 $1,2,\cdots,r$ 阶原点矩都存在，它们都是 $\theta_1,\theta_2,\cdots,\theta_r$ 的函数，即
 $$\mu_k=\mu_k(\theta_1,\theta_2,\cdots,\theta_r)=E(X^k),k=1,2,\cdots,r$$
-从总体中抽取样本 $X_1,X_2,\cdots,X_n$，根据辛钦定理可得当 $n\to\infty$ 时样本 $k$ 阶原点矩依概率收敛于总体的 $k$ 阶原点矩 $\mu_k$，取样本 $k$ 阶原点矩 $A_k$ 作为总体 $k$ 阶原点矩 $\mu_k$ 的估计，用样本矩的连续函数作为总体矩的同一个连续函数
+从总体中抽取样本 $X_1,X_2,\cdots,X_n$，根据辛钦定理可得当 $n\to\infty$ 时样本 $k$ 阶原点矩依概率收敛于总体的 $k$ 阶原点矩 $\mu_k$，取样本 $k$ 阶原点矩 $A_k$ 作为总体 $k$ 阶原点矩 $\mu_k$ 的估计，用样本矩的连续函数作为总体矩的同一个连续函数. 令
+$$
+\begin{equation*}
+\begin{cases}
+\mu_1(\theta_1,\theta_2,\cdots,\theta_r)=A_1,\\
+\mu_2(\theta_1,\theta_2,\cdots,\theta_r)=A_2,\\
+\cdots,\\
+\mu_r(\theta_1,\theta_2,\cdots,\theta_r)=A_r \\
+\end{cases}
+\end{equation*}
+$$
+这是一个关于未知参数 $(\theta_1,\theta_2,\cdots,\theta_r)$ 的方程组，记方程组的解为
+$$
+\begin{equation*}
+\begin{cases}
+\hat{\theta_1}=\hat{\theta_1}(A_1,A_2,\cdots,A_r),\\
+\hat{\theta_2}=\hat{\theta_2}(A_1,A_2,\cdots,A_r),\\
+\cdots,\\
+\hat{\theta_r}=\hat{\theta_r}(A_1,A_2,\cdots,A_r),\\
+\end{cases}
+\end{equation*}
+$$
+称为未知参数 $\theta_1,\theta_2,\cdots,\theta_r$ 的矩估计量，这种求点估计量的方法叫做矩估计法，代入样本观测值即可得到矩估计量的观测值（估计值）
+$$
+\begin{equation*}
+\begin{cases}
+\hat{\theta_1}=\hat{\theta_1}(a_1,a_2,\cdots,a_r),\\
+\hat{\theta_2}=\hat{\theta_2}(a_1,a_2,\cdots,a_r),\\
+\cdots,\\
+\hat{\theta_r}=\hat{\theta_r}(a_1,a_2,\cdots,a_r),\\
+\end{cases}
+\end{equation*}
+$$
+其中 $a_k$ 即为各阶样本矩的观测值.
+
+第一次看到这玩意的定义可能一头雾水，可以这样理解：矩估计法就是用样本的 $k$ 阶矩去估计总体的 $k$ 阶矩。样本矩是我们有观测数据的，能直接算出来的，做题的时候写出表达式就行；总体矩是一个理论值，要通过理论推导，我们用要求的未知参数表示出来。这样，在 `总体矩 = 样本矩` 这个方程中，我们就得到了关于未知参数的方程，解出来就是矩估计量，代入具体观测值就是矩估计值，实在不行看一两个例题就明白了。
+
+无论总体服从什么分布，总体均值的矩估计量都是样本均值，总体方差的矩估计量都是样本二阶中心矩. 有多组解表示出某个未知参数时，一般情况下优先使用低阶矩.
+
+### 最大似然估计法
+最大似然估计法是利用已知的总体的概率密度（概率分布）和样本，根据概率最大的事件在一次试验中最可能出现的原理，求总体的概率密度（或概率分布）的未知参数的点估计的方法。
+
+对于离散型总体，若只有一个未知参数，设总体 $X$ 为离散型随机变量，其概率分布为 $P\{X=x\}=p(x;\theta)$，其中 $\theta$ 是未知参数. 若样本 $X_1,X_2,\cdots,X_n$ 的观测值为 $x_1,x_2,\cdots,x_n$，由于样本中的各个随机变量之间相互独立，因此相当于 $\{X_1=x_1\},\{X_2=x_2\},\cdots,\{X_n=x_n\}$ 同时发生，其概率为
+$$p(x_1;\theta)p(x_2;\theta)\cdots p(x_n;\theta)=\prod_{i=1}^np(x_i;\theta)$$
+由于概率分布 $p$、样本观测值 $x_1,x_2,\cdots,x_n$ 都是已知的，上式仅含有唯一的未知参数 $\theta$，即上式是 $\theta$ 的函数，记为
+$$L(\theta)=\prod_{i=1}^np(x_i;\theta)$$
+并称为样本的似然函数. 选取 $L(\theta)$ 取得最大值的 $\hat{\theta}$ 作为 $\theta$ 的估计，此时样本观测值 $x_1,x_2,\cdots,x_n$ 出现的概率最大. 若在 $\theta$ 的取值范围内恒有 $L(\hat{\theta})\ge L(\theta)$，则称 $\hat{\theta}$ 是 $\theta$ 的最大似然估计值，这样得到的估计量可以根据 $x_1,x_2,\cdots,x_n$ 计算出来. 把样本观测值换成对应的随机变量，就得到最大似然估计量.
+
+求 $L(\theta)$ 的最大值点，要先求出 $L(\theta)$ 的极大值点. 当 $L(\theta)$ 是可导函数时，可以利用导数求出它的极大值点，也就是解方程
+$$\dfrac{\mathrm{d}L(\theta)}{\mathrm{d}\theta}=0$$
+这个方程叫做似然方程. 如果 $L(\theta)$ 有唯一的驻点 $\hat{\theta}$，则认为它是似然函数的极大值点.
+
+似然方程一般含有大量关于 $\theta$ 的表达式相乘的结构，求导数比较麻烦，由于 $\ln x$ 在定义域上是单调增加函数，$L(\theta),\ln L(\theta)$ 在同一点处取得极大值，可以由方程
+$$\dfrac{\mathrm{d}\ln L(\theta)}{\mathrm{d}\theta}=0$$
+求得 $\theta$ 的最大似然估计值，该方程称为对数似然方程.
+
+对于连续型随机变量的情形，可以类似取似然函数
+$$L(\theta)=\prod_{i=1}^nf(x_i;\theta)$$
+并按照上述方法求极大值点，进而得到最大似然估计量和估计值. 这相当于让样本观测值取到 $x_1,x_2,\cdots,x_n$ 邻域内的概率最大.
+
+如果含有多个未知参数，则可按照类似的方法求关于每个未知参数的偏导数，解出各个未知参数的估计量、估计值：
+$$\dfrac{\partial L(\theta_1,\theta_2,\cdots,\theta_r)}{\partial\theta_i}=0$$
+或者取对数似然方程
+$$\dfrac{\partial \ln L(\theta_1,\theta_2,\cdots,\theta_r)}{\partial\theta_i}=0$$
+
+对于未知参数 $\theta$ 的函数 $u(\theta)$，若已知 $\hat{\theta}$ 是最大似然估计值，则 $\hat{u}=u(\hat{\theta})$ 是 $u=u(\theta)$ 的最大似然估计值.
+
+有时候题目里面的似然函数是在定义域上单调的，这时需要考虑样本的边界值，比如最大最小值.
+
+### 估计量的评选标准
+- 无偏性：设 $\hat{\theta}=\hat{\theta}(X_1,X_2,\cdots,X_n)$ 是未知参数 $\theta$ 的估计量，若 $E(\hat{\theta})$ 存在，且满足 $E(\hat{\theta})=\theta$，则称 $\hat{\theta}$ 是 $\theta$ 的无偏估计（量），或 $\hat{\theta}$ 作为 $\theta$ 的估计具有无偏性.
+- 有效性：设 $\hat{\theta}_1=\hat{\theta}_1(X_1,X_2,\cdots,X_n),\hat{\theta}_2=\hat{\theta}_2(X_1,X_2,\cdots,X_n)$ 是未知参数 $\theta$ 的两个无偏估计量，若 $D(\hat{\theta}_1)<D(\hat{\theta}_2)$，则称 $\hat{\theta}_1$ 比 $\hat{\theta}_2$ 更有效. 在无偏估计中，一般认为以方差更小的为好.
+- 一致性：设 $\hat{\theta}_n=\hat{\theta}_n(X_1,X_2,\cdots,X_n)$ 是未知参数 $\theta$ 的估计量序列，若当 $n\to\infty$ 时，$\hat{\theta}\xrightarrow{P}\theta$，则称 $\hat{\theta}_n=\hat{\theta}_n(X_1,X_2,\cdots,X_n)$ 为未知参数 $\theta$ 的一致估计（量）或相合估计（量），也称以 $\hat{\theta}$ 估计 $\theta$ 具有一致性或相合性，即当 $n$ 充分大时 $\hat{\theta}_n$ 稳定在 $\theta$ 的附近. 证明一致性可以使用切比雪夫不等式.
+
+### 双侧区间估计
+设总体 $X$ 的分布中含有一个未知参数 $\theta$，$(X_1,X_2,\cdots,X_n)$ 是来自总体 $X$ 的样本. 如果对于给定的概率 $1-\alpha(0<\alpha<1)$，存在两个统计量 $\theta_1=\theta_1(X_1,X_2,\cdots,X_n),\theta_2=\theta_2(X_1,X_2,\cdots,X_n)$，使得 $P\{\theta_1<\theta<\theta_2\}=1-\alpha$，则称 $1-\alpha$ 为置信度或置信水平，称随机区间 $(\theta_1,\theta_2)$ 为未知参数 $\theta$ 的置信水平为 $1-\alpha$ 的置信区间，分别称 $\theta_1,\theta_2$ 为置信水平为 $1-\alpha$ 的双侧置信区间的置信下限和置信上限. 这种估计未知参数的方法叫做区间估计.
+
+置信水平的意义是，置信区间 $(\theta_1,\theta_2)$ 包含未知变量的真值的概率为 $1-\alpha$. 对于同一个未知参数 $\theta$，置信水平为 $1-\alpha$ 的置信区间不唯一. 区间长度越短，估计精确度越高.
+
+计算置信区间的一般步骤：
+
+1. 构造样本函数 $T(X_1,X_2,\cdots,X_n;\theta)$，要求仅包含一个未知参数 $\theta$.
+2. 根据给定的置信水平和 $T$ 的分布，找到两个常数 $a,b$ 满足
+   $$P\{a<T<b\}=1-\alpha$$
+3. 解不等式求出 $\theta$ 的置信区间
+---
+以下给出一些针对正态总体的区间估计方法. 假设总体 $X\sim N(\mu,\sigma^2)$，从总体中抽取样本 $X_1,X_2,\cdots,X_n$，样本均值和样本方差分别为 $\bar{X},S^2$，置信水平为 $1-\alpha$.
+- $\sigma^2$ 已知，求 $\mu$ 的置信区间：标准正态分布 $N(0,1)$
+
+  根据
+  $$u=\dfrac{\bar{X}-\mu}{\sigma}\sqrt{n}\sim N(0,1)$$
+  利用正态分布的对称性，有 $u_{\frac{\alpha}{2}}=-u_{1-\frac{\alpha}{2}}$，得到
+  $$P\left\{-u_{\alpha/2}<\dfrac{\bar{X}-\mu}{\sigma}\sqrt{n}<u_{\alpha/2}\right\}=1-\alpha$$
+  由于 $\bar{X},\sigma,n$ 都是已知条件，正态分布查表可得到 $u_{\alpha/2}$ 的数据，中间这一坨服从正态分布，这个概率是天然成立的，因此解不等式
+  $$-u_{\alpha/2}<\dfrac{\bar{X}-\mu}{\sigma}\sqrt{n}<u_{\alpha/2}$$
+  即可得到 $\mu$ 的置信区间
+  $$\left(\bar{X}-u_{\alpha/2}\dfrac{\sigma}{\sqrt{n}},\bar{X}+u_{\alpha/2}\dfrac{\sigma}{\sqrt{n}}\right)$$
+  该区间的长度为
+  $$l=2u_{\alpha/2}\dfrac{\sigma}{\sqrt{n}}$$
+  置信水平一定的情况下，$l$ 与 $\sqrt{n}$ 成反比. 设 $a$ 为正实数，若要使 $l\le a$，则样本容量应当满足
+  $$n\ge \left(2u_{\alpha/2}\dfrac{\sigma}{a}\right)^2$$
+- $\sigma^2$ 未知，求 $\mu$ 的置信区间：$t(n-1)$ 分布
+
+  根据
+  $$t=\dfrac{\bar{X}-\mu}{S}\sqrt{n}\sim t(n-1)$$
+  利用 t 分布的对称性，选取 t 分布关于原点对称的区间：
+  $$P\left\{-t_{\alpha/2}(n-1)<\dfrac{\bar{X}-\mu}{S}\sqrt{n}<t_{\alpha/2}(n-1)\right\}=1-\alpha$$
+  解不等式，得到 $\mu$ 的置信区间为
+  $$\left(\bar{X}-\dfrac{S}{\sqrt{n}}t_{\alpha/2}(n-1),\bar{X}+\dfrac{S}{\sqrt{n}}t_{\alpha/2}(n-1)\right)$$
+- $\mu$ 已知，求 $\sigma^2$ 的置信区间：$\chi^2(n)$ 分布
+
+  根据
+  $$\chi^2=\dfrac{1}{\sigma^2}\sum_{i=1}^n(X_i-\mu)^2\sim\chi^2(n)$$
+  可得关于 $\sigma^2$ 的不等式
+  $$\chi^2_{1-\frac{\alpha}{2}}(n)<\dfrac{1}{\sigma^2}\sum_{i=1}^n(X_i-\mu)^2<\chi^2_{\frac{\alpha}{2}}(n)$$
+  解得置信区间为
+  $$\left(\dfrac{\sum\limits_{i=1}^n(X_i-\mu)^2}{\chi^2_{\frac{\alpha}{2}}(n)},\dfrac{\sum\limits_{i=1}^n(X_i-\mu)^2}{\chi^2_{1-\frac{\alpha}{2}}(n)}\right)$$
+
+- $\mu$ 未知，$\sigma^2$ 的置信区间：$\chi^2(n-1)$ 分布
+  根据
+  $$\chi^2=\dfrac{(n-1)\sigma^2}{\sigma^2}\sim\chi^2(n-1)$$
+  仿照上述过程得到关于 $\sigma^2$ 的不等式
+  $$\chi^2_{1-\frac{\alpha}{2}}(n-1)<\dfrac{(n-1)S^2}{\sigma^2}<\chi^2_{\frac{\alpha}{2}}(n-1)$$
+  解得置信区间为
+  $$\left(\dfrac{(n-1)S^2}{\chi^2_{\frac{\alpha}{2}}(n-1)},\dfrac{(n-1)S^2}{\chi^2_{1-\frac{\alpha}{2}}(n-1)}\right)$$
+
+对于两个正态总体 $N(\mu_1,\sigma_1^2),N(\mu_2,\sigma_2^2)$，分别独立地抽取样本 $X_1,X_2,\cdots,X_{n_1}$ 和 $Y_1,Y_2,\cdots,Y_{n_2}$样本均值分别为 $\bar{X},\bar{Y}$，样本方差分别为 $S_1^2,S_2^2$.
+- $\sigma_1^2,\sigma_2^2$ 已知，求 $\mu_1-\mu_2$ 的置信区间：标准正态分布 $N(0,1)$
+
+  根据
+  $$u=\dfrac{\bar{X}-\bar{Y}-(\mu_1-\mu_2)}{\sqrt{\dfrac{\sigma_1^2}{n_1}+\dfrac{\sigma_2^2}{n_2}}}\sim N(0,1)$$
+  得到关于 $\mu_1-\mu_2$ 的不等式
+  $$-u_{\frac{\alpha}{2}}<\dfrac{\bar{X}-\bar{Y}-(\mu_1-\mu_2)}{\sqrt{\dfrac{\sigma_1^2}{n_1}+\dfrac{\sigma_2^2}{n_2}}}<u_{\frac{\alpha}{2}}$$
+  解得置信区间为
+  $$\left(\bar{X}-\bar{Y}-u_{\frac{\alpha}{2}}\sqrt{\dfrac{\sigma^2_1}{n_1}+\dfrac{\sigma_2^2}{n_2}},\bar{X}-\bar{Y}+u_{\frac{\alpha}{2}}\sqrt{\dfrac{\sigma^2_1}{n_1}+\dfrac{\sigma_2^2}{n_2}}\right)$$
+  $\mu_1-\mu_2$ 的置信区间可以用来比较两个总体的均值大小. 如果置信区间下界大于0，则以置信水平 $1-\alpha$ 认为 $\mu_1>\mu_2$;若置信区间上界小于0，则以置信水平 $1-\alpha$ 认为 $\mu_1<\mu_2$.
+
+- $\sigma_1^2=\sigma_2^2=\sigma^2$ 未知，求 $\mu_1-\mu_2$ 的置信区间：$t(n_1+n_2-2)$ 分布
+
+  注意这里的两个方差是相等的. 根据
+  $$t=\dfrac{\bar{X}-\bar{Y}-(\mu_1-\mu_2)}{S_W\sqrt{\dfrac{1}{n_1}+\dfrac{1}{n_2}}}\sim t(n_1+n_2-2)$$
+  其中
+  $$S_W=\sqrt{\dfrac{(n_1-1)S_1^2+(n_2-1)S_2^2}{n_1+n_2-2}}$$
+  得到关于 $\mu_1-\mu_2$ 的不等式
+  $$-t_{\frac{\alpha}{2}}(n_1+n_2-2)<\dfrac{\bar{X}-\bar{Y}-(\mu_1-\mu_2)}{S_W\sqrt{\dfrac{1}{n_1}+\dfrac{1}{n_2}}}<t_{\frac{\alpha}{2}}(n_1+n_2-2)$$
+  解得置信区间为
+  $$\left(\bar{X}-\bar{Y}-t_{\frac{\alpha}{2}}(n_1+n_2-2)S_W\sqrt{\dfrac{1}{n_1}+\dfrac{1}{n_2}},\bar{X}-\bar{Y}+t_{\frac{\alpha}{2}}(n_1+n_2-2)S_W\sqrt{\dfrac{1}{n_1}+\dfrac{1}{n_2}}\right)$$
+
+- 已知 $\mu_1,\mu_2$，求 $\dfrac{\sigma_1^2}{\sigma_2^2}$ 的置信区间：$F(n_1,n_2)$ 分布
+
+  利用 $F$ 分布解答双侧区间估计问题时，常利用 $F_{1-\alpha}(n_1,n_2)=1/F_{\alpha}(n_2,n_1)$ 这一性质. 根据
+  $$F=\dfrac{n_2}{n_1}\cdot\dfrac{\sigma_2^2}{\sigma_1^2}\cdot\dfrac{\sum\limits_{i=1}^{n_1}(X_i-\mu_1)^2}{\sum\limits_{i=1}^{n_2}(Y_i-\mu_1)^2}\sim F(n_1,n_2)$$
+  得到关于 $\dfrac{\sigma_1^2}{\sigma_2^2}$ 的不等式
+  $$F_{1-\frac{\alpha}{2}}(n_1,n_2) < \dfrac{n_2}{n_1}\cdot\dfrac{\sigma_2^2}{\sigma_1^2}\cdot\dfrac{\sum\limits_{i=1}^{n_1}(X_i-\mu_1)^2}{\sum\limits_{i=1}^{n_2}(Y_i-\mu_1)^2} < F_{\frac{\alpha}{2}}(n_1,n_2)$$
+  等价于
+  $$\dfrac{\sigma_1^2}{\sigma_2^2} < \dfrac{n_2\sum\limits_{i=1}^{n_1}(X_i-\mu_1)^2}{n_1\sum\limits_{i=1}^{n_2}(Y_i-\mu_1)^2}F_{\frac{\alpha}{2}}(n_2,n_1)$$
+  $$\dfrac{\sigma_1^2}{\sigma_2^2} > \dfrac{n_2\sum\limits_{i=1}^{n_1}(X_i-\mu_1)^2}{n_1\sum\limits_{i=1}^{n_2}(Y_i-\mu_1)^2}\cdot \dfrac{1}{F_{\frac{\alpha}{2}}(n_1,n_2)}$$
+  即其置信区间为
+  $$\left(\dfrac{n_2\sum\limits_{i=1}^{n_1}(X_i-\mu_1)^2}{n_1\sum\limits_{i=1}^{n_2}(Y_i-\mu_1)^2}\cdot \dfrac{1}{F_{\frac{\alpha}{2}}(n_1,n_2)},\dfrac{n_2\sum\limits_{i=1}^{n_1}(X_i-\mu_1)^2}{n_1\sum\limits_{i=1}^{n_2}(Y_i-\mu_1)^2}F_{\frac{\alpha}{2}}\textcolor{red}{(n_2,n_1)}\right)$$
+
+- $\mu_1,\mu_2$ 未知，求 $\dfrac{\sigma_1^2}{\sigma_2^2}$ 的置信区间：$F(n_1-1,n_2-1)$ 分布
+
+  根据
+  $$F=\dfrac{\sigma_2^2}{\sigma_1^2}\cdot\dfrac{S_1^2}{S_2^2}\sim F(n_1-1,n_2-2)$$
+  可得关于 $\dfrac{\sigma_1^2}{\sigma_2^2}$ 的不等式
+  $$F_{1-\frac{\alpha}{2}}(n_1-1,n_2-2)<\dfrac{\sigma_2^2}{\sigma_1^2}\cdot\dfrac{S_1^2}{S_2^2}<F_{\frac{\alpha}{2}}(n_1-1,n_2-2)$$
+  解得置信区间为
+  $$\left(\dfrac{S_1^2}{S_2^2}\cdot\dfrac{1}{F_{\frac{\alpha}{2}}(n_1-1,n_2-2)},\dfrac{S_1^2}{S_2^2}\cdot F_{\frac{\alpha}{2}}\textcolor{red}{(n_2-1,n_1-2)}\right)$$
+
+- 如果 $\dfrac{\sigma_1^2}{\sigma_2^2}$ 的置信区间下限大于1，则以置信水平 $1-\alpha$ 认为 $\sigma_1^2>\sigma_2^2$; 若 $\dfrac{\sigma_1^2}{\sigma_2^2}$ 的置信区间上限小于1，则以置信水平 $1-\alpha$ 认为 $\sigma_1^2>\sigma_2^2$.
+
+### 单侧区间估计
+需要求得未知参数的上/下限，而不关心另一个边界值时，可以用单侧区间估计来计算所需的边界值. 设总体 $X$ 的分布中含有未知参数 $\theta$，从总体 $X$ 中抽取样本 $X_1,X_2,\cdots,X_n$，对于给定的概率 $1-\alpha(0<\alpha<1)$：
+- 如果统计量 $\theta_1=\theta_1(X_1,X_2,\cdots,X_n)$ 满足 $P\{\theta>\theta_1\}=1-\alpha$，则称随机区间 $(\theta_1,+\infty)$ 为置信水平为 $1-\alpha$ 的单侧置信区间，$\theta_1$ 称为 $\theta$ 的置信水平为 $1-\alpha$ 的单侧置信下限.
+- 如果统计量 $\theta_2=\theta_2(X_1,X_2,\cdots,X_n)$ 满足 $P\{\theta<\theta_2\}=1-\alpha$，则称随机区间 $(-\infty,\theta_2)$ 为置信水平为 $1-\alpha$ 的单侧置信区间，$\theta_2$ 称为 $\theta$ 的置信水平为 $1-\alpha$ 的单侧置信上限.
+
+实际上还是利用标准正态分布和三大分布的那几个统计量，只不过把需要解的不等式换成单侧的而已. 例如：
+
+设总体 $X\sim N(\mu,\sigma^2)$，$X$ 的均值和方差 $\mu,\sigma^2$ 都存在但未知. 从总体中抽取样本 $X_1,X_2,\cdots,X_n$，对于给定的置信水平 $1-\alpha$：
+- 求未知参数 $\mu$ 的置信水平下限. 根据
+  $$t=\dfrac{\bar{X}-\mu}{S}\sqrt{n}\sim t(n-1)$$
+  可得不等式
+  $$\dfrac{\bar{X}-\mu}{S}\sqrt{n}<t_\alpha(n-1)$$
+  解得置信区间为
+  $$\left(\bar{X}-\dfrac{S}{\sqrt{n}}t_\alpha(n-1),+\infty\right)$$
+  即置信区间下限为
+  $$\mu_1=\bar{X}-\dfrac{S}{\sqrt{n}}t_\alpha(n-1)$$
+- 求未知参数 $\sigma^2$ 的置信水平上限. 根据
+  $$\chi^2=\dfrac{(n-1)S^2}{\sigma^2}\sim\chi^2(n-1)$$
+  列出不等式
+  $$\dfrac{(n-1)S^2}{\sigma^2}>\chi_{1-\alpha}^2(n-1)$$
+  解得置信区间为
+  $$\left(0,\dfrac{(n-1)S^2}{\chi^2_{1-\alpha}(n-1)}\right)$$
+  即所求置信区间上限为
+  $$\sigma_2^2=\dfrac{(n-1)S^2}{\chi^2_{1-\alpha}(n-1)}$$
+
+## 假设检验
