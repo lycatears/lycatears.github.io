@@ -43,6 +43,16 @@ links:
     desc: Dor的洞天
     avatar: https://i.ibb.co/G3H0JXZ0/dcrlike-avatar.jpg
     color: "#ffffff"
+  - url: https://blog.gladius-huang.cn/
+    blog: Gladius
+    desc: 梦想是入土为安
+    avatar: https://www.helloimg.com/i/2026/07/22/6a5fa6129d288.jpg
+    color: "#ffffff"
+  - url: https://qiankee.github.io/
+    blog: QianK
+    desc: Attention is all you need
+    avatar: https://www.helloimg.com/i/2026/07/22/6a5fa6ec615ee.jpg
+    color: "#ffffff"
 random: true
 ---
 
