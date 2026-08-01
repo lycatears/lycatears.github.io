@@ -171,6 +171,11 @@ tags:
 - （1）他能命中目标的概率；
 - （2）如果他命中目标，则所用的手枪是校准过的概率.
 
+> 设事件“拿到校准后的手枪”为 $A$，“拿到未校准的手枪”为 $\bar{A}$，“命中目标”为 $B$，易得 $P(A)=\dfrac{2}{3},P(\bar{A})=\dfrac{1}{3}$
+>
+> （1）根据全概率公式有 $P(B)=P(B|A)P(A)+P(B|\bar{A})P(\bar{A})=0.9\times\dfrac{2}{3}+0.3\times\dfrac{1}{3}=0.7$
+>
+> （2）根据贝叶斯公式可得 $P(A|B)=\dfrac{P(B|A)P(A)}{P(B)}=\dfrac{0.9\times\dfrac{2}{3}}{0.7}=\dfrac{6}{7}$
 
 ---
 14. （8分）设连续型随机变量 $X$ 的概率密度为
@@ -200,8 +205,19 @@ tags:
     |-|-|-|-|
     |$P$|$\theta^2$|$2\theta(1-\theta)$|$(1-\theta)^2$|
 
-    其中 $\theta(0<\theta<1)$ 是位置参数，已知来自总体 $X$ 的样本值为 $1,2,1,3$. 求 $\theta$ 的矩估计值和最大似然估计值.
+    其中 $\theta(0<\theta<1)$ 是未知参数，已知来自总体 $X$ 的样本值为 $1,2,1,3$. 求 $\theta$ 的矩估计值和最大似然估计值.
 
+> **先求矩估计：** $E(X)=\theta^2+2\times2\theta(1-\theta)+3(1-\theta)^2=3-2\theta$
+>
+> $A_1=\dfrac{1}{4}(1+2+1+3)=\dfrac{7}{4}=3-2\theta$
+>
+> 解得 $\hat{\theta}=\dfrac{5}{8}$
+>
+> **再求最大似然估计：** 似然函数为 $L(\theta)=\prod\limits_{i=1}^4p_i=(\theta^2)^2\cdot2\theta(1-\theta)(1-\theta)^2=2\theta^5(1-\theta)^3$
+>
+> 取对数得到对数似然函数 $\ln L(\theta)=5\ln\theta+3\ln(1-\theta)+\ln 2$
+>
+> 由此得到方程 $5\ln\theta+3\ln(1-\theta)+\ln 2=0$，两边求导得 $\dfrac{5}{\theta}-\dfrac{3}{1-\theta}=0$，解得 $\hat{\theta}=\dfrac{5}{8}$
 
 ---
 17. （6分）设总体 $X\sim N(\mu,\sigma^2),X_1,X_2,\cdots,X_{2n}(n\ge 2)$ 为取自 $X$ 的样本，其样本均值为

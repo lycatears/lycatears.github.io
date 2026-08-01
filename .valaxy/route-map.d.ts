@@ -171,6 +171,13 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
+    '/posts/gaokao-math': RouteRecordInfo<
+      '/posts/gaokao-math',
+      '/posts/gaokao-math',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
     '/posts/goodbye-forever-c': RouteRecordInfo<
       '/posts/goodbye-forever-c',
       '/posts/goodbye-forever-c',
@@ -500,6 +507,14 @@ declare module 'vue-router/auto-routes' {
     'pages/posts/gaokao-2.md': {
       routes:
         | '/posts/gaokao-2'
+      views:
+        | never
+      pathParamNames:
+        | never
+    }
+    'pages/posts/gaokao-math.md': {
+      routes:
+        | '/posts/gaokao-math'
       views:
         | never
       pathParamNames:
