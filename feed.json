@@ -1,0 +1,266 @@
+{
+    "version": "https://jsonfeed.org/version/1",
+    "title": "韶华未既",
+    "home_page_url": "https://lycatears.github.io/",
+    "feed_url": "https://lycatears.github.io/feed.json",
+    "description": "天才少女洛樱！",
+    "icon": "https://lycatears.github.io/avatar.jpg",
+    "author": {
+        "name": "洛樱",
+        "url": "https://valaxy.site"
+    },
+    "items": [
+        {
+            "id": "https://lycatears.github.io/posts/probability-review-notes-2",
+            "content_html": "<h2>样本及样本函数的分布</h2>\n<h3>总体与样本</h3>\n<ul>\n<li>研究对象的全体是总体，总体中的每个元素是个体，总体中的元素个数称为总体容量，分为有限总体和无限总体两种.</li>\n<li>研究对象的某一种数值指标，在总体中的</li>\n</ul>\n<br/><p>访问 <a href=\"https://lycatears.github.io/posts/probability-review-notes-2\" target=\"_blank\">https://lycatears.github.io/posts/probability-review-notes-2</a> 阅读全文。</p>",
+            "url": "https://lycatears.github.io/posts/probability-review-notes-2",
+            "title": "《概率论与数理统计》复习笔记（下）",
+            "date_modified": "2026-07-20T08:57:56.000Z",
+            "date_published": "2026-07-20T08:57:56.000Z",
+            "author": {
+                "name": "洛樱",
+                "url": "https://valaxy.site"
+            }
+        },
+        {
+            "id": "https://lycatears.github.io/posts/calculus-a2-joke",
+            "content_html": "<blockquote>\n<h4>温馨提示：本试卷纯属整活，请勿用于期末考试复习.</h4>\n</blockquote>\n<p>本试卷共3页，19题，考试时间120分钟。</p>\n<p>注意事项：</p>\n<ol>\n<li>答题前，考生务必将他人的姓名、准考证号填写在答题卡上。</li>\n<li>回答选择</li>\n</ol>\n<br/><p>访问 <a href=\"https://lycatears.github.io/posts/calculus-a2-joke\" target=\"_blank\">https://lycatears.github.io/posts/calculus-a2-joke</a> 阅读全文。</p>",
+            "url": "https://lycatears.github.io/posts/calculus-a2-joke",
+            "title": "2025-2026学年 “迎期末·庆六一” 微积分A2信心卷",
+            "date_modified": "2026-07-14T19:03:05.000Z",
+            "date_published": "2026-07-14T19:03:05.000Z",
+            "author": {
+                "name": "洛樱",
+                "url": "https://valaxy.site"
+            }
+        },
+        {
+            "id": "https://lycatears.github.io/posts/probability-review-notes",
+            "content_html": "<p>::: warning<br>\n本文是猫娘学习概率论与数理统计的笔记，整理了吉林大学数学学院《随机数学》、茆诗松《概率论与数理统计教程》两本教材和知乎上的有关内容，有很多超出校内考试范围的内容，可能不适合期末</p>\n<br/><p>访问 <a href=\"https://lycatears.github.io/posts/probability-review-notes\" target=\"_blank\">https://lycatears.github.io/posts/probability-review-notes</a> 阅读全文。</p>",
+            "url": "https://lycatears.github.io/posts/probability-review-notes",
+            "title": "《概率论与数理统计》复习笔记（上）",
+            "date_modified": "2026-07-11T10:02:27.000Z",
+            "date_published": "2026-07-11T10:02:27.000Z",
+            "author": {
+                "name": "洛樱",
+                "url": "https://valaxy.site"
+            }
+        },
+        {
+            "id": "https://lycatears.github.io/posts/zhongkao-math-answer-sheet",
+            "content_html": "<h2>前言</h2>\n<p>高中刷题的时候发现有很多人做高考模拟答题卡，但是最近搜了一下网上的资源，似乎并没有做中考答题卡的。正好最近在学LaTeX，就拿这个练手了。</p>\n<p>据学姐了解，2019年是最后一年分卷I、卷II</p>\n<br/><p>访问 <a href=\"https://lycatears.github.io/posts/zhongkao-math-answer-sheet\" target=\"_blank\">https://lycatears.github.io/posts/zhongkao-math-answer-sheet</a> 阅读全文。</p>",
+            "url": "https://lycatears.github.io/posts/zhongkao-math-answer-sheet",
+            "title": "制作一张河北中考数学答题卡",
+            "date_modified": "2026-06-24T13:57:13.000Z",
+            "date_published": "2026-06-24T13:57:13.000Z",
+            "author": {
+                "name": "洛樱",
+                "url": "https://valaxy.site"
+            }
+        },
+        {
+            "id": "https://lycatears.github.io/posts/gaokao-2",
+            "content_html": "<p>从石家庄二中实验学校的校门远去，望着石家庄街边的灯火，我却感受不到想象中的兴奋。或许是因为数学考试的当头一棒，又或许是三年压抑生活的麻木，总之，银灰色的小车就这样载着我远离了这所让我又爱又恨的高中。</p>\n<br/><p>访问 <a href=\"https://lycatears.github.io/posts/gaokao-2\" target=\"_blank\">https://lycatears.github.io/posts/gaokao-2</a> 阅读全文。</p>",
+            "url": "https://lycatears.github.io/posts/gaokao-2",
+            "title": "高考回忆录（2）：时间加速魔法",
+            "date_modified": "2026-06-22T23:45:23.000Z",
+            "date_published": "2026-06-22T23:45:23.000Z",
+            "author": {
+                "name": "洛樱",
+                "url": "https://valaxy.site"
+            }
+        },
+        {
+            "id": "https://lycatears.github.io/posts/gaokao-1",
+            "content_html": "<blockquote>\n<p>繁华散作香尘，应是垂泪觉秋深。——《红尘寄雪》</p>\n</blockquote>\n<p>又是一年高考季，不知不觉中自己已经快要本科毕业了。本科四年虽没有高中时幻想的那样丰富多彩，但也算说得过去，勉强达到了及格的标准，但曾经的少年心气再</p>\n<br/><p>访问 <a href=\"https://lycatears.github.io/posts/gaokao-1\" target=\"_blank\">https://lycatears.github.io/posts/gaokao-1</a> 阅读全文。</p>",
+            "url": "https://lycatears.github.io/posts/gaokao-1",
+            "title": "高考回忆录（1）：关窗锁门，封闭考场",
+            "date_modified": "2026-06-11T16:47:05.000Z",
+            "date_published": "2026-06-11T16:47:05.000Z",
+            "author": {
+                "name": "洛樱",
+                "url": "https://valaxy.site"
+            }
+        },
+        {
+            "id": "https://lycatears.github.io/posts/oop-addition",
+            "content_html": "<h1>面向对象程序设计试卷大题解析（第二弹）</h1>\n<p>鉴于上一篇关于OOP考试的文章<a href=\"./oop-test-paper.md\">面向对象程序设计试卷大题解析</a>有计算机学院的部分题型没有照顾到，猫娘收集了部分奔腾</p>\n<br/><p>访问 <a href=\"https://lycatears.github.io/posts/oop-addition\" target=\"_blank\">https://lycatears.github.io/posts/oop-addition</a> 阅读全文。</p>",
+            "url": "https://lycatears.github.io/posts/oop-addition",
+            "title": "面向对象程序设计试卷大题解析（第二弹）",
+            "date_modified": "2026-05-30T19:56:50.000Z",
+            "date_published": "2026-05-30T19:56:50.000Z",
+            "author": {
+                "name": "洛樱",
+                "url": "https://valaxy.site"
+            }
+        },
+        {
+            "id": "https://lycatears.github.io/posts/comic-magazines",
+            "content_html": "<p>偶然翻到自己2024年暑假买的两本《天行轶事》3、4册，不知不觉已经快过去两年了。其实当时我也没想到县城的书店还能留着这种古董一样的漫画书，毕竟书店最大的客户是学校，很多书店本质上是一个大型教辅仓库，</p>\n<br/><p>访问 <a href=\"https://lycatears.github.io/posts/comic-magazines\" target=\"_blank\">https://lycatears.github.io/posts/comic-magazines</a> 阅读全文。</p>",
+            "url": "https://lycatears.github.io/posts/comic-magazines",
+            "title": "原价买不回的，不仅是漫画",
+            "date_modified": "2026-05-28T00:47:05.000Z",
+            "date_published": "2026-05-28T00:47:05.000Z",
+            "author": {
+                "name": "洛樱",
+                "url": "https://valaxy.site"
+            }
+        },
+        {
+            "id": "https://lycatears.github.io/posts/goodbye-forever-c",
+            "content_html": "<h2>不想你，牢C——初中入学考试十周年纪念</h2>\n<blockquote>\n<p>曾盼得人心欲碎，如今幻化成灰。——《落花霁》</p>\n</blockquote>\n<p>十年前，也就是2016年4月16日，当时还是六年级的我第一次到外地参加选拔性考试。至于原因，无非是家</p>\n<br/><p>访问 <a href=\"https://lycatears.github.io/posts/goodbye-forever-c\" target=\"_blank\">https://lycatears.github.io/posts/goodbye-forever-c</a> 阅读全文。</p>",
+            "url": "https://lycatears.github.io/posts/goodbye-forever-c",
+            "title": "不想你，牢C",
+            "date_modified": "2026-04-04T00:15:34.000Z",
+            "date_published": "2026-04-04T00:15:34.000Z",
+            "author": {
+                "name": "洛樱",
+                "url": "https://valaxy.site"
+            }
+        },
+        {
+            "id": "https://lycatears.github.io/posts/gaokao-math",
+            "content_html": "<p>对于想要冲刺985高校的中学生，是否有必要提前学习下一阶段的数学知识？</p>\n<p>在初高中阶段，曾经我也对这些“奇技淫巧”嗤之以鼻。尤其是在高中阶段，有的同学提出“极点极线解圆锥曲线”之类的利用高等背景的解题</p>\n<br/><p>访问 <a href=\"https://lycatears.github.io/posts/gaokao-math\" target=\"_blank\">https://lycatears.github.io/posts/gaokao-math</a> 阅读全文。</p>",
+            "url": "https://lycatears.github.io/posts/gaokao-math",
+            "title": "高中生是否有必要学习大学数学知识？",
+            "date_modified": "2025-10-01T23:52:17.000Z",
+            "date_published": "2025-10-01T23:52:17.000Z",
+            "author": {
+                "name": "洛樱",
+                "url": "https://valaxy.site"
+            }
+        },
+        {
+            "id": "https://lycatears.github.io/posts/apply-for-graduate-student",
+            "content_html": "<h1>保研之旅</h1>\n<h2>黑话词典</h2>\n<ul>\n<li>\n<p>bg/bar<br>\nbackground，背景，个人成绩排名英语竞赛论文获奖，等等。bar就是你入营需要达到的条件、门槛。</p>\n</li>\n<li>\n<p>rk<br>\nrank，排名。</p>\n</li>\n<li>\n<p>强</p>\n</li>\n</ul>\n<br/><p>访问 <a href=\"https://lycatears.github.io/posts/apply-for-graduate-student\" target=\"_blank\">https://lycatears.github.io/posts/apply-for-graduate-student</a> 阅读全文。</p>",
+            "url": "https://lycatears.github.io/posts/apply-for-graduate-student",
+            "title": "一个白板选手的保研之旅",
+            "date_modified": "2025-09-27T16:42:00.000Z",
+            "date_published": "2025-09-27T16:42:00.000Z",
+            "author": {
+                "name": "洛樱",
+                "url": "https://valaxy.site"
+            }
+        },
+        {
+            "id": "https://lycatears.github.io/posts/probability-a-2024",
+            "content_html": "<h2>简介</h2>\n<ul>\n<li>考试时间2024年6月26日13:00-15:00，两小时。</li>\n<li>难度中规中矩。概率论在吉大公共数学课中的难度比较简单，不必过度复习。</li>\n<li>没做这套卷之前别看下面的解析。</li>\n</ul>\n<blockquote>\n<p>雪落幽静</p>\n</blockquote>\n<br/><p>访问 <a href=\"https://lycatears.github.io/posts/probability-a-2024\" target=\"_blank\">https://lycatears.github.io/posts/probability-a-2024</a> 阅读全文。</p>",
+            "url": "https://lycatears.github.io/posts/probability-a-2024",
+            "title": "《概率论与数理统计A》2024年试题解析",
+            "date_modified": "2025-07-02T20:13:28.000Z",
+            "date_published": "2025-07-02T20:13:28.000Z",
+            "author": {
+                "name": "洛樱",
+                "url": "https://valaxy.site"
+            }
+        },
+        {
+            "id": "https://lycatears.github.io/posts/gpa-calculator",
+            "content_html": "<h1>吉林大学绩点计算器</h1>\n<p>本质上其实跟您在网页上运行一个油猴脚本差不多，只不过当时学Qt，一时兴起做了这个东西，现在看来挺鸡肋的。</p>\n<h2>下载</h2>\n<p>[百度网盘](<a href=\"https://pan.baidu.co\">https://pan.baidu.co</a></p>\n<br/><p>访问 <a href=\"https://lycatears.github.io/posts/gpa-calculator\" target=\"_blank\">https://lycatears.github.io/posts/gpa-calculator</a> 阅读全文。</p>",
+            "url": "https://lycatears.github.io/posts/gpa-calculator",
+            "title": "吉林大学绩点计算器",
+            "date_modified": "2025-06-20T12:06:14.000Z",
+            "date_published": "2025-06-20T12:06:14.000Z",
+            "author": {
+                "name": "洛樱",
+                "url": "https://valaxy.site"
+            }
+        },
+        {
+            "id": "https://lycatears.github.io/posts/db2",
+            "content_html": "<h1>DB2</h1>\n<p>软件学院最具历史性的课程，可以与考古学院联动的那种。</p>\n<p>包含两门课，其一为《企业级数据库性能调优》，其二为《数据库应用程序开发》。</p>\n<p>据说这两门课之前是与IBM合作的产物，过了可以拿到一个</p>\n<br/><p>访问 <a href=\"https://lycatears.github.io/posts/db2\" target=\"_blank\">https://lycatears.github.io/posts/db2</a> 阅读全文。</p>",
+            "url": "https://lycatears.github.io/posts/db2",
+            "title": "DB2通关指南",
+            "date_modified": "2024-12-30T14:55:41.000Z",
+            "date_published": "2024-12-30T14:55:41.000Z",
+            "author": {
+                "name": "洛樱",
+                "url": "https://valaxy.site"
+            }
+        },
+        {
+            "id": "https://lycatears.github.io/posts/ml-final-2024",
+            "content_html": "<h2>选择题（2*10=20）</h2>\n<ul>\n<li>基本上都是PPT上面很简单的概念，完整看过一遍PPT就能全做出来。</li>\n</ul>\n<h2>简答题（4*5=20）</h2>\n<ol>\n<li>什么是随机梯度下降？什么是批量梯度下降？并写出二者的优</li>\n</ol>\n<br/><p>访问 <a href=\"https://lycatears.github.io/posts/ml-final-2024\" target=\"_blank\">https://lycatears.github.io/posts/ml-final-2024</a> 阅读全文。</p>",
+            "url": "https://lycatears.github.io/posts/ml-final-2024",
+            "title": "机器学习B通关指南",
+            "date_modified": "2024-12-05T19:03:01.000Z",
+            "date_published": "2024-12-05T19:03:01.000Z",
+            "author": {
+                "name": "洛樱",
+                "url": "https://valaxy.site"
+            }
+        },
+        {
+            "id": "https://lycatears.github.io/posts/software-engineering-notes",
+            "content_html": "<h1>软件工程A</h1>\n<p>第五学期必修课，2.5学分，计入保研绩点。</p>\n<p>谁说大三就没有思政课的？软院马原来喽！</p>\n<p>猫娘在该课程上仅得到86.4分，本仓库内容请谨慎参考。</p>\n<h2>课程本身</h2>\n<ul>\n<li>奇怪的排课。每周2</li>\n</ul>\n<br/><p>访问 <a href=\"https://lycatears.github.io/posts/software-engineering-notes\" target=\"_blank\">https://lycatears.github.io/posts/software-engineering-notes</a> 阅读全文。</p>",
+            "url": "https://lycatears.github.io/posts/software-engineering-notes",
+            "title": "软件工程通关指南",
+            "date_modified": "2024-11-25T18:59:01.000Z",
+            "date_published": "2024-11-25T18:59:01.000Z",
+            "author": {
+                "name": "洛樱",
+                "url": "https://valaxy.site"
+            }
+        },
+        {
+            "id": "https://lycatears.github.io/posts/normal-distribution-generate",
+            "content_html": "<h2>经典回顾</h2>\n<ul>\n<li>\n<p>分布函数(Cumulative Distribution Function, CDF)</p>\n<p>设$X$为随机变量，对于任意实数$x$，令<br>\n$$F(x)=P{X\\leq x}</p>\n</li>\n</ul>\n<br/><p>访问 <a href=\"https://lycatears.github.io/posts/normal-distribution-generate\" target=\"_blank\">https://lycatears.github.io/posts/normal-distribution-generate</a> 阅读全文。</p>",
+            "url": "https://lycatears.github.io/posts/normal-distribution-generate",
+            "title": "如何生成服从正态分布的随机数",
+            "date_modified": "2024-06-05T23:44:01.000Z",
+            "date_published": "2024-06-05T23:44:01.000Z",
+            "author": {
+                "name": "洛樱",
+                "url": "https://valaxy.site"
+            }
+        },
+        {
+            "id": "https://lycatears.github.io/posts/java-review-notes",
+            "content_html": "<h1>Java基础知识复习笔记</h1>\n<p>本文是猫娘<strong>复习</strong>Java时所做的笔记，主要是为了巩固基础。<br>\n:::danger<br>\n本文不包含吉林大学软件学院Java程序设计课程中的GUI部分。<br>\n:::<br>\n参考文献：[</p>\n<br/><p>访问 <a href=\"https://lycatears.github.io/posts/java-review-notes\" target=\"_blank\">https://lycatears.github.io/posts/java-review-notes</a> 阅读全文。</p>",
+            "url": "https://lycatears.github.io/posts/java-review-notes",
+            "title": "Java基础知识复习笔记",
+            "date_modified": "2024-05-31T20:54:36.000Z",
+            "date_published": "2024-05-31T20:54:36.000Z",
+            "author": {
+                "name": "洛樱",
+                "url": "https://valaxy.site"
+            }
+        },
+        {
+            "id": "https://lycatears.github.io/posts/oop-test-paper",
+            "content_html": "<h1>课程信息</h1>\n<ul>\n<li>第二学期必修课，3学分，计入保研绩点。</li>\n<li>平时分30，期末考试70分。猫娘是zjq班级，作业很少，最终成绩基本上就是你的期末考试成绩，但是也捞人。</li>\n<li>试卷结构如下：\n<ul>\n<li>判断</li>\n</ul>\n</li>\n</ul>\n<br/><p>访问 <a href=\"https://lycatears.github.io/posts/oop-test-paper\" target=\"_blank\">https://lycatears.github.io/posts/oop-test-paper</a> 阅读全文。</p>",
+            "url": "https://lycatears.github.io/posts/oop-test-paper",
+            "title": "面向对象程序设计试卷大题解析",
+            "date_modified": "2023-07-02T19:11:01.000Z",
+            "date_published": "2023-07-02T19:11:01.000Z",
+            "author": {
+                "name": "洛樱",
+                "url": "https://valaxy.site"
+            }
+        },
+        {
+            "id": "https://lycatears.github.io/posts/heyiwei",
+            "content_html": "<h2>猫娘的根基在人民</h2>\n<p>猫娘，作为一种融合了人类与猫咪特征的文化形象，近年来在动漫、游戏、文学等领域广泛传播，受到众多群众特别是青年群体的喜爱。猫娘文化之所以能够从小众爱好逐渐走向大众视野，并形成独</p>\n<br/><p>访问 <a href=\"https://lycatears.github.io/posts/heyiwei\" target=\"_blank\">https://lycatears.github.io/posts/heyiwei</a> 阅读全文。</p>",
+            "url": "https://lycatears.github.io/posts/heyiwei",
+            "title": "何意味？",
+            "date_modified": "2023-03-03T15:30:07.000Z",
+            "date_published": "2023-03-03T15:30:07.000Z",
+            "author": {
+                "name": "洛樱",
+                "url": "https://valaxy.site"
+            }
+        },
+        {
+            "id": "https://lycatears.github.io/posts/valaxy",
+            "content_html": "<h2>部署</h2>\n<p>123</p>\n<br/><p>访问 <a href=\"https://lycatears.github.io/posts/valaxy\" target=\"_blank\">https://lycatears.github.io/posts/valaxy</a> 阅读全文。</p>",
+            "url": "https://lycatears.github.io/posts/valaxy",
+            "title": "Valaxy",
+            "date_modified": "2022-04-01T00:00:00.000Z",
+            "date_published": "2022-04-01T00:00:00.000Z",
+            "author": {
+                "name": "洛樱",
+                "url": "https://valaxy.site"
+            }
+        }
+    ]
+}

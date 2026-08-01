@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>韶华未既</title>
+        <link>https://lycatears.github.io/</link>
+        <description>天才少女洛樱！</description>
+        <lastBuildDate>Sat, 01 Aug 2026 16:56:32 GMT</lastBuildDate>
+        <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
+        <generator>https://github.com/jpmonette/feed</generator>
+        <image>
+            <title>韶华未既</title>
+            <url>https://lycatears.github.io/avatar.jpg</url>
+            <link>https://lycatears.github.io/</link>
+        </image>
+        <copyright>CC BY-NC-SA 4.0 2026 © 洛樱</copyright>
+        <atom:link href="https://lycatears.github.io/feed.xml" rel="self" type="application/rss+xml"/>
+        <item>
+            <title><![CDATA[《概率论与数理统计》复习笔记（下）]]></title>
+            <link>https://lycatears.github.io/posts/probability-review-notes-2</link>
+            <guid isPermaLink="false">https://lycatears.github.io/posts/probability-review-notes-2</guid>
+            <pubDate>Mon, 20 Jul 2026 08:57:56 GMT</pubDate>
+            <content:encoded><![CDATA[<h2>样本及样本函数的分布</h2>
+<h3>总体与样本</h3>
+<ul>
+<li>研究对象的全体是总体，总体中的每个元素是个体，总体中的元素个数称为总体容量，分为有限总体和无限总体两种.</li>
+<li>研究对象的某一种数值指标，在总体中的</li>
+</ul>
+<br/><p>访问 <a href="https://lycatears.github.io/posts/probability-review-notes-2" target="_blank">https://lycatears.github.io/posts/probability-review-notes-2</a> 阅读全文。</p>]]></content:encoded>
+            <author>i@valaxy.site (洛樱)</author>
+        </item>
+        <item>
+            <title><![CDATA[2025-2026学年 “迎期末·庆六一” 微积分A2信心卷]]></title>
+            <link>https://lycatears.github.io/posts/calculus-a2-joke</link>
+            <guid isPermaLink="false">https://lycatears.github.io/posts/calculus-a2-joke</guid>
+            <pubDate>Tue, 14 Jul 2026 19:03:05 GMT</pubDate>
+            <content:encoded><![CDATA[<blockquote>
+<h4>温馨提示：本试卷纯属整活，请勿用于期末考试复习.</h4>
+</blockquote>
+<p>本试卷共3页，19题，考试时间120分钟。</p>
+<p>注意事项：</p>
+<ol>
+<li>答题前，考生务必将他人的姓名、准考证号填写在答题卡上。</li>
+<li>回答选择</li>
+</ol>
+<br/><p>访问 <a href="https://lycatears.github.io/posts/calculus-a2-joke" target="_blank">https://lycatears.github.io/posts/calculus-a2-joke</a> 阅读全文。</p>]]></content:encoded>
+            <author>i@valaxy.site (洛樱)</author>
+        </item>
+        <item>
+            <title><![CDATA[《概率论与数理统计》复习笔记（上）]]></title>
+            <link>https://lycatears.github.io/posts/probability-review-notes</link>
+            <guid isPermaLink="false">https://lycatears.github.io/posts/probability-review-notes</guid>
+            <pubDate>Sat, 11 Jul 2026 10:02:27 GMT</pubDate>
+            <content:encoded><![CDATA[<p>::: warning<br>
+本文是猫娘学习概率论与数理统计的笔记，整理了吉林大学数学学院《随机数学》、茆诗松《概率论与数理统计教程》两本教材和知乎上的有关内容，有很多超出校内考试范围的内容，可能不适合期末</p>
+<br/><p>访问 <a href="https://lycatears.github.io/posts/probability-review-notes" target="_blank">https://lycatears.github.io/posts/probability-review-notes</a> 阅读全文。</p>]]></content:encoded>
+            <author>i@valaxy.site (洛樱)</author>
+        </item>
+        <item>
+            <title><![CDATA[制作一张河北中考数学答题卡]]></title>
+            <link>https://lycatears.github.io/posts/zhongkao-math-answer-sheet</link>
+            <guid isPermaLink="false">https://lycatears.github.io/posts/zhongkao-math-answer-sheet</guid>
+            <pubDate>Wed, 24 Jun 2026 13:57:13 GMT</pubDate>
+            <content:encoded><![CDATA[<h2>前言</h2>
+<p>高中刷题的时候发现有很多人做高考模拟答题卡，但是最近搜了一下网上的资源，似乎并没有做中考答题卡的。正好最近在学LaTeX，就拿这个练手了。</p>
+<p>据学姐了解，2019年是最后一年分卷I、卷II</p>
+<br/><p>访问 <a href="https://lycatears.github.io/posts/zhongkao-math-answer-sheet" target="_blank">https://lycatears.github.io/posts/zhongkao-math-answer-sheet</a> 阅读全文。</p>]]></content:encoded>
+            <author>i@valaxy.site (洛樱)</author>
+        </item>
+        <item>
+            <title><![CDATA[高考回忆录（2）：时间加速魔法]]></title>
+            <link>https://lycatears.github.io/posts/gaokao-2</link>
+            <guid isPermaLink="false">https://lycatears.github.io/posts/gaokao-2</guid>
+            <pubDate>Mon, 22 Jun 2026 23:45:23 GMT</pubDate>
+            <content:encoded><![CDATA[<p>从石家庄二中实验学校的校门远去，望着石家庄街边的灯火，我却感受不到想象中的兴奋。或许是因为数学考试的当头一棒，又或许是三年压抑生活的麻木，总之，银灰色的小车就这样载着我远离了这所让我又爱又恨的高中。</p>
+<br/><p>访问 <a href="https://lycatears.github.io/posts/gaokao-2" target="_blank">https://lycatears.github.io/posts/gaokao-2</a> 阅读全文。</p>]]></content:encoded>
+            <author>i@valaxy.site (洛樱)</author>
+        </item>
+        <item>
+            <title><![CDATA[高考回忆录（1）：关窗锁门，封闭考场]]></title>
+            <link>https://lycatears.github.io/posts/gaokao-1</link>
+            <guid isPermaLink="false">https://lycatears.github.io/posts/gaokao-1</guid>
+            <pubDate>Thu, 11 Jun 2026 16:47:05 GMT</pubDate>
+            <content:encoded><![CDATA[<blockquote>
+<p>繁华散作香尘，应是垂泪觉秋深。——《红尘寄雪》</p>
+</blockquote>
+<p>又是一年高考季，不知不觉中自己已经快要本科毕业了。本科四年虽没有高中时幻想的那样丰富多彩，但也算说得过去，勉强达到了及格的标准，但曾经的少年心气再</p>
+<br/><p>访问 <a href="https://lycatears.github.io/posts/gaokao-1" target="_blank">https://lycatears.github.io/posts/gaokao-1</a> 阅读全文。</p>]]></content:encoded>
+            <author>i@valaxy.site (洛樱)</author>
+        </item>
+        <item>
+            <title><![CDATA[面向对象程序设计试卷大题解析（第二弹）]]></title>
+            <link>https://lycatears.github.io/posts/oop-addition</link>
+            <guid isPermaLink="false">https://lycatears.github.io/posts/oop-addition</guid>
+            <pubDate>Sat, 30 May 2026 19:56:50 GMT</pubDate>
+            <content:encoded><![CDATA[<h1>面向对象程序设计试卷大题解析（第二弹）</h1>
+<p>鉴于上一篇关于OOP考试的文章<a href="./oop-test-paper.md">面向对象程序设计试卷大题解析</a>有计算机学院的部分题型没有照顾到，猫娘收集了部分奔腾</p>
+<br/><p>访问 <a href="https://lycatears.github.io/posts/oop-addition" target="_blank">https://lycatears.github.io/posts/oop-addition</a> 阅读全文。</p>]]></content:encoded>
+            <author>i@valaxy.site (洛樱)</author>
+        </item>
+        <item>
+            <title><![CDATA[原价买不回的，不仅是漫画]]></title>
+            <link>https://lycatears.github.io/posts/comic-magazines</link>
+            <guid isPermaLink="false">https://lycatears.github.io/posts/comic-magazines</guid>
+            <pubDate>Thu, 28 May 2026 00:47:05 GMT</pubDate>
+            <content:encoded><![CDATA[<p>偶然翻到自己2024年暑假买的两本《天行轶事》3、4册，不知不觉已经快过去两年了。其实当时我也没想到县城的书店还能留着这种古董一样的漫画书，毕竟书店最大的客户是学校，很多书店本质上是一个大型教辅仓库，</p>
+<br/><p>访问 <a href="https://lycatears.github.io/posts/comic-magazines" target="_blank">https://lycatears.github.io/posts/comic-magazines</a> 阅读全文。</p>]]></content:encoded>
+            <author>i@valaxy.site (洛樱)</author>
+        </item>
+        <item>
+            <title><![CDATA[不想你，牢C]]></title>
+            <link>https://lycatears.github.io/posts/goodbye-forever-c</link>
+            <guid isPermaLink="false">https://lycatears.github.io/posts/goodbye-forever-c</guid>
+            <pubDate>Sat, 04 Apr 2026 00:15:34 GMT</pubDate>
+            <content:encoded><![CDATA[<h2>不想你，牢C——初中入学考试十周年纪念</h2>
+<blockquote>
+<p>曾盼得人心欲碎，如今幻化成灰。——《落花霁》</p>
+</blockquote>
+<p>十年前，也就是2016年4月16日，当时还是六年级的我第一次到外地参加选拔性考试。至于原因，无非是家</p>
+<br/><p>访问 <a href="https://lycatears.github.io/posts/goodbye-forever-c" target="_blank">https://lycatears.github.io/posts/goodbye-forever-c</a> 阅读全文。</p>]]></content:encoded>
+            <author>i@valaxy.site (洛樱)</author>
+        </item>
+        <item>
+            <title><![CDATA[高中生是否有必要学习大学数学知识？]]></title>
+            <link>https://lycatears.github.io/posts/gaokao-math</link>
+            <guid isPermaLink="false">https://lycatears.github.io/posts/gaokao-math</guid>
+            <pubDate>Wed, 01 Oct 2025 23:52:17 GMT</pubDate>
+            <content:encoded><![CDATA[<p>对于想要冲刺985高校的中学生，是否有必要提前学习下一阶段的数学知识？</p>
+<p>在初高中阶段，曾经我也对这些“奇技淫巧”嗤之以鼻。尤其是在高中阶段，有的同学提出“极点极线解圆锥曲线”之类的利用高等背景的解题</p>
+<br/><p>访问 <a href="https://lycatears.github.io/posts/gaokao-math" target="_blank">https://lycatears.github.io/posts/gaokao-math</a> 阅读全文。</p>]]></content:encoded>
+            <author>i@valaxy.site (洛樱)</author>
+        </item>
+        <item>
+            <title><![CDATA[一个白板选手的保研之旅]]></title>
+            <link>https://lycatears.github.io/posts/apply-for-graduate-student</link>
+            <guid isPermaLink="false">https://lycatears.github.io/posts/apply-for-graduate-student</guid>
+            <pubDate>Sat, 27 Sep 2025 16:42:00 GMT</pubDate>
+            <content:encoded><![CDATA[<h1>保研之旅</h1>
+<h2>黑话词典</h2>
+<ul>
+<li>
+<p>bg/bar<br>
+background，背景，个人成绩排名英语竞赛论文获奖，等等。bar就是你入营需要达到的条件、门槛。</p>
+</li>
+<li>
+<p>rk<br>
+rank，排名。</p>
+</li>
+<li>
+<p>强</p>
+</li>
+</ul>
+<br/><p>访问 <a href="https://lycatears.github.io/posts/apply-for-graduate-student" target="_blank">https://lycatears.github.io/posts/apply-for-graduate-student</a> 阅读全文。</p>]]></content:encoded>
+            <author>i@valaxy.site (洛樱)</author>
+        </item>
+        <item>
+            <title><![CDATA[《概率论与数理统计A》2024年试题解析]]></title>
+            <link>https://lycatears.github.io/posts/probability-a-2024</link>
+            <guid isPermaLink="false">https://lycatears.github.io/posts/probability-a-2024</guid>
+            <pubDate>Wed, 02 Jul 2025 20:13:28 GMT</pubDate>
+            <content:encoded><![CDATA[<h2>简介</h2>
+<ul>
+<li>考试时间2024年6月26日13:00-15:00，两小时。</li>
+<li>难度中规中矩。概率论在吉大公共数学课中的难度比较简单，不必过度复习。</li>
+<li>没做这套卷之前别看下面的解析。</li>
+</ul>
+<blockquote>
+<p>雪落幽静</p>
+</blockquote>
+<br/><p>访问 <a href="https://lycatears.github.io/posts/probability-a-2024" target="_blank">https://lycatears.github.io/posts/probability-a-2024</a> 阅读全文。</p>]]></content:encoded>
+            <author>i@valaxy.site (洛樱)</author>
+        </item>
+        <item>
+            <title><![CDATA[吉林大学绩点计算器]]></title>
+            <link>https://lycatears.github.io/posts/gpa-calculator</link>
+            <guid isPermaLink="false">https://lycatears.github.io/posts/gpa-calculator</guid>
+            <pubDate>Fri, 20 Jun 2025 12:06:14 GMT</pubDate>
+            <content:encoded><![CDATA[<h1>吉林大学绩点计算器</h1>
+<p>本质上其实跟您在网页上运行一个油猴脚本差不多，只不过当时学Qt，一时兴起做了这个东西，现在看来挺鸡肋的。</p>
+<h2>下载</h2>
+<p>[百度网盘](<a href="https://pan.baidu.co">https://pan.baidu.co</a></p>
+<br/><p>访问 <a href="https://lycatears.github.io/posts/gpa-calculator" target="_blank">https://lycatears.github.io/posts/gpa-calculator</a> 阅读全文。</p>]]></content:encoded>
+            <author>i@valaxy.site (洛樱)</author>
+        </item>
+        <item>
+            <title><![CDATA[DB2通关指南]]></title>
+            <link>https://lycatears.github.io/posts/db2</link>
+            <guid isPermaLink="false">https://lycatears.github.io/posts/db2</guid>
+            <pubDate>Mon, 30 Dec 2024 14:55:41 GMT</pubDate>
+            <content:encoded><![CDATA[<h1>DB2</h1>
+<p>软件学院最具历史性的课程，可以与考古学院联动的那种。</p>
+<p>包含两门课，其一为《企业级数据库性能调优》，其二为《数据库应用程序开发》。</p>
+<p>据说这两门课之前是与IBM合作的产物，过了可以拿到一个</p>
+<br/><p>访问 <a href="https://lycatears.github.io/posts/db2" target="_blank">https://lycatears.github.io/posts/db2</a> 阅读全文。</p>]]></content:encoded>
+            <author>i@valaxy.site (洛樱)</author>
+        </item>
+        <item>
+            <title><![CDATA[机器学习B通关指南]]></title>
+            <link>https://lycatears.github.io/posts/ml-final-2024</link>
+            <guid isPermaLink="false">https://lycatears.github.io/posts/ml-final-2024</guid>
+            <pubDate>Thu, 05 Dec 2024 19:03:01 GMT</pubDate>
+            <content:encoded><![CDATA[<h2>选择题（2*10=20）</h2>
+<ul>
+<li>基本上都是PPT上面很简单的概念，完整看过一遍PPT就能全做出来。</li>
+</ul>
+<h2>简答题（4*5=20）</h2>
+<ol>
+<li>什么是随机梯度下降？什么是批量梯度下降？并写出二者的优</li>
+</ol>
+<br/><p>访问 <a href="https://lycatears.github.io/posts/ml-final-2024" target="_blank">https://lycatears.github.io/posts/ml-final-2024</a> 阅读全文。</p>]]></content:encoded>
+            <author>i@valaxy.site (洛樱)</author>
+        </item>
+        <item>
+            <title><![CDATA[软件工程通关指南]]></title>
+            <link>https://lycatears.github.io/posts/software-engineering-notes</link>
+            <guid isPermaLink="false">https://lycatears.github.io/posts/software-engineering-notes</guid>
+            <pubDate>Mon, 25 Nov 2024 18:59:01 GMT</pubDate>
+            <content:encoded><![CDATA[<h1>软件工程A</h1>
+<p>第五学期必修课，2.5学分，计入保研绩点。</p>
+<p>谁说大三就没有思政课的？软院马原来喽！</p>
+<p>猫娘在该课程上仅得到86.4分，本仓库内容请谨慎参考。</p>
+<h2>课程本身</h2>
+<ul>
+<li>奇怪的排课。每周2</li>
+</ul>
+<br/><p>访问 <a href="https://lycatears.github.io/posts/software-engineering-notes" target="_blank">https://lycatears.github.io/posts/software-engineering-notes</a> 阅读全文。</p>]]></content:encoded>
+            <author>i@valaxy.site (洛樱)</author>
+        </item>
+        <item>
+            <title><![CDATA[如何生成服从正态分布的随机数]]></title>
+            <link>https://lycatears.github.io/posts/normal-distribution-generate</link>
+            <guid isPermaLink="false">https://lycatears.github.io/posts/normal-distribution-generate</guid>
+            <pubDate>Wed, 05 Jun 2024 23:44:01 GMT</pubDate>
+            <content:encoded><![CDATA[<h2>经典回顾</h2>
+<ul>
+<li>
+<p>分布函数(Cumulative Distribution Function, CDF)</p>
+<p>设$X$为随机变量，对于任意实数$x$，令<br>
+$$F(x)=P{X\leq x}</p>
+</li>
+</ul>
+<br/><p>访问 <a href="https://lycatears.github.io/posts/normal-distribution-generate" target="_blank">https://lycatears.github.io/posts/normal-distribution-generate</a> 阅读全文。</p>]]></content:encoded>
+            <author>i@valaxy.site (洛樱)</author>
+        </item>
+        <item>
+            <title><![CDATA[Java基础知识复习笔记]]></title>
+            <link>https://lycatears.github.io/posts/java-review-notes</link>
+            <guid isPermaLink="false">https://lycatears.github.io/posts/java-review-notes</guid>
+            <pubDate>Fri, 31 May 2024 20:54:36 GMT</pubDate>
+            <content:encoded><![CDATA[<h1>Java基础知识复习笔记</h1>
+<p>本文是猫娘<strong>复习</strong>Java时所做的笔记，主要是为了巩固基础。<br>
+:::danger<br>
+本文不包含吉林大学软件学院Java程序设计课程中的GUI部分。<br>
+:::<br>
+参考文献：[</p>
+<br/><p>访问 <a href="https://lycatears.github.io/posts/java-review-notes" target="_blank">https://lycatears.github.io/posts/java-review-notes</a> 阅读全文。</p>]]></content:encoded>
+            <author>i@valaxy.site (洛樱)</author>
+        </item>
+        <item>
+            <title><![CDATA[面向对象程序设计试卷大题解析]]></title>
+            <link>https://lycatears.github.io/posts/oop-test-paper</link>
+            <guid isPermaLink="false">https://lycatears.github.io/posts/oop-test-paper</guid>
+            <pubDate>Sun, 02 Jul 2023 19:11:01 GMT</pubDate>
+            <content:encoded><![CDATA[<h1>课程信息</h1>
+<ul>
+<li>第二学期必修课，3学分，计入保研绩点。</li>
+<li>平时分30，期末考试70分。猫娘是zjq班级，作业很少，最终成绩基本上就是你的期末考试成绩，但是也捞人。</li>
+<li>试卷结构如下：
+<ul>
+<li>判断</li>
+</ul>
+</li>
+</ul>
+<br/><p>访问 <a href="https://lycatears.github.io/posts/oop-test-paper" target="_blank">https://lycatears.github.io/posts/oop-test-paper</a> 阅读全文。</p>]]></content:encoded>
+            <author>i@valaxy.site (洛樱)</author>
+        </item>
+        <item>
+            <title><![CDATA[何意味？]]></title>
+            <link>https://lycatears.github.io/posts/heyiwei</link>
+            <guid isPermaLink="false">https://lycatears.github.io/posts/heyiwei</guid>
+            <pubDate>Fri, 03 Mar 2023 15:30:07 GMT</pubDate>
+            <content:encoded><![CDATA[<h2>猫娘的根基在人民</h2>
+<p>猫娘，作为一种融合了人类与猫咪特征的文化形象，近年来在动漫、游戏、文学等领域广泛传播，受到众多群众特别是青年群体的喜爱。猫娘文化之所以能够从小众爱好逐渐走向大众视野，并形成独</p>
+<br/><p>访问 <a href="https://lycatears.github.io/posts/heyiwei" target="_blank">https://lycatears.github.io/posts/heyiwei</a> 阅读全文。</p>]]></content:encoded>
+            <author>i@valaxy.site (洛樱)</author>
+        </item>
+        <item>
+            <title><![CDATA[Valaxy]]></title>
+            <link>https://lycatears.github.io/posts/valaxy</link>
+            <guid isPermaLink="false">https://lycatears.github.io/posts/valaxy</guid>
+            <pubDate>Fri, 01 Apr 2022 00:00:00 GMT</pubDate>
+            <content:encoded><![CDATA[<h2>部署</h2>
+<p>123</p>
+<br/><p>访问 <a href="https://lycatears.github.io/posts/valaxy" target="_blank">https://lycatears.github.io/posts/valaxy</a> 阅读全文。</p>]]></content:encoded>
+            <author>i@valaxy.site (洛樱)</author>
+        </item>
+    </channel>
+</rss>
