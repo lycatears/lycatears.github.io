@@ -82,10 +82,16 @@ export default defineSiteConfig({
     //   color: '#0088CC',
     // },
     {
-      name: 'E-Mail',
+      name: 'E-Mail (Outlook)',
       link: 'mailto:lycatears@outlook.com',
       icon: 'i-ri-mail-line',
       color: '#8E71C1',
+    },
+    {
+      name: 'E-Mail (Gmail)',
+      link: 'mailto:lycatears@gmail.com',
+      icon: 'i-ri-mail-line',
+      color: '#C18E71',
     },
     // {
     //   name: 'Travelling',
