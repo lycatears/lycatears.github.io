@@ -1,9 +1,8 @@
 ---
 layout: post
-date: 2026-07-16 16:41:29
+date: 2025-07-16 16:41:29
 title: 《概率论与数理统计A》2023年试题解析
 categories: 学习
-hide: true
 tags:
   - 数学
   - 学习
@@ -164,7 +163,7 @@ tags:
 
 12.  设 $X_1,X_2,\cdots,X_n$ 是来自总体 $X\sim N(\mu,\sigma^2)$ 的样本，若 $\sigma^2$ 未知， $\bar{X}$ 和 $S^2$ 分别为样本均值和样本方差，检验假设为 $H_0:\mu=\mu_0,H_1:\mu\neq\mu_0$，则应取检验统计量为 $\underline{\hspace{4em}}$.
 
-> $\sigma^2$ 未知，对 $\mu$ 进行假设检验，选择统计量 $\dfrac{\bar{X}-\mu_0}{S/\sqrt{n}}$
+> $\sigma^2$ 未知，对 $\mu$ 进行假设检验，选择统计量 $\dfrac{\bar{X}-\mu_0}{S/\sqrt{n}}$ 【见教材P204】
 
 ## 解答题
 13. （8分）已知 9 支手枪中有 6 支已校准过，3 支未校准。一名射手如果用校准过的手枪射击，命中率为 0.9，如果用未校准过的手枪射击，命中率为 0.3。现从这 9 支手枪中任取一支射击。求：
@@ -193,10 +192,44 @@ tags:
 - （2）随机变量 $X$ 落在 $(1,3)$ 内的概率；
 - （3）$X$ 的分布函数.
 
+> （1）根据概率密度函数的性质可得
+> $$\int_0^1x\mathrm{d}x+\int_1^2k(2-x)\mathrm{d}x=\dfrac{1}{2}+\left[2kx-\dfrac{1}{2}kx^2\right]^2_1=\dfrac{1+k}{2}=1$$
+> 易得 $k=1$
+>
+> （2）$P\{1<X<3\}=P\{1<X<2\}+P\{2<X<3\}$，由于 $X$ 的概率密度函数 $f(x)$ 在区间 $(2,+\infty)$ 上恒为 $0$，即 $P\{2<X<3\}=0$
+>
+> 因此 $P\{1<X<3\}=P\{1<X<2\}=\int_1^2(2-x)\mathrm{d}x=\dfrac{1}{2}$
+>
+> （3）当 $x<0$ 时，易得分布函数为 $\int_{-\infty}^xf(t)\mathrm{d}t=0$
+>
+> 当 $x\in[0,1)$ 时，分布函数为 $\int_{-\infty}^xf(t)\mathrm{d}t=\int_{-\infty}^00\mathrm{d}t+\int_{0}^xt\mathrm{d}t=\dfrac{1}{2}x^2$
+>
+> 当 $x\in [1,2)$ 时，分布函数为 $\int_{-\infty}^xf(t)\mathrm{d}t=\int_{-\infty}^00\mathrm{d}t+\int_{0}^1t\mathrm{d}t+\int_{1}^xt\mathrm{d}t=0+\dfrac{1}{2}+\left(2x-\dfrac{1}{2}x^2-\dfrac{3}{2}\right)=-\dfrac{1}{2}x^2+2x-1$
+>
+> 当 $x\in[2,+\infty)$ 时，分布函数为 $\int_{-\infty}^xf(t)\mathrm{d}t=\int_{-\infty}^00\mathrm{d}t+\int_{0}^1t\mathrm{d}t+\int_{1}^xt\mathrm{d}t=0+\dfrac{1}{2}+\dfrac{1}{2}=1$
+>
+> 综上所述，$X$ 的分布函数为
+> $$F(x)=\begin{equation*}
+    \begin{cases}
+    0,&x< 0, \\
+    \dfrac{1}{2}x^2,&0\le x< 1, \\
+    -\dfrac{1}{2}x^2+2x-1,&1\le x<2,\\
+    1,&x\ge 2
+    \end{cases}
+    \end{equation*}
+    $$
 
 ---
-15. （6分）据以往经验，某种电器元件的寿命服从均值为 100h 的指数分布，现随机地取 16 只，设它们的寿命是相互独立的，求这 16 只元件的寿命总和大于 1920h 的概率.（$\varPhi(0.8)=0.7881$）
+15.   （6分）据以往经验，某种电器元件的寿命服从均值为 100h 的指数分布，现随机地取 16 只，设它们的寿命是相互独立的，求这 16 只元件的寿命总和大于 1920h 的概率.（$\varPhi(0.8)=0.7881$）
 
+> 该元件的寿命服从指数分布，均值为 $100$，即指数分布的参数满足 $\dfrac{1}{\lambda}=100$，解得参数为 $\dfrac{1}{100}$，故其概率密度函数为 $f(x)=\dfrac{1}{100}\mathrm{e}^{-\frac{1}{100}x}(x>0)$
+>
+> 因此总体均值 $\mu=100$，总体方差 $\sigma^2=\dfrac{1}{\lambda^2}=10000$
+>
+> 设 $X=\sum\limits_{i=1}^{16}X_i$ 为所有元件的寿命总和，其中 $X_i$ 表示第 $i$ 个元件的寿命，根据独立同分布的中心极限定理，可得
+> $$Y=\dfrac{X-n\mu}{\sqrt{n}\sigma}=\dfrac{X-1600}{400}\sim N(0,1)$$
+> 由此可得
+> $$P\{X>1920\}=P \left\{ \dfrac{X-1600}{400}>\dfrac{1920-1600}{400} \right\}=P\{Y>0.8\}=1-P\{Y\le 0.8\}=0.2119$$
 
 ---
 16. （8分）设总体 $X$ 具有概率分布
@@ -209,9 +242,7 @@ tags:
 
 > **先求矩估计：** $E(X)=\theta^2+2\times2\theta(1-\theta)+3(1-\theta)^2=3-2\theta$
 >
-> $A_1=\dfrac{1}{4}(1+2+1+3)=\dfrac{7}{4}=3-2\theta$
->
-> 解得 $\hat{\theta}=\dfrac{5}{8}$
+> $A_1=\dfrac{1}{4}(1+2+1+3)=\dfrac{7}{4}$，解方程$\dfrac{7}{4}=3-2\theta$，解得 $\hat{\theta}=\dfrac{5}{8}$
 >
 > **再求最大似然估计：** 似然函数为 $L(\theta)=\prod\limits_{i=1}^4p_i=(\theta^2)^2\cdot2\theta(1-\theta)(1-\theta)^2=2\theta^5(1-\theta)^3$
 >
@@ -226,7 +257,21 @@ tags:
     $$Y=\sum_{i=1}^n(X_i+X_{n+i}-2\bar{X})^2$$
     求 $E(Y)$.
 
-
+> 展开平方项得
+> $$E(Y)=\sum_{i=1}^{n}[E(X_i^2)+E(X_{n+i}^2)+4E(\bar{X}^2)+2E(X_iX_{n+i})-4E(X_i\bar{X})-4E(X_{n+i}\bar{X})]$$
+> 根据方差计算公式易得（注意项数是 $2n$ ）
+> $$E(X_i^2)=E(X_{n+i}^2)=D(X)+[E(X)]^2=\sigma^2+\mu^2$$
+> $$E(\bar{X}^2)=D(\bar{X})+[E(\bar{X})]^2=\dfrac{\sigma^2}{2n}+\mu^2$$
+> 由于 $X_i,X_{n+i}$ 都是来自总体 $X$ 的样本，它们相互独立，则有
+> $$E(X_iX_{n+i})=E(X_i)E(X_{n+i})=\mu^2$$
+> 原式化简为
+> $$2n(\sigma^2+\mu^2)+4n(\dfrac{\sigma^2}{2n}+\mu^2)+2n\mu^2-4E\left(\sum_{i=1}^{2n}X_i\bar{X}\right)\ \ (*)$$
+> **注意到**
+> $$\sum_{i=1}^{2n}X_i=2n\bar{X}$$
+> 则有
+> $$4E\left(\sum_{i=1}^{2n}X_i\bar{X}\right)=8nE(\bar{X}^2)=8n\left(\dfrac{\sigma^2}{2n}+\mu^2\right)=4\sigma^2+8n\mu^2$$
+> 代入 $(*)$ 式得
+> $$2n(\sigma^2+\mu^2)+4n(\dfrac{\sigma^2}{2n}+\mu^2)+2n\mu^2-4\sigma^2-8n\mu^2=2(n-1)\sigma^2$$
 
 ---
 18. （14分）设 $A$ 和 $B$ 为两个随机事件，且 $P(A)=\dfrac{1}{4},P(B|A)=\dfrac{1}{3},P(A|B)=\dfrac{1}{2}$，令
@@ -246,6 +291,30 @@ tags:
     $$
     求 $X$ 与 $Y$ 的联合概率分布和 $Z=X^2+Y^2$ 的概率分布.
 
+> $P(B|A)=\dfrac{P(AB)}{P(A)}=\dfrac{1}{3}$，由 $P(A)=\dfrac{1}{4}$ 解得 $P(AB)=\dfrac{1}{12}$
+>
+> $P(A|B)=\dfrac{P(AB)}{P(B)}=\dfrac{1}{2}$，解得 $P(B)=\dfrac{1}{6}$
+>
+> $P(A\bar{B})=P(A)-P(AB)=\dfrac{1}{6},P(\bar{A}B)=P(B)-P(AB)=\dfrac{1}{12},P(\bar{A}\bar{B})=P(\bar{A})-P(\bar{A}B)=\dfrac{2}{3}$
+>
+> 因此有 $P\{X=0,Y=0\}=P(\bar{A}\bar{B})=\dfrac{2}{3},P\{X=0,Y=1\}=P(\bar{A}B)=\dfrac{1}{12},P\{X=1,Y=0\}=P(A\bar{B})=\dfrac{1}{6},P\{X=1,Y=1\}=P(AB)=\dfrac{1}{12}$
+>
+> 综上，$X,Y$ 的联合概率分布为
+>
+> |X\Y|0|1|
+> |-|-|-|
+> |0|$\dfrac{2}{3}$|$\dfrac{1}{12}$|
+> |1|$\dfrac{1}{6}$|$\dfrac{1}{12}$|
+>
+> 易得 $Z$ 的取值包括 $0,1,2$，且有 $P\{Z=0\}=P\{X=0,Y=0\}=\dfrac{2}{3},P\{Z=1\}=P\{X=1,Y=0\}+P\{X=0,Y=1\}=\dfrac{1}{4},P\{Z=2\}=P\{X=1,Y=1\}=\dfrac{1}{12}$
+>
+> 即 $Z$ 的概率分布为
+>
+> |$Z$|0|1|2|
+> |-|-|-|-|
+> |$P$|$\dfrac{2}{3}$|$\dfrac{1}{4}$|$\dfrac{1}{12}$|
+>
+> 这题给14分何意味？
 
 ---
 19. （14分）已知二维随机变量 $(X,Y)$ 的概率密度为
@@ -261,3 +330,50 @@ tags:
 - （2）求条件概率密度 $f_{X|Y}(x|y)$；
 - （3）判断 $X$ 和 $Y$ 是否相互独立；
 - （4）计算概率 $P\{X<2|Y<1\}$.
+
+> （1）根据概率密度函数的性质有
+> $$\iint\limits_{x>0,y>0}k\mathrm{e}^{-(2x+y)}\mathrm{d}x\mathrm{d}y=k\int_0^{+\infty}\mathrm{e}^{-2x}\mathrm{d}x\int_{0}^{+\infty}\mathrm{e}^{-y}\mathrm{d}y=\dfrac{k}{2}=1$$
+> 即 $k=2$
+>
+> （2）$Y$ 的边缘概率密度函数为
+> $$f_Y(y)=\int_0^{+\infty}2\mathrm{e}^{-(2x+y)}\mathrm{d}x=\mathrm{e}^{-y}(y>0)$$
+> 即
+> $$
+> f_{Y}(y)=\begin{equation*}
+>   \begin{cases}
+>   \mathrm{e}^{-y},&y>0, \\
+>   0,&y\le 0.
+>   \end{cases}
+>   \end{equation*}
+>   $$
+> 因此当 $x>0$ 时条件概率密度为
+> $$f_{X|Y}(x|y)=\dfrac{f(x,y)}{f_Y(y)}=2\mathrm{e}^{-2x}(x>0)$$
+> 即
+> $$
+> f_{X|Y}(x|y)=\begin{equation*}
+>   \begin{cases}
+>   2\mathrm{e}^{-2x},&x>0, \\
+>   0,&x\le 0.
+>   \end{cases}
+>   \end{equation*}
+>   $$
+> （3）$X$ 的边缘概率密度函数为
+> $$f_X(x)=\int_0^{+\infty}2\mathrm{e}^{-(2x+y)}\mathrm{d}y=2\mathrm{e}^{-2x}(x>0)$$
+> 即
+> $$
+> f_{X}(x)=\begin{equation*}
+>   \begin{cases}
+>   2\mathrm{e}^{-2x},&x>0, \\
+>   0,&x\le 0.
+>   \end{cases}
+>   \end{equation*}
+>   $$
+> 由于对任意 $x,y\in\R$ 均有 $f(x,y)=f_X(x)f_Y(y)$，因此 $X,Y$ 相互独立
+>
+> （4）根据条件概率的定义有
+> $$P\{X<2|Y<1\}=\dfrac{P\{X<2,Y<1\}}{P\{Y<1\}}$$
+> $$P\{X<2,Y<1\}=\iint\limits_{0<x<2,0<y<1}2\mathrm{e}^{-(2x+y)}\mathrm{d}x\mathrm{d}y=2\int_0^2\mathrm{e}^{-2x}\mathrm{d}x\int_{0}^1\mathrm{e}^{-y}\mathrm{d}y=(1-\mathrm{e}^{-4})(1-\mathrm{e}^{-1})$$
+> $$P\{Y<1\}=\int_0^1\mathrm{e}^{-y}\mathrm{d}y=1-\mathrm{e}^{-1}$$
+> 因此所求概率为
+> $$\dfrac{P\{X<2,Y<1\}}{P\{Y<1\}}=1-\mathrm{e}^{-4}$$
+> 或者：由于 $X,Y$ 相互独立，$P\{X<2|Y<1\}=P\{X<2\}$
