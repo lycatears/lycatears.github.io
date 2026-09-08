@@ -72,6 +72,15 @@ export default defineValaxyConfig<UserThemeConfig>({
     addonWaline({
       serverURL: 'https://waline-comment-seven-gilt.vercel.app/',
       dark: 'auto',
+      emoji: [
+        '//unpkg.com/@waline/emojis@1.4.0/bmoji',
+        '//unpkg.com/@waline/emojis@1.4.0/tieba',
+      ],
+      pageview: true,
+      locale: {
+        placeholder: '欢迎评论（支持匿名喵）',
+        anonymous: '神秘人'
+      }
     })
   ],
 

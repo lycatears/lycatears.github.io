@@ -136,6 +136,13 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
+    '/posts/ctf-01-file-steganography': RouteRecordInfo<
+      '/posts/ctf-01-file-steganography',
+      '/posts/ctf-01-file-steganography',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
     '/posts/db2': RouteRecordInfo<
       '/posts/db2',
       '/posts/db2',
@@ -153,6 +160,13 @@ declare module 'vue-router/auto-routes' {
     '/posts/diary1': RouteRecordInfo<
       '/posts/diary1',
       '/posts/diary1',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/posts/effective-cpp': RouteRecordInfo<
+      '/posts/effective-cpp',
+      '/posts/effective-cpp',
       Record<never, never>,
       Record<never, never>,
       | never
@@ -304,9 +318,23 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
+    '/posts/stl-notes': RouteRecordInfo<
+      '/posts/stl-notes',
+      '/posts/stl-notes',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
     '/posts/valaxy': RouteRecordInfo<
       '/posts/valaxy',
       '/posts/valaxy',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/posts/zhongkao-hebei-2026': RouteRecordInfo<
+      '/posts/zhongkao-hebei-2026',
+      '/posts/zhongkao-hebei-2026',
       Record<never, never>,
       Record<never, never>,
       | never
@@ -472,6 +500,14 @@ declare module 'vue-router/auto-routes' {
       pathParamNames:
         | never
     }
+    'pages/posts/ctf-01-file-steganography.md': {
+      routes:
+        | '/posts/ctf-01-file-steganography'
+      views:
+        | never
+      pathParamNames:
+        | never
+    }
     'pages/posts/db2.md': {
       routes:
         | '/posts/db2'
@@ -491,6 +527,14 @@ declare module 'vue-router/auto-routes' {
     'pages/posts/diary1.md': {
       routes:
         | '/posts/diary1'
+      views:
+        | never
+      pathParamNames:
+        | never
+    }
+    'pages/posts/effective-cpp.md': {
+      routes:
+        | '/posts/effective-cpp'
       views:
         | never
       pathParamNames:
@@ -664,9 +708,25 @@ declare module 'vue-router/auto-routes' {
       pathParamNames:
         | never
     }
+    'pages/posts/stl-notes.md': {
+      routes:
+        | '/posts/stl-notes'
+      views:
+        | never
+      pathParamNames:
+        | never
+    }
     'pages/posts/valaxy.md': {
       routes:
         | '/posts/valaxy'
+      views:
+        | never
+      pathParamNames:
+        | never
+    }
+    'pages/posts/zhongkao-hebei-2026.md': {
+      routes:
+        | '/posts/zhongkao-hebei-2026'
       views:
         | never
       pathParamNames:
