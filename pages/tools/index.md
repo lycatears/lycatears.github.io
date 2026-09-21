@@ -3,16 +3,18 @@ title: 神秘妙妙工具
 ---
 
 <script setup>
-// import { useRouter } from 'vue-router'
-
-// const router = useRouter()
-
 const tools = [
   {
     name: '随机数生成',
     desc: '生成均匀分布、正态分布的随机整数或小数',
     path: '/tools/random-gen/',
     icon: '🎲',
+  },
+  {
+    name: '图片水印',
+    desc: '在浏览器本地为图片添加文字水印',
+    path: '/tools/image-watermark/',
+    icon: '🖼️',
   },
 ]
 </script>

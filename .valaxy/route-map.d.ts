@@ -360,6 +360,13 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
+    '/tools/image-watermark': RouteRecordInfo<
+      '/tools/image-watermark',
+      '/tools/image-watermark',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
     '/tools/random-gen': RouteRecordInfo<
       '/tools/random-gen',
       '/tools/random-gen',
@@ -751,6 +758,14 @@ declare module 'vue-router/auto-routes' {
     'pages/tools/index.md': {
       routes:
         | '/tools/'
+      views:
+        | never
+      pathParamNames:
+        | never
+    }
+    'pages/tools/image-watermark.md': {
+      routes:
+        | '/tools/image-watermark'
       views:
         | never
       pathParamNames:
