@@ -14,7 +14,8 @@
   "dependencies": {
     "valaxy": "0.28.8",
     "valaxy-addon-waline": "^0.2.1",
-    "valaxy-theme-yun": "0.28.8"
+    "valaxy-theme-yun": "0.28.8",
+    "unplugin-vue-components": "28.0.0"
   },
   "devDependencies": {
     "typescript": "^5.9.3"
