@@ -122,6 +122,13 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
+    '/posts/cmake-learning-notes': RouteRecordInfo<
+      '/posts/cmake-learning-notes',
+      '/posts/cmake-learning-notes',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
     '/posts/comic-magazines': RouteRecordInfo<
       '/posts/comic-magazines',
       '/posts/comic-magazines',
@@ -486,6 +493,14 @@ declare module 'vue-router/auto-routes' {
     'pages/posts/calculus-a3-2024.md': {
       routes:
         | '/posts/calculus-a3-2024'
+      views:
+        | never
+      pathParamNames:
+        | never
+    }
+    'pages/posts/cmake-learning-notes.md': {
+      routes:
+        | '/posts/cmake-learning-notes'
       views:
         | never
       pathParamNames:
