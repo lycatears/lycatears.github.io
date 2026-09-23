@@ -284,7 +284,179 @@ cmake --build build --clean-first
 ```
 新构建的项目产物中，两个目标被放在了不同的目录中，例如可执行文件就存放在 `Step1/build/Tutorial/Debug/Tutorial.exe`。
 ## Step 2: CMake Language Basics
+- 变量：CMake 中，变量的基本类型只有字符串和列表，而列表又是以分号为间隔符的字符串。可以使用 `set` 命令创建变量，也就是为字符串命名。例如 `set(var "Hello")` 就是创建 `var` 变量，并赋值为 `Hello`。
+  - 变量的值可以用 `${}` 展开访问，例如：
+```cmake
+set(var "World!")
+message("Hello ${var}")
+```
+使用 `cmake -P` 告诉 CMake 这个文件不构建软件项目，不包含 `project` 命令，而是作为命令解释器。
+```bash
+cmake -P demo.cmake
+# Hello World!
+```
+- 条件判断：CMake 与其他程序设计语言不同，条件判断是基于一系列约定的。
+  - `True` `YES` `Y` `ON` 或者非零数字（例如 `114514` `123.456` `1e-15`）视为真值。注意，上述真值不区分大小写。
+  - `False` `NO` `N` `OFF` `NOTFOUND` `IGNORE` `0` 或者空字符串、以 `NOTFOUND` 结尾的字符串视为假值。上述假值也不区分大小写。
+- 列表的遍历：列表是以分号作为分隔符的字符串，例如 `Apple;Orange;Banana` 就是一个列表。遍历列表可以使用 `foreach` 命令，例如：
+```cmake
+set(stooges "Moe;Larry")
+list(APPEND stooges "Curly")
 
+message("Stooges contains: ${stooges}")
+
+foreach(stooge IN LISTS stooges)
+  message("Hello, ${stooge}")
+endforeach()
+```
+运行结果为：
+```
+Stooges contains: Moe;Larry;Curly
+Hello, Moe
+Hello, Larry
+Hello, Curly
+```
+- 宏和函数：需要反复调用一系列命令时可以封装在宏或函数中调用。例如：
+```cmake
+macro(MyMacro MacroArgument)
+  message("${MacroArgument}\n\t\tFrom Macro")
+endmacro()
+
+function(MyFunc FuncArgument)
+  MyMacro("${FuncArgument}\n\tFrom Function")
+endfunction()
+
+MyFunc("From TopLevel")
+```
+运行结果为：
+```
+From TopLevel
+        From Function
+                From Macro
+```
+函数和宏的区别在于作用域不同。宏中修改、定义的变量会影响到外部作用域，而函数在默认情况下不会，例如：
+```cmake
+macro(MyMacro)
+  set(var "114514")
+  message("In Macro var = ${var}")
+endmacro()
+
+function(MyFunc)
+  set(var "1919810")
+  message("In Function var = ${var}")
+endfunction()
+
+set(var "0")
+message("Original var = ${var}")
+MyFunc()
+message("After Calling Function var = ${var}")
+MyMacro()
+message("After Calling Macro var = ${var}")
+```
+输出结果为：
+```
+Original var = 0
+In Function var = 1919810
+After Calling Function var = 0
+In Macro var = 114514
+After Calling Macro var = 114514
+```
+可见，函数没有修改外部作用域中的变量（会创建新的作用域），而宏会修改（不创建作用域），产生副作用。如果希望函数中修改的变量是上层作用域中的变量，需要加入 `PARENT_SCOPE` 选项：
+```cmake
+function(MyFunc)
+  set(var "1919810" PARENT_SCOPE)
+  message("In Function var = ${var}")
+endfunction()
+
+set(var 0)
+message("Original var = ${var}")
+MyFunc()
+message("After Calling Function var = ${var}")
+```
+输出如下：
+```
+Original var = 0
+In Function var = 0
+After Calling Function var = 1919810
+```
+注意到在函数作用域中 `var=0`，但在全局变量中 `var=1919810` 确实被赋值成功了。官方文档中的 `set` 命令指出：
+> 如果给定了 PARENT_SCOPE 选项，变量将在当前作用域的上一级作用域中设置。每个新目录或 function() 命令都会创建一个新作用域。作用域也可以通过 block() 命令创建。set(PARENT_SCOPE) 会将变量值设置到父目录、调用函数或外层作用域中（视具体情况而定）。变量在当前作用域中的之前状态保持不变（例如，如果之前未定义，则仍然未定义；如果之前有值，则该值保持不变）。
+
+但是函数作用域中的这个0是哪里来的呢？定位到 CMake 源代码的 `Sources/cmSetCommand.cxx`，找到 `bool cmSetCommand(std::vector<std::string> const& args, cmExecutionStatus& status)` 函数。前面两个判断都是针对 `ENV` 和 `CACHE` 的，暂时跳过，直接看最一般的命令行为：
+```cpp:line-numbers=170
+// here are the remaining options
+//  SET (VAR value )
+//  SET (VAR value PARENT_SCOPE)
+//  SET (VAR CACHE TYPE "doc String" [FORCE])
+//  SET (VAR value CACHE TYPE "doc string" [FORCE])
+std::string value;  // optional
+bool cache = false; // optional
+bool force = false; // optional
+bool parentScope = false;
+```
+显然我们需要知道 `SET (VAR value PARENT_SCOPE)` 的具体行为。
+```cpp:line-numbers=184
+// look for PARENT_SCOPE argument
+  if (args.size() > 1 && args.back() == "PARENT_SCOPE") {
+    parentScope = true;
+    ignoreLastArgs++;
+  }
+```
+可以看出这段代码设置了 `parentScope` 标志位。查找这个标志位的其他引用，定位到：
+```cpp:line-numbers=207
+if (parentScope) {
+    status.GetMakefile().RaiseScope(variable, value.c_str());
+    return true;
+  }
+```
+继续查看函数 `bool cmStateSnapshot::RaiseScope(std::string const& var, char const* varDef)` 的定义，发现注释中明确指出，创建新的作用域时，会先将当前作用域中的变量本地化一份：
+```cpp:line-numbers=455[Source/cmStateSnapshot.cxx]
+  // First localize the definition in the current scope.
+  cmDefinitions::Raise(var, this->Position->Vars, this->Position->Root);
+```
+最终定位到：
+```cpp:line-numbers=13[Source/cmDefinitions.cxx]
+cmDefinitions::Def const& cmDefinitions::GetInternal(std::string const& key,
+                                                     StackIter begin,
+                                                     StackIter end, bool raise)
+{
+  assert(begin != end);
+  {
+    auto it = begin->Map.find(cm::String::borrow(key));
+    if (it != begin->Map.end()) {
+      return it->second;
+    }
+  }
+  StackIter it = begin;
+  ++it;
+  if (it == end) {
+    return cmDefinitions::NoDef;
+  }
+  Def const& def = cmDefinitions::GetInternal(key, it, end, raise);
+  if (!raise) {
+    return def;
+  }
+  return begin->Map.emplace(key, def).first->second;
+}
+```
+可以发现，底层做的就是遍历作用域栈，递归地查找给定的变量名。只要在某一层作用域找到了这个变量名，就会返回对应的值，最终把这个值赋值给当前作用域中的这个变量。所以，CMake 函数在创建自己的作用域时，就已经把上级作用域中的值保存到当前作用域中了；而 `set(var "1919810" PARENT_SCOPE)` 只对父级作用域生效了，当前作用域中的 `var` 仍然为 `0`。
+
+---
+宏和函数都支持 `ARGV` 和 `ARGN` 两个预设变量。`ARGV` 是所有参数的列表，`ARGN` 是剩余参数（即除了预期参数之后的其他参数）的列表。例如：
+```cmake
+function(MyFunc var)
+  message("ARGV = ${ARGV}")
+  message("ARGN = ${ARGN}")
+endfunction()
+
+set(var 0)
+MyFunc(${var} 114 514)
+```
+输出为：
+```
+ARGV = 0;114;514
+ARGN = 114;514
+```
 ## Step 3: Variables
 
 ## Step 4: Target Commands
