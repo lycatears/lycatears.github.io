@@ -283,7 +283,7 @@ target_sources(MathFunctions
 cmake --build build --clean-first
 ```
 新构建的项目产物中，两个目标被放在了不同的目录中，例如可执行文件就存放在 `Step1/build/Tutorial/Debug/Tutorial.exe`。
-## Step 2: CMake Language Basics
+## Step 2: CMake Language Fundamentals
 - 变量：CMake 中，变量的基本类型只有字符串和列表，而列表又是以分号为间隔符的字符串。可以使用 `set` 命令创建变量，也就是为字符串命名。例如 `set(var "Hello")` 就是创建 `var` 变量，并赋值为 `Hello`。
   - 变量的值可以用 `${}` 展开访问，例如：
 ```cmake
@@ -294,27 +294,6 @@ message("Hello ${var}")
 ```bash
 cmake -P demo.cmake
 # Hello World!
-```
-- 条件判断：CMake 与其他程序设计语言不同，条件判断是基于一系列约定的。
-  - `True` `YES` `Y` `ON` 或者非零数字（例如 `114514` `123.456` `1e-15`）视为真值。注意，上述真值不区分大小写。
-  - `False` `NO` `N` `OFF` `NOTFOUND` `IGNORE` `0` 或者空字符串、以 `NOTFOUND` 结尾的字符串视为假值。上述假值也不区分大小写。
-- 列表的遍历：列表是以分号作为分隔符的字符串，例如 `Apple;Orange;Banana` 就是一个列表。遍历列表可以使用 `foreach` 命令，例如：
-```cmake
-set(stooges "Moe;Larry")
-list(APPEND stooges "Curly")
-
-message("Stooges contains: ${stooges}")
-
-foreach(stooge IN LISTS stooges)
-  message("Hello, ${stooge}")
-endforeach()
-```
-运行结果为：
-```
-Stooges contains: Moe;Larry;Curly
-Hello, Moe
-Hello, Larry
-Hello, Curly
 ```
 - 宏和函数：需要反复调用一系列命令时可以封装在宏或函数中调用。例如：
 ```cmake
@@ -334,7 +313,7 @@ From TopLevel
         From Function
                 From Macro
 ```
-函数和宏的区别在于作用域不同。宏中修改、定义的变量会影响到外部作用域，而函数在默认情况下不会，例如：
+函数和宏的一个区别在于作用域不同。宏中修改、定义的变量会影响到外部作用域，而函数在默认情况下不会，例如：
 ```cmake
 macro(MyMacro)
   set(var "114514")
@@ -442,11 +421,12 @@ cmDefinitions::Def const& cmDefinitions::GetInternal(std::string const& key,
 可以发现，底层做的就是遍历作用域栈，递归地查找给定的变量名。只要在某一层作用域找到了这个变量名，就会返回对应的值，最终把这个值赋值给当前作用域中的这个变量。所以，CMake 函数在创建自己的作用域时，就已经把上级作用域中的值保存到当前作用域中了；而 `set(var "1919810" PARENT_SCOPE)` 只对父级作用域生效了，当前作用域中的 `var` 仍然为 `0`。
 
 ---
-宏和函数都支持 `ARGV` 和 `ARGN` 两个预设变量。`ARGV` 是所有参数的列表，`ARGN` 是剩余参数（即除了预期参数之后的其他参数）的列表。例如：
+函数支持 `ARGV` 和 `ARGN` `ARGC` 等预设变量。`ARGV` 是所有参数的列表，`ARGN` 是剩余参数（即除了预期参数之后的其他参数）的列表，`ARGC` 是参数个数。例如：
 ```cmake
 function(MyFunc var)
   message("ARGV = ${ARGV}")
   message("ARGN = ${ARGN}")
+  message("ARGV1 = ${ARGV1}")
 endfunction()
 
 set(var 0)
@@ -456,6 +436,92 @@ MyFunc(${var} 114 514)
 ```
 ARGV = 0;114;514
 ARGN = 114;514
+ARGV1 = 114
+```
+宏也可以使用 `ARGV` 和 `ARGC` `ARGN` 等，但是在宏中，它们不是变量，而是直接被替换成相应的值。例如：
+```cmake
+macro(bar)
+  foreach(arg IN LISTS ARGN)
+    message(${arg})
+  endforeach()
+endmacro()
+
+function(foo)
+  bar(x y z)
+endfunction()
+
+foo(a b c)
+```
+程序输出的是 `a b c` 而不是 `x y z`。宏体内没有使用 `${ARGN}`，因此 `ARGN` 没有被替换，被遍历的实际上是上层作用域中的变量，也就是函数 `foo` 作用域中的 `ARGN`。
+
+函数的形参在函数体中是局部变量，而宏的形参类似于 C/C++ 预处理器中的宏，是直接进行文本替换的。例如：
+```cmake
+set(a "\${b}")      # a 的值是字面量 ${b}（\${ 阻止了赋值时的展开）
+set(b "hello")
+
+macro(mac x)
+  message("MACRO: ${x}")
+endmacro()
+
+function(func x)
+  message("FUNC : ${x}")
+endfunction()
+
+mac("${a}")    # 宏体被改写成 message("MACRO: ${b}") → 再当普通命令执行 → 二次展开
+func("${a}")   # x 的值就是字面量 "${b}"，${x} 展开后不再扫描
+# 运行结果为：
+# MACRO: hello
+# FUNC : ${b}
+```
+从控制流的角度来看，调用函数会将控制权转移给函数，而宏更相当于将宏体粘贴到调用出，因此在宏内调用 `return()` 会使得上层作用域退出，因此不建议在宏内使用 `return()`。
+
+- 条件判断：CMake 与其他程序设计语言不同，条件判断是基于一系列约定的。
+  - `True` `YES` `Y` `ON` 或者非零数字（例如 `114514` `123.456` `1e-15`）视为真值。注意，上述真值不区分大小写。
+  - `False` `NO` `N` `OFF` `NOTFOUND` `IGNORE` `0` 或者空字符串、以 `NOTFOUND` 结尾的字符串视为假值。上述假值也不区分大小写。
+  - 对于 `if<variable>`，例如 `if(var)`，`var` 会先被当作变量名在作用域中查找。如果 `var` 有定义，则为真值，否则为假值。
+  - 对于 `if<string>` ，例如 `if("abc")`，除非引号内的值是上面的真值常量，否则都是假值。
+  - 对于 `if(${var})`：先展开，若展开结果为假值常量，则为假；否则再对展开结果求值。
+  - 运算符：对于 `STREQUAL` 等运算符，先判断两侧的裸词是否是变量，是变量的替换为它的值，否则认为是字符串，然后判断。
+```cmake
+set(a 1)
+set(b 1)
+set(c a)
+set(d false)
+
+if(a STREQUAL b)
+    message(1)
+endif()
+
+if("a" STREQUAL c)
+    message(2)
+endif()
+
+if(${d})
+    message(3)
+endif()
+
+if(d)
+    message(4)
+endif()
+# 输出：1 2
+```
+- 列表的遍历：列表是以分号作为分隔符的字符串，例如 `Apple;Orange;Banana` 就是一个列表。遍历列表可以使用 `foreach` 命令，例如：
+```cmake
+set(stooges "Moe;Larry")
+list(APPEND stooges "Curly")
+
+message("Stooges contains: ${stooges}")
+
+foreach(stooge IN LISTS stooges)
+  message("Hello, ${stooge}")
+endforeach()
+```
+运行结果为：
+```
+Stooges contains: Moe;Larry;Curly
+Hello, Moe
+Hello, Larry
+Hello, Curly
 ```
 ## Step 3: Variables
 
