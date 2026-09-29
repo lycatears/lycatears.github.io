@@ -12,7 +12,7 @@ tags:
   - 南京大学
   - 工具链
 ---
-> 本笔记根据 CMake 官方教程记录。
+> 本笔记根据 [CMake 官方教程](https://cmake.com.cn/cmake/help/latest/guide/tutorial/index.html) （版本4.4.0）记录。
 ## 命令列表
 - `cmake_minimium_required` 指定项目所需最低的 CMake 版本，确保构建时遵循该版本的行为。顶层 `CMakeLists.txt` 必须在第一行包含这条命令。例如：`cmake_minimium_required(VERSION 3.23)` 要求最低使用3.23版本的 CMake。
 - `project()` 规定项目名称，告诉 CMake 下面的内容是对一个软件项目的描述，CMake 会对环境进行检查，识别字节序等系统属性。例如 `project(HelloWorld)` 指定项目名称为 HelloWorld。
@@ -523,6 +523,65 @@ Hello, Moe
 Hello, Larry
 Hello, Curly
 ```
+`foreach` 的作用域限于循环体内部。`foreach` 命令有如下几种使用方法：
+- `foreach(<loop_var> IN LISTS <lists>)` 和 `foreach(<loop_var> IN ITEMS <items>)`
+  二者比较类似，都是对列表进行遍历。假设有 `set(List "1;2;3")`，`IN LISTS List` 会展开 `List`，也就是依次遍历 `1 2 3`，而 `IN ITEMS` 不会展开，被遍历的列表只有 `List` 。也就是说 `IN LISTS var` 和 `IN ITEMS ${var}` 是等价的。如果没有提供 `<list>` 或者 `<var>`，则为空循环，循环体不会被执行。例如：
+```cmake
+set(A 0;1)
+set(B 2 3)
+set(C "4 5")
+set(D 6;7 8)
+set(E "")
+foreach(X IN LISTS A B C ITEMS D)
+    message(STATUS "X=${X}")
+endforeach()
+# -- X=0
+# -- X=1
+# -- X=2
+# -- X=3
+# -- X=4 5
+# -- X=D
+```
+- `foreach(<loop_var> RANGE <stop>)`：从数字 0 依次遍历到数字 `stop`。注意 **这里的循环是包含右边界的**。例如：
+```cmake
+set(n 5)
+foreach(x RANGE ${n})
+    message(${x})
+endforeach()
+# 0 1 2 3 4 5
+```
+- `foreach(<loop_var> RANGE <start> <stop> [<step>])`：从数字 `start` 遍历到 `stop`，步长为 `step`（若没有则为1），**同样包含右边界**。例如：
+```cmake
+set(n 5)
+foreach(x RANGE 1 ${n} 2)
+    message(${x})
+endforeach()
+# 1 3 5
+```
+- `foreach(<loop_var>... IN ZIP_LISTS <lists>)`：对多个列表进行遍历。如果只有一个循环变量 `var`，则会创建 `var_0` `var_1` ... 等多个变量对应于相应位置上的列表，例如：
+```cmake
+list(APPEND English one two three four)
+list(APPEND Bahasa satu dua tiga)
+
+foreach(num IN ZIP_LISTS English Bahasa)
+    message(STATUS "num_0=${num_0}, num_1=${num_1}")
+endforeach()
+
+foreach(en ba IN ZIP_LISTS English Bahasa)
+    message(STATUS "en=${en}, ba=${ba}")
+endforeach()
+# -- num_0=one, num_1=satu
+# -- num_0=two, num_1=dua
+# -- num_0=three, num_1=tiga
+# -- num_0=four, num_1=
+# -- en=one, ba=satu
+# -- en=two, ba=dua
+# -- en=three, ba=tiga
+# -- en=four, ba=
+```
+在 CMake 中同样有 `break()` 和 `continue()` 两个命令用于跳出循环控制流，与其他语言中的用法类似。
+
+`include()` 命令可用于导入其他 CMake 代码文件的内容。该命令会在 **父CML作用域内** 解释导入的文件，相当于把被导入的文件当作一个宏来解释，这意味着被导入的文件中定义的变量、函数、宏都会被导入。
 ## Step 3: Variables
 
 ## Step 4: Target Commands
