@@ -3,8 +3,7 @@ title: 我的小伙伴们
 keywords: 链接
 links:
   - url: https://lycatears.github.io
-    name: 洛樱
-    blog: 韶华未既
+    blog: 洛樱
     avatar: /avatar.jpg
     desc: 一只废物猫娘
     color: "#ff99cc"
@@ -56,7 +55,8 @@ links:
   - url: https://sorastyx.github.io/
     blog: 花鳥風月official
     desc: 意志产生希望，希望孕育梦想，梦想改变世界
-    image: https://sorastyx.github.io/img/avatar_hu1c0e92488a57e4f8f780a388ae6d5b66_35455_300x0_resize_box_3.png
+    image: https://www.helloimg.com/i/2026/09/29/6abbcfdcb5608.jpg
+    color: "#ffffff"
 
 random: true
 ---

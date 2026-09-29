@@ -367,6 +367,13 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
+    '/tools/image-resize': RouteRecordInfo<
+      '/tools/image-resize',
+      '/tools/image-resize',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
     '/tools/image-watermark': RouteRecordInfo<
       '/tools/image-watermark',
       '/tools/image-watermark',
@@ -773,6 +780,14 @@ declare module 'vue-router/auto-routes' {
     'pages/tools/index.md': {
       routes:
         | '/tools/'
+      views:
+        | never
+      pathParamNames:
+        | never
+    }
+    'pages/tools/image-resize.md': {
+      routes:
+        | '/tools/image-resize'
       views:
         | never
       pathParamNames:

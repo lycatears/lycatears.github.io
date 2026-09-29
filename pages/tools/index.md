@@ -16,6 +16,12 @@ const tools = [
     path: '/tools/image-watermark/',
     icon: '🖼️',
   },
+  {
+    name: '分辨率缩放',
+    desc: '在浏览器本地调整图片的像素尺寸',
+    path: '/tools/image-resize/',
+    icon: '📐',
+  },
 ]
 </script>
 
