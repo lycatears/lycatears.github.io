@@ -582,6 +582,68 @@ endforeach()
 在 CMake 中同样有 `break()` 和 `continue()` 两个命令用于跳出循环控制流，与其他语言中的用法类似。
 
 `include()` 命令可用于导入其他 CMake 代码文件的内容。该命令会在 **父CML作用域内** 解释导入的文件，相当于把被导入的文件当作一个宏来解释，这意味着被导入的文件中定义的变量、函数、宏都会被导入。
-## Step 3: Variables
+
+- TODO1
+```cmake
+# TODO1: Implement MacroAppend
+macro(MacroAppend ListVar Value)
+  if("${${ListVar}}" STREQUAL "")
+    set(${ListVar} "${Value}")
+  else()
+    set(${ListVar} "${${ListVar}};${Value}")
+  endif()
+endmacro()
+```
+宏 `MacroAppend` 的预期调用方式为 `MacroAppend(BeginList "Delta")`，也就是说宏体内的 `${ListVar}` 会被直接替换为 `BeginList`，`${value}` 会被替换为 `Delta`，所以获取列表值需要双重解引用，而获取 `Value` 的值只需要一次解引用。至于为什么不用 `${${ListVar}}` 直接作为条件变量，因为如果列表中只有一个元素，且该元素是假常值，就会被认定为空列表。
+- TODO2
+```cmake
+# TODO2: Call MacroAppend, then return the value from FuncAppend
+function(FuncAppend ListVar Value)
+  MacroAppend("${ListVar}" "${Value}")
+  set("${ListVar}" "${${ListVar}}" PARENT_SCOPE)
+endfunction()
+```
+这里由于局部变量指向的是 **实参的名称** ，所以调用宏的时候还需要一次解引用。宏没有自己的作用域，调用时会直接修改函数作用域中的变量，因此可以用函数作用域中 `ListVar` 的值覆盖全局作用域中的 `ListVar`。
+- TODO3
+```cmake
+function(FilterFoo OutVar)
+# TODO3: Search all the variables in the argument list passed to FilterFoo,
+#        and place those containing "Foo" into the list named by "OutVar"
+  foreach(var IN LISTS ARGN)
+    if(${var} MATCHES "Foo")
+      list(APPEND ${OutVar} ${var})
+    endif()
+  endforeach()
+
+  set(${OutVar} ${${OutVar}} PARENT_SCOPE)
+endfunction()
+```
+注意函数的第一个参数是输出的列表，因此输入的列表只能放到剩余参数。
+- TODO 4-7
+```cmake
+# TODO4: Set the SKIP_TESTS variable to a true value, so that the tests from
+#        Exercise1 and Exercise2 are skipped
+set(SKIP_TESTS "true")
+
+# TODO5: Include Exercise1.cmake and Exercise2.cmake
+include("Exercise1.cmake")
+include("Exercise2.cmake")
+
+set(InList FooBar QuxBar)
+
+# TODO6: Append FooBaz and QuxBaz to InList with FuncAppend
+FuncAppend(InList "FooBaz")
+FuncAppend(InList "QuxBaz")
+
+if(NOT InList STREQUAL "FooBar;QuxBar;FooBaz;QuxBaz")
+  message(WARNING "Append failed, InList contains: ${InList}")
+endif()
+
+
+# TODO7: Filter InList with FilterFoo, use OutList as the output variable
+FilterFoo(OutList ${InList})
+```
+导入其他 CML 文件相当于将这个文件作为宏执行，因此需要特别设置一个标志变量跳过其他文件中的测试。可以看到，前两个练习中的变量、函数都可以直接访问到。
+## Step 3: Configuration and Cache Variables
 
 ## Step 4: Target Commands
