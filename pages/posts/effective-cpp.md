@@ -3,7 +3,7 @@ layout: post
 title: 现代C++学习笔记
 date: 2026-09-04 12:34:49
 categories: 学习
-excerpt: 学习现代C++，为Infra打下基础
+excerpt: C++ 是什么人？他是我的韩信、白起、周亚夫
 hide: true
 tags:
   - 编程
@@ -74,3 +74,8 @@ lambda 函数在 C++ 11 引入，定义的格式如下：
 // 函数体
 }
 ```
+
+## 移动语义
+### 右值引用
+
+### 移动语义
