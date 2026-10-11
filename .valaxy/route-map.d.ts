@@ -206,6 +206,13 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
+    '/posts/goodbye-my-nerd-ages': RouteRecordInfo<
+      '/posts/goodbye-my-nerd-ages',
+      '/posts/goodbye-my-nerd-ages',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
     '/posts/gpa-calculator': RouteRecordInfo<
       '/posts/gpa-calculator',
       '/posts/gpa-calculator',
@@ -258,6 +265,13 @@ declare module 'vue-router/auto-routes' {
     '/posts/ml-final-2024': RouteRecordInfo<
       '/posts/ml-final-2024',
       '/posts/ml-final-2024',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/posts/movement-semantics': RouteRecordInfo<
+      '/posts/movement-semantics',
+      '/posts/movement-semantics',
       Record<never, never>,
       Record<never, never>,
       | never
@@ -321,6 +335,13 @@ declare module 'vue-router/auto-routes' {
     '/posts/software-engineering-notes': RouteRecordInfo<
       '/posts/software-engineering-notes',
       '/posts/software-engineering-notes',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/posts/static-dynamic-libraries': RouteRecordInfo<
+      '/posts/static-dynamic-libraries',
+      '/posts/static-dynamic-libraries',
       Record<never, never>,
       Record<never, never>,
       | never
@@ -601,6 +622,14 @@ declare module 'vue-router/auto-routes' {
       pathParamNames:
         | never
     }
+    'pages/posts/goodbye-my-nerd-ages.md': {
+      routes:
+        | '/posts/goodbye-my-nerd-ages'
+      views:
+        | never
+      pathParamNames:
+        | never
+    }
     'pages/posts/gpa-calculator.md': {
       routes:
         | '/posts/gpa-calculator'
@@ -660,6 +689,14 @@ declare module 'vue-router/auto-routes' {
     'pages/posts/ml-final-2024.md': {
       routes:
         | '/posts/ml-final-2024'
+      views:
+        | never
+      pathParamNames:
+        | never
+    }
+    'pages/posts/movement-semantics.md': {
+      routes:
+        | '/posts/movement-semantics'
       views:
         | never
       pathParamNames:
@@ -732,6 +769,14 @@ declare module 'vue-router/auto-routes' {
     'pages/posts/software-engineering-notes.md': {
       routes:
         | '/posts/software-engineering-notes'
+      views:
+        | never
+      pathParamNames:
+        | never
+    }
+    'pages/posts/static-dynamic-libraries.md': {
+      routes:
+        | '/posts/static-dynamic-libraries'
       views:
         | never
       pathParamNames:
