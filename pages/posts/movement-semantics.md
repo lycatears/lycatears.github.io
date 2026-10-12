@@ -387,3 +387,83 @@ int main(void) {
 > 拷贝被删除、移动不是 noexcept 的类型能否放入 `vector`？
 >
 > 通常可以，这时仍然可以调用移动语义，但是不再提供异常安全保证。
+
+## 完美转发
+假设我们需要一个包装函数：
+```cpp
+void val(A&) {
+    std::cout << "lvalue\n";
+}
+
+void val(A&&) {
+    std::cout << "rvalue\n";
+}
+
+template<typename T>
+void wrapper(T&& arg) {
+  // TODO: 如何传递 arg 到函数 val?
+}
+```
+我们希望传递给 `wrapper` 的参数能够按照“原样”传递给 `val`，不改变它的左/右值属性。假设有 `A` 类对象 `a`，也就是：
+- `wrapper(a)` 调用 `val(A&)`
+- `wrapper(A{})` 调用 `val(A&&)`
+- `wrapper(std::move(a))` 调用 `val(A&&)`
+
+假如我们直接传递 `arg`，也就是 `val(arg)`，在 `val` 的函数体中，`arg` 作为表达式是左值。不论我们传递给 `wrapper` 的是左值还是右值，都会选中 `val(A&)` 重载，传递的右值没有被保留下来。
+
+如果我们对传入的实参都加上 `std::move`，xvalue 和 prvalue 确实能作为右值被传递到 `val`，但是 lvalue 也被当作右值传递了。如果 `val` 会转移 `arg` 的资源，那么传入的左值会被破坏掉。
+
+模板函数中的 `T&&` 和其他地方的不同。普通的函数，例如 `void foo(A&& a);` 代表接收 `A` 类右值参数，这里的 `A&&` 就只是右值引用。但如果是模板函数：
+```cpp
+template<typename T>
+void foo(T&& arg);
+```
+这里的 `T&&` 具有特殊的类型推导条件，称为转发引用。当传入左值时，`T` 会被推导为它的引用，相当于 `T = A&`，那么带回到 `T&& arg` 中，`arg` 的类型就是 `A& &&`；如果传入右值，模板推导 `T = A`，代入 `T&&` 得到 `arg` 的类型是 `T&&`，恰好是右值引用。至于前面的左值情形，C++ 有引用折叠规则：
+| 组合     | 结果  |
+| -------- | ----- |
+| `T& &`   | `T&`  |
+| `T& &&`  | `T&`  |
+| `T&& &`  | `T&`  |
+| `T&& &&` | `T&&` |
+
+可以粗略的记为，只要有一个左值引用，最后折叠得到的就是左值引用。常见的关于转发引用的判断有：
+
+| 声明                                           | 是否是这里讨论的转发引用？                     |
+| ---------------------------------------------- | ---------------------------------------------- |
+| `template<class T> void f(T&&)`                | **是**，调用时推导不带 cv 限定的 `T`               |
+| `void f(std::string&&)`                        | **否**，是固定类型右值引用                         |
+| `template<class T> void f(const T&&)`          | **否**，带 `const` 的形式不满足条件                |
+| `template<class T> struct C { void f(T&&); };` | **否**，`T` 来自类模板，而不是本次函数调用推导     |
+| `auto&& r = expression;`                       | 通常按转发引用规则推导（初始化列表除外） |
+
+最终，我们得到的包装函数类似于下面的形式：
+```cpp
+void sink(const std::string&); // 借用
+void sink(std::string&&);      // 可消费右值
+
+template<class T>
+void relay(T&& value) {
+    sink(std::forward<T>(value));
+}
+```
+注意到这里的完美转发函数 `forward` 带着模板参数 `<T>`。通常情况下，使用转发引用需要加上这个模板参数。传入函数体的实参是左值，丢失了值类别信息；但是上面的转发引用能保留调用者传入参数的类型信息，`std::forward<T>` 就能利用这个信息，结合引用折叠规则，决定返回左值还是右值。例如：
+```cpp
+void sink(const std::string&); // 接收左值
+void sink(std::string&&);      // 接收右值
+
+template<class T>
+void relay(T&& arg) {
+    sink(std::forward<T>(arg));
+}
+
+std::string s = "hello";
+relay(s);
+relay(std::move(s));
+```
+两次调用中，外层模板的推导结果不同：
+| 调用                  | 推导出的 `T`   | 函数体里的 `arg` | `forward<T>(arg)` |
+| --------------------- | -------------- | ---------------- | ----------------- |
+| `relay(s)`            | `std::string&` | 左值             | 左值              |
+| `relay(std::move(s))` | `std::string`  | 左值             | 右值              |
+
+传入左值时：
