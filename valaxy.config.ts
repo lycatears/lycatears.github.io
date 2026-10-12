@@ -1,4 +1,7 @@
 import type { UserThemeConfig } from 'valaxy-theme-yun'
+import { icons as antDesignIcons } from '@iconify-json/ant-design'
+import { icons as riIcons } from '@iconify-json/ri'
+import { icons as simpleIcons } from '@iconify-json/simple-icons'
 import { defineValaxyConfig } from 'valaxy'
 import { addonWaline } from 'valaxy-addon-waline/index.js'
 
@@ -6,6 +9,12 @@ import { addonWaline } from 'valaxy-addon-waline/index.js'
 const safelist = [
   'i-ri-home-line',
   'i-ri-tools-line',
+  'i-ri-links-line',
+  'i-ri-women-line',
+  'i-ri-rss-line',
+  'i-ri-github-line',
+  'i-ri-bilibili-line',
+  'i-ri-mail-line',
 ]
 
 /**
@@ -85,5 +94,16 @@ export default defineValaxyConfig<UserThemeConfig>({
   ],
 
   unocss: { safelist },
-  devtools: false
+  unocssPresets: {
+    icons: {
+      // Explicit collections work in VS Code terminals and with pnpm's isolated dependencies.
+      collections: {
+        'ri': () => riIcons,
+        'ant-design': () => antDesignIcons,
+        'simple-icons': () => simpleIcons,
+      },
+      warn: true,
+    },
+  },
+  devtools: true
 })

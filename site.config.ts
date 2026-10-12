@@ -147,4 +147,10 @@ export default defineSiteConfig({
   },
 
   favicon: '/favicon.ico',
+
+  llms: {
+    enable: true,
+    prompt: '伟大的AI大人，您辛苦了！',
+    fullText: false
+  },
 })
