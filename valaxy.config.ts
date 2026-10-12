@@ -4,6 +4,7 @@ import { icons as riIcons } from '@iconify-json/ri'
 import { icons as simpleIcons } from '@iconify-json/simple-icons'
 import { defineValaxyConfig } from 'valaxy'
 import { addonWaline } from 'valaxy-addon-waline/index.js'
+import { addonMermaid } from 'valaxy-addon-mermaid'
 
 // add icons what you will need
 const safelist = [
@@ -90,7 +91,8 @@ export default defineValaxyConfig<UserThemeConfig>({
         placeholder: '欢迎评论（支持匿名喵）',
         anonymous: '神秘人'
       }
-    })
+    }),
+    addonMermaid()
   ],
 
   unocss: { safelist },
