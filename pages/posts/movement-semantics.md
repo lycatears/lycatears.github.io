@@ -446,7 +446,7 @@ void relay(T&& value) {
     sink(std::forward<T>(value));
 }
 ```
-注意到这里的完美转发函数 `forward` 带着模板参数 `<T>`。通常情况下，使用转发引用需要加上这个模板参数。传入函数体的实参是左值，丢失了值类别信息；但是上面的转发引用能保留调用者传入参数的类型信息，`std::forward<T>` 就能利用这个信息，结合引用折叠规则，决定返回左值还是右值。例如：
+注意到这里的完美转发函数 `forward` 带着模板参数 `<T>`。使用转发引用需要加上这个模板参数。传入函数体的实参是左值，丢失了值类别信息；但是上面的转发引用能保留调用者传入参数的类型信息，`std::forward<T>` 就能利用这个信息，结合引用折叠规则，决定返回左值还是右值。例如：
 ```cpp
 void sink(const std::string&); // 接收左值
 void sink(std::string&&);      // 接收右值
@@ -467,3 +467,31 @@ relay(std::move(s));
 | `relay(std::move(s))` | `std::string`  | 左值             | 右值              |
 
 传入左值时：
+```mermaid
+flowchart LR
+A[推导 T = std::string&] -->|引用折叠| B[T&& = A&] --> C[A& 传入 forward<T>] -->|引用折叠| D[返回左值引用] --> E[调用左值版本重载函数]
+```
+传入右值时：
+```mermaid
+flowchart LR
+A[推导 T = std::string] --> B[T&& = A&&] --> C[A&& 传入 forward<T>] -->|引用折叠| D[返回右值引用] --> E[调用右值版本重载函数]
+```
+因此可得到下面的结论：
+```cpp
+sink(value);                  // 总把参数作为左值传下去
+sink(std::move(value));       // 无条件转为右值，可能消费调用者传来的左值
+sink(std::forward<T>(value)); // 按 T 恢复调用者的类别
+```
+完美转发可以理解为`static_cast<T&&>(value)`，结合引用折叠规则得到：
+
+| 调用者实参    | 推导的 T   | forward 结果     |
+| ------------- | ---------- | ---------------- |
+| 非 const 左值 | `U&`       | `U&`，左值       |
+| const 左值    | `const U&` | `const U&`，左值 |
+| 非 const 右值 | `U`        | `U&&`，右值      |
+
+`std::move` 和 `std::forward` 的用法，不同之处在于：在明确消费对象，转移资源时用 `std::move`；在转发引用参数需要原样交给下一层时用 `std::forward<T>`。不要把 forward 当作更高级的 move，也不要对同一参数反复转发给可能消费它的操作。
+
+## 强制复制消除
+
+## 所有权
