@@ -2,6 +2,7 @@
 layout: post
 title: C++ 移动语义入门
 date: 2026-10-10 15:43:08
+updated: 2026-10-14 23:37:10
 categories: 编程
 excerpt: 老母居于北方，而冀州早就归于了北方
 cover: https://www.helloimg.com/i/2026/10/11/6aca69df6bbb5.jpg

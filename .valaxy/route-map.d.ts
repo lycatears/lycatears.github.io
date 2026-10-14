@@ -87,6 +87,20 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
+    '/moments/': RouteRecordInfo<
+      '/moments/',
+      '/moments',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/moments/2026-10-15-1': RouteRecordInfo<
+      '/moments/2026-10-15-1',
+      '/moments/2026-10-15-1',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
     '/page/[page]': RouteRecordInfo<
       '/page/[page]',
       '/page/:page',
@@ -481,6 +495,22 @@ declare module 'vue-router/auto-routes' {
     'pages/links/index.md': {
       routes:
         | '/links/'
+      views:
+        | never
+      pathParamNames:
+        | never
+    }
+    'node_modules/.pnpm/valaxy-addon-moments@0.1.4__bb4db48e44d2607e2bdc55ee826ef608/node_modules/valaxy-addon-moments/pages/moments/index.vue': {
+      routes:
+        | '/moments/'
+      views:
+        | never
+      pathParamNames:
+        | never
+    }
+    'pages/moments/2026-10-15-1.md': {
+      routes:
+        | '/moments/2026-10-15-1'
       views:
         | never
       pathParamNames:

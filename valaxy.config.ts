@@ -5,6 +5,7 @@ import { icons as simpleIcons } from '@iconify-json/simple-icons'
 import { defineValaxyConfig } from 'valaxy'
 import { addonWaline } from 'valaxy-addon-waline/index.js'
 import { addonMermaid } from 'valaxy-addon-mermaid'
+import { addonMoments } from 'valaxy-addon-moments'
 
 // add icons what you will need
 const safelist = [
@@ -92,7 +93,11 @@ export default defineValaxyConfig<UserThemeConfig>({
         anonymous: '神秘人'
       }
     }),
-    addonMermaid()
+    addonMermaid(),
+    addonMoments({
+      title: '时光',
+      description: '花瓣铺满纯白的画面',
+    }),
   ],
 
   unocss: { safelist },

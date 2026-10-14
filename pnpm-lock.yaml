@@ -20,6 +20,9 @@ importers:
       valaxy-addon-mermaid:
         specifier: ^0.1.1
         version: 0.1.1(valaxy@1.1.0(@devframes/agentic@1.2.3)(@devframes/json-render@1.2.3(@devframes/hub@1.2.3(@devframes/agentic@1.2.0)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.3))(devframe@1.2.3))(@nuxt/kit@3.21.11(magicast@0.5.5))(@oxc-project/types@0.150.0)(@types/markdown-it@14.2.0)(@vue/devtools-api@8.2.1)(cac@7.0.1)(crossws@0.4.15(srvx@1.0.5))(eslint@10.12.0(jiti@2.7.0))(lightningcss@1.33.0)(oxc-parser@0.150.0)(rolldown@1.2.13)(srvx@1.0.5)(typescript@5.9.3)(vue-router@5.4.0(@vue/compiler-sfc@3.5.43)(pinia@4.0.3(@vue/devtools-api@8.2.1)(typescript@5.9.3)(vue@3.5.43(typescript@5.9.3)))(rolldown@1.2.13)(vite@8.3.4)(vue@3.5.43(typescript@5.9.3)))(vue@3.5.43(typescript@5.9.3))(yaml@2.9.1))(vue@3.5.43(typescript@5.9.3))
+      valaxy-addon-moments:
+        specifier: ^0.1.4
+        version: 0.1.4(valaxy@1.1.0(@devframes/agentic@1.2.3)(@devframes/json-render@1.2.3(@devframes/hub@1.2.3(@devframes/agentic@1.2.0)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.3))(devframe@1.2.3))(@nuxt/kit@3.21.11(magicast@0.5.5))(@oxc-project/types@0.150.0)(@types/markdown-it@14.2.0)(@vue/devtools-api@8.2.1)(cac@7.0.1)(crossws@0.4.15(srvx@1.0.5))(eslint@10.12.0(jiti@2.7.0))(lightningcss@1.33.0)(oxc-parser@0.150.0)(rolldown@1.2.13)(srvx@1.0.5)(typescript@5.9.3)(vue-router@5.4.0(@vue/compiler-sfc@3.5.43)(pinia@4.0.3(@vue/devtools-api@8.2.1)(typescript@5.9.3)(vue@3.5.43(typescript@5.9.3)))(rolldown@1.2.13)(vite@8.3.4)(vue@3.5.43(typescript@5.9.3)))(vue@3.5.43(typescript@5.9.3))(yaml@2.9.1))(vue-i18n@11.4.14(vue@3.5.43(typescript@5.9.3)))(vue@3.5.43(typescript@5.9.3))
       valaxy-addon-waline:
         specifier: ^0.2.1
         version: 0.2.1(typescript@5.9.3)(valaxy@1.1.0(@devframes/agentic@1.2.3)(@devframes/json-render@1.2.3(@devframes/hub@1.2.3(@devframes/agentic@1.2.0)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.3))(devframe@1.2.3))(@nuxt/kit@3.21.11(magicast@0.5.5))(@oxc-project/types@0.150.0)(@types/markdown-it@14.2.0)(@vue/devtools-api@8.2.1)(cac@7.0.1)(crossws@0.4.15(srvx@1.0.5))(eslint@10.12.0(jiti@2.7.0))(lightningcss@1.33.0)(oxc-parser@0.150.0)(rolldown@1.2.13)(srvx@1.0.5)(typescript@5.9.3)(vue-router@5.4.0(@vue/compiler-sfc@3.5.43)(pinia@4.0.3(@vue/devtools-api@8.2.1)(typescript@5.9.3)(vue@3.5.43(typescript@5.9.3)))(rolldown@1.2.13)(vite@8.3.4)(vue@3.5.43(typescript@5.9.3)))(vue@3.5.43(typescript@5.9.3))(yaml@2.9.1))
@@ -3440,6 +3443,13 @@ packages:
     peerDependencies:
       valaxy: '>=1.0.0-rc.16'
       vue: ^3.5.0
+
+  valaxy-addon-moments@0.1.4:
+    resolution: {integrity: sha512-tTD/jxnph8/mt2NPlLb6gRyI3pFMGPKIOE4UjDeI8ipa1gH8Gs1v2orbMkrKiN2y1/Vz5ku7yM3x2VIH0zXeVQ==}
+    peerDependencies:
+      valaxy: '>=1.0.0-rc.6'
+      vue: ^3.5.0
+      vue-i18n: ^11.0.0
 
   valaxy-addon-waline@0.2.1:
     resolution: {integrity: sha512-A95cnjyAsdypP/QJWIYbfqPyCOhGeMcbFfqSZnJxdAutUdgHH3gQBRrUM6G+/4KR6YHYmk2thNrpGRlGC6CWLg==}
@@ -7219,6 +7229,16 @@ snapshots:
       mermaid: 12.1.0
       valaxy: 1.1.0(@devframes/agentic@1.2.3)(@devframes/json-render@1.2.3(@devframes/hub@1.2.3(@devframes/agentic@1.2.0)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.3))(devframe@1.2.3))(@nuxt/kit@3.21.11(magicast@0.5.5))(@oxc-project/types@0.150.0)(@types/markdown-it@14.2.0)(@vue/devtools-api@8.2.1)(cac@7.0.1)(crossws@0.4.15(srvx@1.0.5))(eslint@10.12.0(jiti@2.7.0))(lightningcss@1.33.0)(oxc-parser@0.150.0)(rolldown@1.2.13)(srvx@1.0.5)(typescript@5.9.3)(vue-router@5.4.0(@vue/compiler-sfc@3.5.43)(pinia@4.0.3(@vue/devtools-api@8.2.1)(typescript@5.9.3)(vue@3.5.43(typescript@5.9.3)))(rolldown@1.2.13)(vite@8.3.4)(vue@3.5.43(typescript@5.9.3)))(vue@3.5.43(typescript@5.9.3))(yaml@2.9.1)
       vue: 3.5.43(typescript@5.9.3)
+
+  valaxy-addon-moments@0.1.4(valaxy@1.1.0(@devframes/agentic@1.2.3)(@devframes/json-render@1.2.3(@devframes/hub@1.2.3(@devframes/agentic@1.2.0)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.3))(devframe@1.2.3))(@nuxt/kit@3.21.11(magicast@0.5.5))(@oxc-project/types@0.150.0)(@types/markdown-it@14.2.0)(@vue/devtools-api@8.2.1)(cac@7.0.1)(crossws@0.4.15(srvx@1.0.5))(eslint@10.12.0(jiti@2.7.0))(lightningcss@1.33.0)(oxc-parser@0.150.0)(rolldown@1.2.13)(srvx@1.0.5)(typescript@5.9.3)(vue-router@5.4.0(@vue/compiler-sfc@3.5.43)(pinia@4.0.3(@vue/devtools-api@8.2.1)(typescript@5.9.3)(vue@3.5.43(typescript@5.9.3)))(rolldown@1.2.13)(vite@8.3.4)(vue@3.5.43(typescript@5.9.3)))(vue@3.5.43(typescript@5.9.3))(yaml@2.9.1))(vue-i18n@11.4.14(vue@3.5.43(typescript@5.9.3)))(vue@3.5.43(typescript@5.9.3)):
+    dependencies:
+      consola: 3.4.2
+      dayjs: 1.11.23
+      fs-extra: 11.4.1
+      valaxy: 1.1.0(@devframes/agentic@1.2.3)(@devframes/json-render@1.2.3(@devframes/hub@1.2.3(@devframes/agentic@1.2.0)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.3))(devframe@1.2.3))(@nuxt/kit@3.21.11(magicast@0.5.5))(@oxc-project/types@0.150.0)(@types/markdown-it@14.2.0)(@vue/devtools-api@8.2.1)(cac@7.0.1)(crossws@0.4.15(srvx@1.0.5))(eslint@10.12.0(jiti@2.7.0))(lightningcss@1.33.0)(oxc-parser@0.150.0)(rolldown@1.2.13)(srvx@1.0.5)(typescript@5.9.3)(vue-router@5.4.0(@vue/compiler-sfc@3.5.43)(pinia@4.0.3(@vue/devtools-api@8.2.1)(typescript@5.9.3)(vue@3.5.43(typescript@5.9.3)))(rolldown@1.2.13)(vite@8.3.4)(vue@3.5.43(typescript@5.9.3)))(vue@3.5.43(typescript@5.9.3))(yaml@2.9.1)
+      vue: 3.5.43(typescript@5.9.3)
+      vue-i18n: 11.4.14(vue@3.5.43(typescript@5.9.3))
+      yargs: 18.2.0
 
   valaxy-addon-waline@0.2.1(typescript@5.9.3)(valaxy@1.1.0(@devframes/agentic@1.2.3)(@devframes/json-render@1.2.3(@devframes/hub@1.2.3(@devframes/agentic@1.2.0)(crossws@0.4.15(srvx@1.0.5))(devframe@1.2.3))(devframe@1.2.3))(@nuxt/kit@3.21.11(magicast@0.5.5))(@oxc-project/types@0.150.0)(@types/markdown-it@14.2.0)(@vue/devtools-api@8.2.1)(cac@7.0.1)(crossws@0.4.15(srvx@1.0.5))(eslint@10.12.0(jiti@2.7.0))(lightningcss@1.33.0)(oxc-parser@0.150.0)(rolldown@1.2.13)(srvx@1.0.5)(typescript@5.9.3)(vue-router@5.4.0(@vue/compiler-sfc@3.5.43)(pinia@4.0.3(@vue/devtools-api@8.2.1)(typescript@5.9.3)(vue@3.5.43(typescript@5.9.3)))(rolldown@1.2.13)(vite@8.3.4)(vue@3.5.43(typescript@5.9.3)))(vue@3.5.43(typescript@5.9.3))(yaml@2.9.1)):
     dependencies:
