@@ -17,6 +17,8 @@ const safelist = [
   'i-ri-github-line',
   'i-ri-bilibili-line',
   'i-ri-mail-line',
+  'i-ri-article-line',
+  'i-ri-armchair-line'
 ]
 
 /**
@@ -53,6 +55,12 @@ export default defineValaxyConfig<UserThemeConfig>({
         icon: 'i-ri-tools-line',
         color: 'skyblue',
       },
+      {
+        name: '时光',
+        url: '/moments/',
+        icon: 'i-ri-armchair-line',
+        color: 'pink',
+      },
       // {
       //   name: '喜欢的女孩子',
       //   url: '/girls/',
@@ -77,40 +85,56 @@ export default defineValaxyConfig<UserThemeConfig>({
     colors: {
       primary: '#ffcce6'
     },
+
+    nav: [
+      {
+        text: '友链',
+        link: '/links/',
+        icon: 'i-ri-link'
+      }, {
+        text: '时光',
+        link: '/moments/',
+        icon: 'i-ri-armchair-line'
+      }, {
+        text: '工具',
+        link: '/tools/',
+        icon: 'i-ri-tools-line'
+      },
+    ]
   },
 
   addons: [
-    addonWaline({
-      serverURL: 'https://waline-comment-seven-gilt.vercel.app/',
-      dark: 'auto',
-      emoji: [
-        '//unpkg.com/@waline/emojis@1.4.0/bmoji',
-        '//unpkg.com/@waline/emojis@1.4.0/tieba',
-      ],
-      pageview: true,
-      locale: {
-        placeholder: '欢迎评论（支持匿名喵）',
-        anonymous: '神秘人'
-      }
-    }),
-    addonMermaid(),
-    addonMoments({
-      title: '时光',
-      description: '花瓣铺满纯白的画面',
-    }),
-  ],
+  addonWaline({
+    serverURL: 'https://waline-comment-seven-gilt.vercel.app/',
+    dark: 'auto',
+    emoji: [
+      '//unpkg.com/@waline/emojis@1.4.0/bmoji',
+      '//unpkg.com/@waline/emojis@1.4.0/tieba',
+    ],
+    pageview: true,
+    locale: {
+      placeholder: '欢迎评论（支持匿名喵）',
+      anonymous: '神秘人'
+    }
+  }),
+  addonMermaid(),
+  addonMoments({
+    title: '时光',
+    description: '花瓣铺满纯白的画面',
+  }),
+],
 
   unocss: { safelist },
   unocssPresets: {
-    icons: {
-      // Explicit collections work in VS Code terminals and with pnpm's isolated dependencies.
-      collections: {
-        'ri': () => riIcons,
-        'ant-design': () => antDesignIcons,
-        'simple-icons': () => simpleIcons,
-      },
-      warn: true,
+  icons: {
+    // Explicit collections work in VS Code terminals and with pnpm's isolated dependencies.
+    collections: {
+      'ri': () => riIcons,
+      'ant-design': () => antDesignIcons,
+      'simple-icons': () => simpleIcons,
     },
+    warn: true,
   },
+},
   devtools: true
 })
