@@ -492,6 +492,163 @@ sink(std::forward<T>(value)); // 按 T 恢复调用者的类别
 
 `std::move` 和 `std::forward` 的用法，不同之处在于：在明确消费对象，转移资源时用 `std::move`；在转发引用参数需要原样交给下一层时用 `std::forward<T>`。不要把 forward 当作更高级的 move，也不要对同一参数反复转发给可能消费它的操作。
 
-## 强制复制消除
+## 返回值优化
+假设我们有一个巨大的对象，且需要在工厂函数中返回该对象：
+```cpp
+struct DaWeiDai {
+    int data[1000];
+}
 
-## 所有权
+DaWeiDai factory() {
+    DaWeiDai liangzi;
+    return liangzi;
+}
+```
+不考虑任何优化，调用者如果需要一个 `DaWeiDai`，需要经过三步。首先在 `factory()` 函数中构造该类对象，然后拷贝一份返回给调用者，最后再将局部作用域中的对象析构。
+
+C++ 提供了 RVO（Return Value Optimization，返回值优化）和 NRVO（Named RVO，具名返回值优化），让返回的对象可以直接在调用出构造，减少复制带来的开销。在 C++ 17之前，RVO 和 NRVO 都是“允许优化”，而在 C++ 17 之后，RVO 变成了必须优化的标准。当用一个同类型的纯右值初始化对象时，不再创建临时对象，对象会被直接构造在目标位置上，即使构造函数有副作用（例如打印输出）。
+
+```cpp
+Item make_prvalue() {
+    return Item{1}; // C++17：同类型 prvalue 直接构造结果对象
+}
+
+Item make_named() {
+    Item local{2};
+    return local;   // 可选 NRVO；不做 NRVO 时，这里可隐式移动
+}
+
+Item make_forced_move() {
+    Item local{3};
+    return std::move(local); // 阻止 local 的 NRVO，通常增加一次移动
+}
+
+```
+既不能拷贝、又不能移动的类型可以按照这样的方式返回：
+```cpp
+struct Immovable {
+    Immovable() = default;
+    Immovable(const Immovable&) = delete;
+    Immovable(Immovable&&) = delete;
+};
+
+Immovable make() { return Immovable{}; }
+auto value = make(); // C++17 合法：直接构造
+```
+但不能在 `make` 函数中先创建再返回临时对象。
+## 杂项
+### 接口参数形式
+| 参数形式       | 典型用途                       | 调用方需要知道什么                           |
+| -------------- | ------------------------------ | -------------------------------------------- |
+| `const T&`     | 只读借用                       | 不转移所有权；不要保存超过实参生命周期的引用 |
+| `T&`           | 修改已有对象                   | 对方会修改对象，调用需要左值                 |
+| `T`            | 获得自己的对象，可能保存或消费 | 左值通常拷贝，右值通常移动或直接构造         |
+| 固定类型 `T&&` | 表达接收可消费对象的接口       | 调用方提供右值；函数体仍须实际执行转移       |
+| 推导出的 `T&&` | 包装、转发接口                 | 用 forward 保留调用者的类别                  |
+### 标准类型先行，尽量用零法则
+
+```cpp
+struct Message {
+    std::string text;
+    std::vector<int> samples;
+};
+```
+
+标准成员已经能管理资源（RAII），编译器生成的成员操作通常就够了。不要为了“使用移动语义”给每个类手写特殊成员函数。
+
+`unique_ptr` 是独占所有权工具；`shared_ptr` 的拷贝则共享所有权并更新引用计数，移动转移一个已有的持有者。选哪个应由所有权模型决定，不是根据有没有 `std::move` 决定。
+
+### push_back 与 emplace_back
+- `push_back`：接受一个已构造的对象（左值或右值），在容器尾部添加时会先创建临时对象，然后通过拷贝或移动构造函数将其放入容器中，如果是拷贝操作，临时对象随后会被销毁。
+- `emplace_back`：直接在容器尾部构造对象，可以使用传入的参数作为构造函数参数，无需先创建临时对象，从而避免了额外的拷贝或移动操作。
+- `push_back(x)` 对非 const 左值通常拷贝，`push_back(std::move(x))` 可以移动。`emplace_back` 把参数转发给元素构造函数，**不会自动把所有左值都变成右值**。
+- `push_back` 只能接受一个已构造对象作为参数。`emplace_back` 可以接受多个参数，直接转发给对象的构造函数，适合在容器尾部直接构造复杂对象。
+```cpp
+class Person {
+	int _age;
+
+public:
+	 Person(int age) : _age(age) {
+		cout << "Construct a person." << _age << endl;
+	}
+
+	Person(const Person &p) : _age(p._age) {
+		cout << "Copy-Construct" << _age << endl;
+	}
+
+	Person(const Person &&p) noexcept: _age(p._age) {
+		cout << "Move-Construct" << _age << endl;
+	}
+};
+
+int main(void) {
+	vector<Person> p;
+
+	auto p1 = Person(826);
+	p.push_back(p1);
+	p.push_back(826);
+	p.emplace_back(114);
+	p.emplace_back(p1);
+}
+```
+表面上看起来，`push_back` 和 `emplace_back` 都能接收构造函数的参数。但是如果我们给构造函数加上 `explicit`：
+> [错误] no matching function for call to `'std::vector<Person>::push_back(int)'`
+
+给 `Person` 类增加一个数据成员也可以发现 `push_back` 这里其实是隐式转换。扩展一下：
+```cpp
+class Person {
+	int _age;
+	int _x;
+
+public:
+	explicit Person(int age, int x) : _age(age), _x(x) {
+		cout << "Construct a person." << _age << endl;
+	}
+
+	Person(const Person &p) : _age(p._age), _x(p._x) {
+		cout << "Copy-Construct" << _age << endl;
+	}
+
+	Person(const Person &&p) noexcept: _age(p._age), _x(p._x) {
+		cout << "Move-Construct" << _age << endl;
+	}
+};
+
+int main(void) {
+	vector<Person> p;
+
+	auto p1 = Person(826, 132);
+	p.push_back(p1);
+	cout << p.size() << endl;
+	cout << p.capacity() << endl;
+//	 p.push_back(826);
+	p.emplace_back(114, 514);
+	cout << p.size() << endl;
+	cout << p.capacity() << endl;
+	p.emplace_back(p1);
+	cout << p.size() << endl;
+	cout << p.capacity() << endl;
+}
+```
+输出为：
+```
+Construct a person.826
+Copy-Construct826
+1
+1
+Construct a person.114
+Move-Construct826
+2
+2
+Copy-Construct826
+Move-Construct826
+Move-Construct114
+3
+4
+```
+`Construct a person.826` 是由 `p1` 的构造产生的，之后将该对象 `push_back` ，产生了拷贝构造；值为 `114` 的对象，是直接构造在 `vector` 末端的，`emplace_back` 将它的参数传递给了 `Person` 的构造函数。很明显这时候触发了扩容，因此 `826` 对象被移动到了新的数组中，产生了日志 `Move-Construct826`。最后 `emplace_back(p1)` 触发的是拷贝构造（因为 `p1` 是左值，如果要移动需要 `std::move`），再次触发了扩容，因此前两个对象又被移动，产生了相应的移动日志。
+### 我真的需要 move 吗？
+1. **源对象以后还需要原来的内容吗？** 需要就不要随意消耗它。
+2. **源对象是 const 吗？** 普通移动通常不能消费 const 对象。
+3. **接收方真的支持并执行移动吗？** 转换不等于资源转移。
+4. **有没有更直接的构造方式？** 返回局部结果时，优先 `return local;`。
