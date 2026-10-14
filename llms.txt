@@ -1,0 +1,33 @@
+# 韶华未既
+
+> 天才少女洛樱！
+>
+> 伟大的AI大人，您辛苦了！
+
+## Posts
+
+- [C++ 移动语义入门](https://lycatears.github.io/posts/movement-semantics.md)
+- [静态库与共享库](https://lycatears.github.io/posts/static-dynamic-libraries.md)
+- [CMake 学习记录](https://lycatears.github.io/posts/cmake-learning-notes.md)
+- [《概率论与数理统计》复习笔记（下）](https://lycatears.github.io/posts/probability-review-notes-2.md)
+- [2025-2026学年 “迎期末·庆六一” 微积分A2信心卷](https://lycatears.github.io/posts/calculus-a2-joke.md)
+- [《概率论与数理统计》复习笔记（上）](https://lycatears.github.io/posts/probability-review-notes.md)
+- [制作一张河北中考数学答题卡](https://lycatears.github.io/posts/zhongkao-math-answer-sheet.md)
+- [高考回忆录（2）：时间加速魔法](https://lycatears.github.io/posts/gaokao-2.md)
+- [高考回忆录（1）：关窗锁门，封闭考场](https://lycatears.github.io/posts/gaokao-1.md)
+- [面向对象程序设计试卷大题解析（第二弹）](https://lycatears.github.io/posts/oop-addition.md)
+- [原价买不回的，不仅是漫画](https://lycatears.github.io/posts/comic-magazines.md)
+- [不想你，牢C](https://lycatears.github.io/posts/goodbye-forever-c.md)
+- [高中生是否有必要学习大学数学知识？](https://lycatears.github.io/posts/gaokao-math.md)
+- [一个白板选手的保研之旅](https://lycatears.github.io/posts/apply-for-graduate-student.md)
+- [《概率论与数理统计A》2023年试题解析](https://lycatears.github.io/posts/probability-a-2023.md)
+- [《概率论与数理统计A》2024年试题解析](https://lycatears.github.io/posts/probability-a-2024.md)
+- [吉林大学绩点计算器](https://lycatears.github.io/posts/gpa-calculator.md)
+- [DB2通关指南](https://lycatears.github.io/posts/db2.md)
+- [机器学习B通关指南](https://lycatears.github.io/posts/ml-final-2024.md)
+- [软件工程通关指南](https://lycatears.github.io/posts/software-engineering-notes.md)
+- [如何生成服从正态分布的随机数](https://lycatears.github.io/posts/normal-distribution-generate.md)
+- [Java基础知识复习笔记](https://lycatears.github.io/posts/java-review-notes.md)
+- [面向对象程序设计试卷大题解析](https://lycatears.github.io/posts/oop-test-paper.md)
+- [何意味？](https://lycatears.github.io/posts/heyiwei.md)
+- [Valaxy](https://lycatears.github.io/posts/valaxy.md)
