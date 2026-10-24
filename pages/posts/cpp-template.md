@@ -97,3 +97,9 @@ template<class T> void by_value(T value);
 template<class T> void by_ref(T& value);
 template<class T> void by_const_ref(const T& value);
 ```
+除了转发引用，这三种参数形式是比较常见的。C++模板的类型推导规则，可以围绕一个核心问题进行拆解：当调用 `f(expr)` 时，编译器如何根据形参类型 `ParamType` 来推断模板参数 `T` 和最终的形参类型？
+
+对于值传递来说，也就是 **函数形参** 是 **模板形参** 本身时，编译器将对实参的类型进行简化。
+- 忽略引用性：如果实参是引用类型，这个引用会被忽略，比如 `int&` 变成 `int`。
+- 忽略 **顶层CV限定**：这条规则一般是针对指针来说的，比如 `const int* const` 中，前一个 `const` 代表不能通过指针修改指向的对象，这是 **底层CV**，后一个 `const` 代表指针指向哪个对象不能被修改，这是 **顶层CV**。值传递在函数作用域中会创建一个新的副本，实参的 CV 限定不应该继承到函数里面去。
+- 保留 **底层CV**：指针的底层 CV 会被保留，比如 `const int*` 的 `const` 不会被移除。
