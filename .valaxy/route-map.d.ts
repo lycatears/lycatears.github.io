@@ -150,6 +150,13 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
+    '/posts/cpp-template': RouteRecordInfo<
+      '/posts/cpp-template',
+      '/posts/cpp-template',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
     '/posts/csapp-notes': RouteRecordInfo<
       '/posts/csapp-notes',
       '/posts/csapp-notes',
@@ -567,6 +574,14 @@ declare module 'vue-router/auto-routes' {
     'pages/posts/comic-magazines.md': {
       routes:
         | '/posts/comic-magazines'
+      views:
+        | never
+      pathParamNames:
+        | never
+    }
+    'pages/posts/cpp-template.md': {
+      routes:
+        | '/posts/cpp-template'
       views:
         | never
       pathParamNames:
