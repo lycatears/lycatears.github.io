@@ -69,12 +69,12 @@ export default defineSiteConfig({
     //   icon: 'i-ri-wechat-2-line',
     //   color: '#1AAD19',
     // },
-    // {
-    //   name: 'Twitter',
-    //   link: 'https://twitter.com/YunYouJun',
-    //   icon: 'i-ri-twitter-x-fill',
-    //   color: 'black',
-    // },
+    {
+      name: 'Twitter',
+      link: 'https://x.com/lycatears',
+      icon: 'i-ri-twitter-x-fill',
+      color: 'black',
+    },
     // {
     //   name: 'Telegram Channel',
     //   link: 'https://t.me/elpsycn',
