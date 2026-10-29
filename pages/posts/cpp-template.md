@@ -103,3 +103,271 @@ template<class T> void by_const_ref(const T& value);
 - 忽略引用性：如果实参是引用类型，这个引用会被忽略，比如 `int&` 变成 `int`。
 - 忽略 **顶层CV限定**：这条规则一般是针对指针来说的，比如 `const int* const` 中，前一个 `const` 代表不能通过指针修改指向的对象，这是 **底层CV**，后一个 `const` 代表指针指向哪个对象不能被修改，这是 **顶层CV**。值传递在函数作用域中会创建一个新的副本，实参的 CV 限定不应该继承到函数里面去。
 - 保留 **底层CV**：指针的底层 CV 会被保留，比如 `const int*` 的 `const` 不会被移除。
+
+假设有定义：
+```cpp
+// 用于在 decltype 中“携带”推导出的 T
+template <typename T> struct TypeIdentity { using type = T; };
+
+// 四种形参形式
+template <typename T> TypeIdentity<T> f_value(T);          // 值传递
+template <typename T> TypeIdentity<T> f_lref(T&);          // 左值引用
+template <typename T> TypeIdentity<T> f_cref(const T&);    // const 左值引用
+template <typename T> TypeIdentity<T> f_forward(T&&);      // 万能引用
+
+// 用于验证引用折叠的别名模板
+template <typename T> using LRef = T&;
+template <typename T> using RRef = T&&;
+```
+使用 `static_assert` 检查模板形参 `T` 的类型：
+```cpp
+int x = 27;
+const int cx = x;
+volatile int vx = x;
+const volatile int cvx = x;
+const int& rx = cx;
+
+int* p = &x;            // 指向 int
+const int* pc = &x;     // 底层 const
+int* const cp = &x;     // 顶层 const
+
+// ============================================================
+// 情形一：值传递 T
+//   规则：剥离引用、剥离顶层 CV；底层 CV 保留；数组/函数退化
+// ============================================================
+
+static_assert(std::is_same_v<decltype(f_value(x)),   TypeIdentity<int>>);
+static_assert(std::is_same_v<decltype(f_value(cx)),  TypeIdentity<int>>);   // 顶层 const 丢弃
+static_assert(std::is_same_v<decltype(f_value(vx)),  TypeIdentity<int>>);   // volatile 丢弃
+static_assert(std::is_same_v<decltype(f_value(cvx)), TypeIdentity<int>>);   // const+volatile 都丢弃
+static_assert(std::is_same_v<decltype(f_value(rx)),  TypeIdentity<int>>);   // 引用性 + const 都丢弃
+static_assert(std::is_same_v<decltype(f_value(p)),   TypeIdentity<int*>>);
+static_assert(std::is_same_v<decltype(f_value(pc)),  TypeIdentity<const int*>>); // 底层 const 保留
+static_assert(std::is_same_v<decltype(f_value(cp)),  TypeIdentity<int*>>);       // 顶层 const 丢弃
+```
+编译通过，证明了上述规则的正确性。但需要注意，在值传递情形下，数组实参会退化为指向其首元素的指针，函数实参会退化为函数指针。
+
+对于左值引用（`T&`）的形参，`T` 本身不会被推导为带有引用的类型。编译器会 **保留** CV限定符，**去掉** 形参类型中的引用（不管是左值引用还是右值引用），例如：
+```cpp
+template<typename T> void f(T& param);
+
+int x = 27;
+const int cx = x;
+const int& rx = cx;
+
+f(x);  // T -> int, ParamType -> int&
+f(cx); // T -> const int, ParamType -> const int&
+f(rx); // T -> const int, ParamType -> const int&
+```
+`const T&` 与 `T&` 的情形类似，不过编译器不保留 `T` 的顶层 `const`，因为形参已经带有 `const` 了。通过 `static_assert` 断言检查下面的代码，能够通过编译，这证明了上面推导 `T` 的规则：
+```cpp
+	// ============================================================
+	// 情形二：T&
+	//   规则：去掉 T 的引用；CV 全部保留
+	// ============================================================
+	static_assert(std::is_same_v<decltype(f_lref(x)),  TypeIdentity<int>>);
+	static_assert(std::is_same_v<decltype(f_lref(cx)), TypeIdentity<const int>>);
+	static_assert(std::is_same_v<decltype(f_lref(vx)), TypeIdentity<volatile int>>);
+	static_assert(std::is_same_v<decltype(f_lref(rx)), TypeIdentity<const int>>); // rx 本身是 const int&
+	static_assert(std::is_same_v<decltype(f_lref(cp)), TypeIdentity<int* const>>);
+  static_assert(std::is_same_v<decltype(f_lref(someFunc)), TypeIdentity<void(int, double)>>);
+
+	// ============================================================
+	// 情形二特例：const T&
+	//   规则：const 由 ParamType 承担，T 中不再含顶层 const
+	// ============================================================
+	static_assert(std::is_same_v<decltype(f_cref(x)),  TypeIdentity<int>>);
+	static_assert(std::is_same_v<decltype(f_cref(cx)), TypeIdentity<int>>);       // T 不含 const
+	static_assert(std::is_same_v<decltype(f_cref(rx)), TypeIdentity<int>>);
+	static_assert(std::is_same_v<decltype(f_cref(42)), TypeIdentity<int>>);       // 可绑定右值
+	static_assert(std::is_same_v<decltype(f_cref(cp)), TypeIdentity<int*>>);
+```
+在引用传递的情形下，数组 **不会** 退化为指针，`T` 被推导为数组类型本身（例如`int[10]`），函数形参的类型就是 `int (&)[10]`；对于函数来说，`T` 的类型就是传入的函数类型，函数形参的类型是函数引用。
+### 转发引用
+当 `T` 是该函数模板正在推导的、没有 cv 限定的类型参数时，`T&&` 有一条特殊规则：传入左值时，`T` 被推导为左值引用。这样的形参叫**转发引用**。
+
+> 转发引用可以是：1）声明为该函数模板的cv非限定类型模板参数的右值引用的函数模板的函数参数；2） `auto&&`，除非从花括号初始化列表推导，或者在类模板参数推导期间表示类模板的模板参数时(自 C++17 起)
+
+其他的规则都比较好理解，但是这个”正在推导“是什么？**正在推导** 需要在编译器发现函数被调用时动态判断。编译器在看到 `f(expr)` 这个调用时，`T` 是否还没有被确定？这需要根据传入的实参 `expr` 来反推它的类型。如果是，`T` 就“正在推导”，`T&&` 才是转发引用；如果不是，`T&&` 就只是一个普通的右值引用。例如，这是一个典型的转发引用：
+```cpp
+template<typename T>
+void f(T&& param); // 调用 f(expr) 时，T 未知，需要从 expr 推导 → 转发引用
+```
+需要注意，一个变量直接出现在 `decltype(r)` 的括号内是判断该变量的类型，而如果再加上一层括号变成 `decltype((r))` 就是判断表达式类型了，会变成左值引用。
+
+下面有几种典型的“退化”成普通右值引用的例子：
+```cpp
+f<int>(x); // 调用点已经明确 T = int，T&& 就是 int&&，纯右值引用
+
+// 类模板的成员函数：
+template<typename U>
+struct Container {
+    void push(U&& x); // 这里的 T 是类模板参数，Container 类实例化后 U 已经被确定
+};
+
+template<typename V>
+void g(const V&& param); // 不能带 CV 限定
+```
+不过成员函数的形参也不一定就不是转发引用，可以在类内部再定义模板：
+```cpp
+template<class T>
+struct Queue {
+    void push(T&& value);  // 使用类模板的 T，不是转发引用
+
+    template<class U>
+    void submit(U&& value); // U 在调用 submit 时独立推导，是转发引用
+};
+```
+除了函数模板、类模板，`auto&&` 也有类似的推导规则，但使用初始化列表的除外：
+```cpp
+int x = 6;
+auto&& r1 = 7;
+auto&& r2 = x;
+static_assert(std::is_same_v<decltype(r1), int&&>);
+static_assert(std::is_same_v<decltype(r2), int&>);
+```
+引用折叠和完美转发已在 [C++ 移动语义入门](./movement-semantics.md) 复习过，不再赘述。
+
+## 模板特化
+在一些低精度的量化模型中，经常会用到 FP8、INT4 这样数据范围较窄的类型。多个低精度数据相加时，可能会出现溢出问题。例如，3个 `int8_t` 的8位整数相加：`100+100+100`，在补码机器上，8位整数的最大值是 255，而这个算式的结果是300，显然会产生溢出错误。假如我们希望为较高精度的数据应用默认的累加规则，而对低精度数据用更高精度的数据类型“中转”，比如用32位整数作为8位整数的累加结果。这就需要我们在模板中，为低精度数据指定特殊规则。
+### 主模板
+提供特殊规则的是模板特化，相对的，提供默认规则的就是主模板。例如，上面的累加例子中，默认类型就是传入的数据类型本身，因此可以这样定义主模板：
+```cpp
+template<class T>
+struct Accumulator { using type = T; };
+```
+比如 `Accumulator<float>::type` 就是 `float` 本身，这是我们定义的主模板的规则。这里的 `using type = T;` 只是一个类型别名，它不会分配内存也不会创建对象。
+### 全特化
+假如我们指定 `int8_t` 的累加中间变量类型是 `int32_t`，可以这样编写代码：
+```cpp
+template<>
+struct Accumulator<std::int8_t> { using type = std::int32_t; };
+```
+由于这里所有的模板参数都被指定了，不再保留待推导的类型参数，因此模板定义的尖括号中没有模板形参，也就是 `template<>`。这个模板特化专门规定了一组完整的模板参数组合 `Accumulator<std::int8_t>`，这就是全特化。那么我们如何使用这套特殊规则进行求和呢？
+```cpp
+template<class T>
+typename Accumulator<T>::type sum(const T* data, std::size_t count) {
+    typename Accumulator<T>::type result{};
+    for (std::size_t i = 0; i < count; ++i) result += data[i];
+    return result;
+}
+```
+上面的代码中，`typename Accumulator<T>::type` 就是提取出中间累加变量的类型，`typename` 告诉编译器后面的依赖名称表示一个类型。在本例中：
+- 遇到 `float` `int` 等宽类型：使用默认规则，返回值和中间变量都是形参的类型。
+- 遇到特化的 `int8_t`：使用特殊规则，返回值和中间变量都是 `int32_t`。
+
+如果先在低精度变量中完成所有计算，最后再转入宽类型，很显然这可能会导致溢出/精度损失。
+### 偏特化
+偏特化指定的是一种“形状”，比如：
+```cpp
+template<class T>
+struct StorageInfo { static constexpr bool borrowed = false; };
+
+template<class T>
+struct StorageInfo<T*> { static constexpr bool borrowed = true; };
+```
+第二个定义匹配“指向任意 T 的指针”，但仍保留了未定参数 `T`，这就是**偏特化**。`StorageInfo<float*>` 和 `StorageInfo<int*>` 都匹配它。这里的 `static constexpr bool` 是属于类型的编译期常量，可直接写 `StorageInfo<float*>::borrowed`。
+
+偏特化也可以是类似于全微分和偏微分那样，只是指定部分模板参数：
+```cpp
+template<class U, class V>
+struct StorageInfo {/* ... */};
+
+template <class V>
+struct StorageInfo<int, V> {/* ... */};
+
+template <class U>
+struct StorageInfo<U, U> {/* ... */}; // 这也是偏特化，只不过是要求两个模板参数相同
+```
+### 特化与重载
+上面的模板特化都是针对类模板的，函数模板也可以特化。但是**函数模板只支持全特化，不支持偏特化**，如果需要定义特殊规则，需要使用重载。例如：
+```cpp
+template<class T> void inspect(T value);
+template<class T> void inspect(T* value); // 重载，不是偏特化
+```
+特化的函数模板和重载函数的区别，主要是它们发生在不同的决策阶段。假如我们有重载函数用于打印变量：
+```cpp
+void print(int value) {
+    std::cout << "int: " << value << '\n';
+}
+
+void print(double value) {
+    std::cout << "double: " << value << '\n';
+}
+
+void print(const std::string& value) {
+    std::cout << "string: " << value << '\n';
+}
+```
+显然，编译器会通过重载决议，为不同的实参类型选择合适的函数。函数模板特化也能实现这样的规则，比如：
+```cpp
+template<typename T>
+void print(const T& value) {
+    std::cout << "generic: " << value << '\n';
+}
+
+// 针对 std::string 的显式特化
+template<>
+void print<std::string>(const std::string& value) {
+    std::cout << "string: " << value << '\n';
+}
+```
+在这个特化案例中，主模板输出 `generic`，但对 `std::string` 的特化模板输出 `string`。重载是为不同的数据类型定义一组独立的函数，分别实现；而特化的思想是，先定义一个通用规则，再针对某些特殊类型专门定义一个特殊规则。模板特化并不是简单地增加一个同名函数，而是为已有模板的特定模板参数提供专门实现。但考虑下面的代码：
+```cpp
+template<typename T>
+void foo(T) {
+    std::cout << "primary template\n";
+}
+
+// 函数模板显式特化
+template<>
+void foo<int>(int) {
+    std::cout << "specialization\n";
+}
+
+// 普通函数重载
+void foo(int) {
+    std::cout << "non-template overload\n";
+}
+
+int main() {
+    foo(10);
+}
+```
+似乎三个函数定义都能匹配上实参 `10`。最终的输出是 `non-template overload`，编译器选择了 **非模板函数**。根据 C++ 的重载决议规则，在其他条件相同的情况下，非模板函数优先于函数模板特化。重载决议大致是这样进行的：
+1. 确定候选函数：当编译器遇到 `foo(10)` 时，编译器会考虑 `template<class T> void foo(T)` 和 `void foo(int)` 两个候选项。注意全特化的函数模板 `template<> void foo<int>(int)` 没有被单独列出来，因为它仍然属于主模板，不会被单独列入候选函数。
+2. 执行重载决议：编译器从函数模板推导得到特化的函数 `void foo<int>(int)` 和普通函数 `void foo(int)`，二者都能精确匹配实参。但在其他条件相同的情况下，非模板函数的优先级更高，因此编译器最后选择了后者。
+3. 只有编译器选定了某个模板实例的情况下，编译器才会考虑是否有可用的特化。如果想强制使用特化函数，要显式指定 `foo<int>(10)`。函数重载决定选择哪个函数或函数模板；函数模板显式特化决定被选中的**主模板**针对某组模板参数使用哪个实现。
+### 函数模板重载
+函数模板不支持偏特化，但如果想要给指针等类型指定特殊规则怎么办？这时候就要使用函数模板重载。看下面的例子，由于C++不允许函数模板的偏特化，这样的代码编译会出现错误：
+```cpp
+template<typename T>
+void foo(T value) {
+    std::cout << "generic\n";
+}
+
+template<typename T>
+void foo<T*>(T* value) {  // 编译错误
+    std::cout << "pointer\n";
+}
+```
+但我们可以这样为指针类型指定特殊规则：
+```cpp
+template<typename T>
+void foo(T value) {
+    std::cout << "generic\n";
+}
+
+template<typename T>
+void foo(T* value) {
+    std::cout << "pointer\n";
+}
+```
+这两个函数模板是独立的。为什么说上例中的函数是试图进行偏特化，而本例中的两个函数是独立的两个模板呢？上例中，第二个 `foo` 函数后面带有实参列表 `<T*>`
+## 可变参数模板
+
+## 折叠表达式
+
+## if constexpr
+
+## 类型萃取
