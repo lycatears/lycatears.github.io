@@ -266,7 +266,7 @@ struct StorageInfo { static constexpr bool borrowed = false; };
 template<class T>
 struct StorageInfo<T*> { static constexpr bool borrowed = true; };
 ```
-第二个定义匹配“指向任意 T 的指针”，但仍保留了未定参数 `T`，这就是**偏特化**。`StorageInfo<float*>` 和 `StorageInfo<int*>` 都匹配它。这里的 `static constexpr bool` 是属于类型的编译期常量，可直接写 `StorageInfo<float*>::borrowed`。
+第二个定义匹配“指向任意 T 的指针”，但仍保留了未定参数 `T`，这就是**偏特化**。`StorageInfo<float*>` 和 `StorageInfo<int*>` 都匹配它。这里的 `static constexpr bool` 是属于类型的编译期常量，可直接写 `StorageInfo<float*>::borrowed`。这也是后面类型萃取的原理。
 
 偏特化也可以是类似于全微分和偏微分那样，只是指定部分模板参数：
 ```cpp
@@ -278,6 +278,46 @@ struct StorageInfo<int, V> {/* ... */};
 
 template <class U>
 struct StorageInfo<U, U> {/* ... */}; // 这也是偏特化，只不过是要求两个模板参数相同
+```
+更进一步来说，其实编译器并不要求特化模板的参数列表有几个参数，也不关心这些形参究竟叫什么名字。编译器关心的是这些参数能不能从实参模式里推导出来，以及整体是不是比主模板更特化。比如下面的代码中，后两个模板也是偏特化：
+```cpp
+template<typename T>
+struct ContainerTraits {
+    static constexpr const char* name = "unknown";
+};
+
+template<typename T, typename Alloc>
+struct ContainerTraits<std::vector<T, Alloc>> {
+    static constexpr const char* name = "vector";
+};
+
+template<typename T, typename Alloc>
+struct ContainerTraits<std::list<T, Alloc>> {
+    static constexpr const char* name = "list";
+};
+```
+尖括号 `X<...>` 里的实参个数必须和主模板一致，`template<...>` 里有多少个参数则不受限制。
+```cpp
+template<typename T> struct X {};
+
+template<typename T>                       struct X<T*> {};               // 1 个
+template<typename K, typename V, typename C, typename A>
+                                           struct X<std::map<K,V,C,A>> {}; // 4 个
+template<typename R, typename... Args>     struct X<R(*)(Args...)> {};   // 参数包
+template<typename T, std::size_t N>        struct X<T[N]> {};            // 非类型参数
+```
+相反，如果参数不能被推导出来，就是编译错误：
+```cpp
+template<typename T, typename U>
+struct X<std::vector<T>> {};   // U 没出现在模式里，无法推导
+
+template<typename V>
+struct Y<typename std::remove_pointer<V>::type> {};  // V 处于 ::type 左边，不可推导
+```
+偏特化的参数列表中不能有默认实参：
+```cpp
+template<typename T, typename A = std::allocator<T>> // 错误
+struct X<std::vector<T, A>> {};
 ```
 ### 特化与重载
 上面的模板特化都是针对类模板的，函数模板也可以特化。但是**函数模板只支持全特化，不支持偏特化**，如果需要定义特殊规则，需要使用重载。例如：
@@ -363,7 +403,37 @@ void foo(T* value) {
     std::cout << "pointer\n";
 }
 ```
-这两个函数模板是独立的。为什么说上例中的函数是试图进行偏特化，而本例中的两个函数是独立的两个模板呢？上例中，第二个 `foo` 函数后面带有实参列表 `<T*>`
+这两个函数模板是独立的。为什么说上例中的函数是试图进行偏特化，而本例中的两个函数是独立的两个模板呢？上例中，第二个 `foo` 函数后面带有实参列表 `<T*>`——它试图通过模板实参列表指定特化对象。但是，C++不允许函数模板的重载，因此它不能被编译。而在本例的 `template<typename T> void foo(T* value)` 中，它没有模板实参列表，定义了一个新的模板，形成了函数模板重载。
+### 例题：选择累加策略
+为 `std::uint8_t` 添加全特化，使累加类型为 `std::uint32_t`。保留主模板和已有算法，不要直接把所有类型都改成无符号整数。应输出 `uint8 sum: 400`，类型断言也必须通过。
+```cpp
+#include <cassert>
+#include <cstdint>
+#include <iostream>
+#include <type_traits>
+
+template<class T> struct Accumulator { using type = T; };
+
+template<> // [!code ++]
+struct Accumulator<std::uint8_t> {  // [!code ++]
+    using type = std::uint32_t;  // [!code ++]
+};  // [!code ++]
+
+template <class T>
+auto sum(const T *data, std::size_t size) -> typename Accumulator<T>::type
+{
+    typename Accumulator<T>::type result{};
+    for (std::size_t i = 0; i < size; ++i) result += data[i];
+    return result;
+}
+
+int main() {
+    const std::uint8_t values[]{200, 200};
+    static_assert(std::is_same_v<Accumulator<std::uint8_t>::type, std::uint32_t>);
+    assert(sum(values, 2) == 400);
+    std::cout << "uint8 sum: " << sum(values, 2) << '\n';
+}
+```
 ## 可变参数模板
 
 ## 折叠表达式
