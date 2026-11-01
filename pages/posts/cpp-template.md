@@ -434,6 +434,70 @@ int main() {
     std::cout << "uint8 sum: " << sum(values, 2) << '\n';
 }
 ```
+### PyTorch源码分析：累加类型提取
+在 PyTorch 的代码 `torch/headeronly/core/AccumulateType.h` 中，有这样一系列为不同的数据类型指定累加类型的宏：
+```cpp:line-numbers=96
+TORCH_HEADERONLY_MPS_ACC_TYPE(BFloat16, float)
+TORCH_HEADERONLY_MPS_ACC_TYPE(Half, float)
+TORCH_HEADERONLY_MPS_ACC_TYPE(Float8_e5m2, float)
+TORCH_HEADERONLY_MPS_ACC_TYPE(Float8_e4m3fn, float)
+TORCH_HEADERONLY_MPS_ACC_TYPE(Float8_e5m2fnuz, float)
+TORCH_HEADERONLY_MPS_ACC_TYPE(Float8_e4m3fnuz, float)
+// ...
+```
+`TORCH_HEADERONLY_MPS_ACC_TYPE` 还有把 `MPS` 替换为 `XPU` `CUDA` `CPU` 等变体，替换的逻辑基本上一致。追踪这个宏的定义：
+```cpp:line-numbers=87
+#define TORCH_HEADERONLY_MPS_ACC_TYPE(t, acc_t) \
+  TORCH_HEADERONLY_ACC_TYPE(t, acc_t, c10::DeviceType::MPS)
+#define TORCH_HEADERONLY_XPU_ACC_TYPE(t, acc_t) \
+  TORCH_HEADERONLY_ACC_TYPE(t, acc_t, c10::DeviceType::XPU)
+#define TORCH_HEADERONLY_CUDA_ACC_TYPE(t, acc_t) \
+  TORCH_HEADERONLY_ACC_TYPE(t, acc_t, c10::DeviceType::CUDA)
+#define TORCH_HEADERONLY_CPU_ACC_TYPE(t, acc_t) \
+  TORCH_HEADERONLY_ACC_TYPE(t, acc_t, c10::DeviceType::CPU)
+// ...
+```
+从字面意义来看，宏 `TORCH_HEADERONLY_ACC_TYPE` 的第一个参数代表输入的数据类型，第二个参数代表中间累加变量的类型，第三个参数代表计算使用的设备。继续追踪这个宏的定义：
+```cpp:line-numbers=82
+#define TORCH_HEADERONLY_ACC_TYPE(t, acc_t, device_type) \
+  template <>                                            \
+  struct AccumulateTypeDevice<t, device_type> {          \
+    using type = acc_t;                                  \
+  };
+```
+这里出现了一个全特化模板 `struct AccumulateTypeDevice<t, device_type>`，它的主模板是 `template <typename T, c10::DeviceType D> struct AccumulateTypeDevice {};`，位于第 60 行，空定义。显然我们上面的猜想是正确的，通过 `typename AccumulateTypeDevice<Half, c10::DeviceType::CUDA>::type` 这样的代码就可以知道：在设备 `CUDA` 上，半精度浮点数的累加类型是 `float`。另外这个头文件中还定义了一个类似的模板：
+```cpp:line-numbers=63
+template <typename T, bool>
+struct AccumulateType {};
+
+template <typename T>
+struct AccumulateType<T, false> {
+  using type = typename AccumulateTypeDevice<T, c10::DeviceType::CPU>::type;
+};
+
+template <typename T>
+struct AccumulateType<T, true> {
+  using type = typename AccumulateTypeDevice<T, c10::DeviceType::CUDA>::type;
+};
+```
+这个模板通过非类型参数把推导累加变量类型转发给了 `AccumulateTypeDevice`。最终两个模板得到的是：
+```cpp:line-numbers=76
+template <typename T, c10::DeviceType device>
+using acc_type_device = typename AccumulateTypeDevice<T, device>::type;
+
+template <typename T, bool is_cuda>
+using acc_type = typename AccumulateType<T, is_cuda>::type;
+```
+这两个类型别名可以直接使用。官方文档指出：
+> `acc_type<T, is_cuda>` and `acc_type_device<T, DeviceType>` give the dtype a
+reduction over `T` should accumulate into, using the same tables as `at::acc_type`:
+>
+> ```cpp
+> #include <torch/headeronly/core/AccumulateType.h>
+>
+> using acc_t = torch::headeronly::acc_type<torch::headeronly::Half, /*is_cuda*/true>;
+> ```
+
 ## 可变参数模板
 
 ## 折叠表达式

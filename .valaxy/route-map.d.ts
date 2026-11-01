@@ -101,6 +101,13 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
+    '/moments/2026-11-01-1': RouteRecordInfo<
+      '/moments/2026-11-01-1',
+      '/moments/2026-11-01-1',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
     '/page/[page]': RouteRecordInfo<
       '/page/[page]',
       '/page/:page',
@@ -525,6 +532,14 @@ declare module 'vue-router/auto-routes' {
     'pages/moments/2026-10-15-1.md': {
       routes:
         | '/moments/2026-10-15-1'
+      views:
+        | never
+      pathParamNames:
+        | never
+    }
+    'pages/moments/2026-11-01-1.md': {
+      routes:
+        | '/moments/2026-11-01-1'
       views:
         | never
       pathParamNames:
