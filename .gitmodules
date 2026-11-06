@@ -1,0 +1,3 @@
+[submodule "pages/posts/private"]
+	path = pages/posts/private
+	url = git@github.com:lycatears/blog-private
