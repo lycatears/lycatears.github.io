@@ -80,6 +80,13 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
+    '/collections/': RouteRecordInfo<
+      '/collections/',
+      '/collections',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
     '/links/': RouteRecordInfo<
       '/links/',
       '/links',
@@ -318,23 +325,65 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
-    '/posts/private/diary-junior-high-school-1': RouteRecordInfo<
-      '/posts/private/diary-junior-high-school-1',
-      '/posts/private/diary-junior-high-school-1',
+    '/posts/private/junior-high-school/': RouteRecordInfo<
+      '/posts/private/junior-high-school/',
+      '/posts/private/junior-high-school',
       Record<never, never>,
       Record<never, never>,
       | never
     >,
-    '/posts/private/diary-junior-high-school-2': RouteRecordInfo<
-      '/posts/private/diary-junior-high-school-2',
-      '/posts/private/diary-junior-high-school-2',
+    '/posts/private/junior-high-school/diary-junior-high-school-1': RouteRecordInfo<
+      '/posts/private/junior-high-school/diary-junior-high-school-1',
+      '/posts/private/junior-high-school/diary-junior-high-school-1',
       Record<never, never>,
       Record<never, never>,
       | never
     >,
-    '/posts/private/diary-junior-high-school-3': RouteRecordInfo<
-      '/posts/private/diary-junior-high-school-3',
-      '/posts/private/diary-junior-high-school-3',
+    '/posts/private/junior-high-school/diary-junior-high-school-2': RouteRecordInfo<
+      '/posts/private/junior-high-school/diary-junior-high-school-2',
+      '/posts/private/junior-high-school/diary-junior-high-school-2',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/posts/private/junior-high-school/diary-junior-high-school-3': RouteRecordInfo<
+      '/posts/private/junior-high-school/diary-junior-high-school-3',
+      '/posts/private/junior-high-school/diary-junior-high-school-3',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/posts/private/junior-high-school/diary-junior-high-school-4': RouteRecordInfo<
+      '/posts/private/junior-high-school/diary-junior-high-school-4',
+      '/posts/private/junior-high-school/diary-junior-high-school-4',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/posts/private/junior-high-school/diary-junior-high-school-5': RouteRecordInfo<
+      '/posts/private/junior-high-school/diary-junior-high-school-5',
+      '/posts/private/junior-high-school/diary-junior-high-school-5',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/posts/private/junior-high-school/diary-junior-high-school-6': RouteRecordInfo<
+      '/posts/private/junior-high-school/diary-junior-high-school-6',
+      '/posts/private/junior-high-school/diary-junior-high-school-6',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/posts/private/junior-high-school/diary-junior-high-school-7': RouteRecordInfo<
+      '/posts/private/junior-high-school/diary-junior-high-school-7',
+      '/posts/private/junior-high-school/diary-junior-high-school-7',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/posts/private/we-dont-need-the-transition-class': RouteRecordInfo<
+      '/posts/private/we-dont-need-the-transition-class',
+      '/posts/private/we-dont-need-the-transition-class',
       Record<never, never>,
       Record<never, never>,
       | never
@@ -522,6 +571,14 @@ declare module 'vue-router/auto-routes' {
     'pages/categories/index.md': {
       routes:
         | '/categories/'
+      views:
+        | never
+      pathParamNames:
+        | never
+    }
+    'pages/collections/index.md': {
+      routes:
+        | '/collections/'
       views:
         | never
       pathParamNames:
@@ -799,25 +856,73 @@ declare module 'vue-router/auto-routes' {
       pathParamNames:
         | never
     }
-    'pages/posts/private/diary-junior-high-school-1.md': {
+    'pages/posts/private/junior-high-school/index.md': {
       routes:
-        | '/posts/private/diary-junior-high-school-1'
+        | '/posts/private/junior-high-school/'
       views:
         | never
       pathParamNames:
         | never
     }
-    'pages/posts/private/diary-junior-high-school-2.md': {
+    'pages/posts/private/junior-high-school/diary-junior-high-school-1.md': {
       routes:
-        | '/posts/private/diary-junior-high-school-2'
+        | '/posts/private/junior-high-school/diary-junior-high-school-1'
       views:
         | never
       pathParamNames:
         | never
     }
-    'pages/posts/private/diary-junior-high-school-3.md': {
+    'pages/posts/private/junior-high-school/diary-junior-high-school-2.md': {
       routes:
-        | '/posts/private/diary-junior-high-school-3'
+        | '/posts/private/junior-high-school/diary-junior-high-school-2'
+      views:
+        | never
+      pathParamNames:
+        | never
+    }
+    'pages/posts/private/junior-high-school/diary-junior-high-school-3.md': {
+      routes:
+        | '/posts/private/junior-high-school/diary-junior-high-school-3'
+      views:
+        | never
+      pathParamNames:
+        | never
+    }
+    'pages/posts/private/junior-high-school/diary-junior-high-school-4.md': {
+      routes:
+        | '/posts/private/junior-high-school/diary-junior-high-school-4'
+      views:
+        | never
+      pathParamNames:
+        | never
+    }
+    'pages/posts/private/junior-high-school/diary-junior-high-school-5.md': {
+      routes:
+        | '/posts/private/junior-high-school/diary-junior-high-school-5'
+      views:
+        | never
+      pathParamNames:
+        | never
+    }
+    'pages/posts/private/junior-high-school/diary-junior-high-school-6.md': {
+      routes:
+        | '/posts/private/junior-high-school/diary-junior-high-school-6'
+      views:
+        | never
+      pathParamNames:
+        | never
+    }
+    'pages/posts/private/junior-high-school/diary-junior-high-school-7.md': {
+      routes:
+        | '/posts/private/junior-high-school/diary-junior-high-school-7'
+      views:
+        | never
+      pathParamNames:
+        | never
+    }
+    'pages/posts/private/we-dont-need-the-transition-class.md': {
+      routes:
+        | '/posts/private/we-dont-need-the-transition-class'
       views:
         | never
       pathParamNames:
