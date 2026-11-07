@@ -325,6 +325,20 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
+    '/posts/private/README': RouteRecordInfo<
+      '/posts/private/README',
+      '/posts/private/README',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/posts/private/test1': RouteRecordInfo<
+      '/posts/private/test1',
+      '/posts/private/test1',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
     '/posts/probability-a-2023': RouteRecordInfo<
       '/posts/probability-a-2023',
       '/posts/probability-a-2023',
@@ -788,6 +802,22 @@ declare module 'vue-router/auto-routes' {
     'pages/posts/oop-test-paper.md': {
       routes:
         | '/posts/oop-test-paper'
+      views:
+        | never
+      pathParamNames:
+        | never
+    }
+    'pages/posts/private/README.md': {
+      routes:
+        | '/posts/private/README'
+      views:
+        | never
+      pathParamNames:
+        | never
+    }
+    'pages/posts/private/test1.md': {
+      routes:
+        | '/posts/private/test1'
       views:
         | never
       pathParamNames:

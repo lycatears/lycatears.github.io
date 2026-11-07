@@ -1,0 +1,31 @@
+# 自建副本（带加密文章）的托管配置
+#
+# 服务器一次性准备：
+#   mkdir -p /opt/blog/site
+#   scp deploy/Caddyfile deploy/docker-compose.yml user@server:/opt/blog/
+#   cd /opt/blog && docker compose up -d
+#
+# 之后在本地执行 `pnpm deploy:server` 上传 dist 即可，无需重启容器。
+
+services:
+  caddy:
+    image: caddy:2-alpine
+    container_name: blog-caddy
+    restart: unless-stopped
+    environment:
+      BLOG_DOMAIN: ${BLOG_DOMAIN:-lycatears.space}
+    ports:
+      # 如果 80/443 已被别的服务占用，把这两行改成 "127.0.0.1:8080:80"，
+      # 再由现有反向代理转发（此时需要在 Caddyfile 里改用 tls internal 或 DNS 验证）。
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - ./site:/srv:ro
+      - caddy_data:/data
+      - caddy_config:/config
+
+volumes:
+  caddy_data:
+  caddy_config:

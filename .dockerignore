@@ -1,2 +1,4 @@
 node_modules
 dist
+# 私密文章明文绝不进镜像
+pages/posts/private

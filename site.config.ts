@@ -1,7 +1,11 @@
 import { defineSiteConfig } from 'valaxy'
 
+// 自建副本（带加密文章）用 VALAXY_SITE_URL 覆盖站点地址，
+// 让 RSS / sitemap / canonical 链接指向自己的服务器而不是 GitHub Pages。
+const env = (globalThis as { process?: { env?: Record<string, string | undefined> } }).process?.env
+
 export default defineSiteConfig({
-  url: 'https://lycatears.github.io',
+  url: env?.VALAXY_SITE_URL || 'https://lycatears.github.io',
   lang: 'zh-CN',
   title: '韶华未既',
   subtitle: '',

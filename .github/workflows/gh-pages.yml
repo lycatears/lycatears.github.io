@@ -13,6 +13,16 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          # 私密文章放在私有仓库的 submodule 里，公开构建绝不拉取
+          submodules: false
+
+      - name: Ensure no private content
+        run: |
+          if [ -n "$(find pages/posts/private -name '*.md' -print -quit 2>/dev/null)" ]; then
+            echo "::error::私密文章明文出现在公开构建里，已中止部署"
+            exit 1
+          fi
 
       - name: Enable pnpm
         uses: pnpm/action-setup@v4

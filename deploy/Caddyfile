@@ -1,0 +1,31 @@
+# 自建副本（带加密文章）的 Caddy 配置
+# 文档：https://caddyserver.com/docs/caddyfile
+#
+# 只需要把域名指向这台机器，Caddy 会自动申请/续期 HTTPS 证书。
+# Valaxy 的密码框用 Web Crypto 解密，所以站点必须是 HTTPS。
+
+{$BLOG_DOMAIN:lycatears.space} {
+	root * /srv
+	encode zstd gzip
+
+	# Valaxy SSG 输出的是 `foo.html`，这里保持无后缀 URL 可用
+	try_files {path} {path}.html {path}/index.html
+
+	file_server
+
+	header {
+		X-Content-Type-Options nosniff
+		Referrer-Policy strict-origin-when-cross-origin
+		# 自建副本和 GitHub Pages 内容重复，默认不收录；想被收录就删掉这一行
+		X-Robots-Tag noindex
+		-Server
+	}
+
+	# 带 hash 的静态资源可以长缓存
+	header /assets/* Cache-Control "public, max-age=31536000, immutable"
+
+	handle_errors {
+		rewrite * /404.html
+		file_server
+	}
+}

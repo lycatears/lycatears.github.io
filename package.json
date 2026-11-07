@@ -4,9 +4,11 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "build": "npm run build:ssg",
+    "build": "node scripts/private-site.mjs check-public && npm run build:ssg",
     "build:spa": "valaxy build",
     "build:ssg": "valaxy build --ssg",
+    "build:private": "node scripts/private-site.mjs build",
+    "deploy:server": "node scripts/private-site.mjs deploy",
     "dev": "valaxy",
     "rss": "valaxy rss",
     "serve": "vite preview"
