@@ -192,13 +192,6 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
-    '/posts/diary1': RouteRecordInfo<
-      '/posts/diary1',
-      '/posts/diary1',
-      Record<never, never>,
-      Record<never, never>,
-      | never
-    >,
     '/posts/effective-cpp': RouteRecordInfo<
       '/posts/effective-cpp',
       '/posts/effective-cpp',
@@ -325,16 +318,23 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
-    '/posts/private/README': RouteRecordInfo<
-      '/posts/private/README',
-      '/posts/private/README',
+    '/posts/private/diary-junior-high-school-1': RouteRecordInfo<
+      '/posts/private/diary-junior-high-school-1',
+      '/posts/private/diary-junior-high-school-1',
       Record<never, never>,
       Record<never, never>,
       | never
     >,
-    '/posts/private/test1': RouteRecordInfo<
-      '/posts/private/test1',
-      '/posts/private/test1',
+    '/posts/private/diary-junior-high-school-2': RouteRecordInfo<
+      '/posts/private/diary-junior-high-school-2',
+      '/posts/private/diary-junior-high-school-2',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '/posts/private/diary-junior-high-school-3': RouteRecordInfo<
+      '/posts/private/diary-junior-high-school-3',
+      '/posts/private/diary-junior-high-school-3',
       Record<never, never>,
       Record<never, never>,
       | never
@@ -655,14 +655,6 @@ declare module 'vue-router/auto-routes' {
       pathParamNames:
         | never
     }
-    'pages/posts/diary1.md': {
-      routes:
-        | '/posts/diary1'
-      views:
-        | never
-      pathParamNames:
-        | never
-    }
     'pages/posts/effective-cpp.md': {
       routes:
         | '/posts/effective-cpp'
@@ -807,17 +799,25 @@ declare module 'vue-router/auto-routes' {
       pathParamNames:
         | never
     }
-    'pages/posts/private/README.md': {
+    'pages/posts/private/diary-junior-high-school-1.md': {
       routes:
-        | '/posts/private/README'
+        | '/posts/private/diary-junior-high-school-1'
       views:
         | never
       pathParamNames:
         | never
     }
-    'pages/posts/private/test1.md': {
+    'pages/posts/private/diary-junior-high-school-2.md': {
       routes:
-        | '/posts/private/test1'
+        | '/posts/private/diary-junior-high-school-2'
+      views:
+        | never
+      pathParamNames:
+        | never
+    }
+    'pages/posts/private/diary-junior-high-school-3.md': {
+      routes:
+        | '/posts/private/diary-junior-high-school-3'
       views:
         | never
       pathParamNames:
