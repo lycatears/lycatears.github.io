@@ -55,8 +55,13 @@ links:
   - url: https://sorastyx.github.io/
     blog: 花鳥風月official
     desc: 意志产生希望，希望孕育梦想，梦想改变世界
-    image: https://www.helloimg.com/i/2026/09/29/6abbcfdcb5608.jpg
+    avatar: https://www.helloimg.com/i/2026/09/29/6abbcfdcb5608.jpg
     color: "#ffffff"
+  - url: https://space.bilibili.com/1475584384
+    blog: 爱喵
+    desc: 小花是个好孩子喵～
+    avatar: https://www.helloimg.com/i/2026/11/08/6aef72e198887.png
+    color: "#cb9ef1"
 
 random: true
 ---
