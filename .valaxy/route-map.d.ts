@@ -283,6 +283,13 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
+    '/posts/linux-cpp': RouteRecordInfo<
+      '/posts/linux-cpp',
+      '/posts/linux-cpp',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
     '/posts/low-precision-training-survey': RouteRecordInfo<
       '/posts/low-precision-training-survey',
       '/posts/low-precision-training-survey',
@@ -810,6 +817,14 @@ declare module 'vue-router/auto-routes' {
     'pages/posts/leetcode-hot100.md': {
       routes:
         | '/posts/leetcode-hot100'
+      views:
+        | never
+      pathParamNames:
+        | never
+    }
+    'pages/posts/linux-cpp.md': {
+      routes:
+        | '/posts/linux-cpp'
       views:
         | never
       pathParamNames:

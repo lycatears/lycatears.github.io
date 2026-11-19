@@ -24,7 +24,7 @@ const tools = [
   },
   {
     name: 'AI对话',
-    desc: '【纯前端AI对话，需提供有效API Key；所有数据均保存在浏览器本地存储】',
+    desc: '纯前端AI对话，需提供有效API Key；所有数据均保存在浏览器本地存储。API费用自理',
     path: 'https://ai-chat.lycatears.space/',
     icon: '🐋',
     external: true,
