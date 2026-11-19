@@ -22,22 +22,30 @@ const tools = [
     path: '/tools/image-resize/',
     icon: '📐',
   },
+  {
+    name: 'AI对话',
+    desc: '【纯前端AI对话，需提供有效API Key；所有数据均保存在浏览器本地存储】',
+    path: 'https://ai-chat.lycatears.space/',
+    icon: '🐋',
+    external: true,
+  },
 ]
 </script>
 
 <div class="tools-grid">
-  <div
+  <component
     v-for="tool in tools"
+    :is="tool.external ? 'a' : 'RouterLink'"
     :key="tool.path"
     class="tool-card"
-    @click="router.push(tool.path)"
+    v-bind="tool.external ? { href: tool.path } : { to: tool.path }"
   >
     <span class="tool-icon">{{ tool.icon }}</span>
     <div class="tool-info">
       <h3 class="tool-name">{{ tool.name }}</h3>
       <p class="tool-desc">{{ tool.desc }}</p>
     </div>
-  </div>
+  </component>
 </div>
 
 <style scoped>
@@ -56,6 +64,8 @@ const tools = [
   border: 1px solid var(--va-c-bg-mute);
   border-radius: 10px;
   background: var(--va-c-bg-light);
+  color: inherit;
+  text-decoration: none;
   cursor: pointer;
   transition: all 0.25s;
 }
